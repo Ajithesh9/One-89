@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
+import Logo from '../assets/Logo'; // <-- 1. Import path is updated to point to the assets folder
 
 const navLinks = [
   { id: 'features', title: 'Features' },
@@ -32,9 +33,10 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
+          
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-dark-onSurface">One-89</h1>
+          <div className="flex-shrink-0 cursor-pointer">
+            <Logo />
           </div>
 
           {/* Desktop Menu */}

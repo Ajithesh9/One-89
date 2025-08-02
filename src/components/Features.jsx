@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiCamera, FiMapPin, FiMic, FiImage, FiPhone, FiBarChart2 } from 'react-icons/fi';
+// Icons updated: FiBarChart2 removed, FiType and FiMessageSquare added
+import { FiCamera, FiMapPin, FiMic, FiImage, FiPhone, FiMessageSquare } from 'react-icons/fi';
 
+// Data updated to reflect the new features
 const featuresData = [
   {
     icon: <FiCamera size={28} className="mb-4 text-dark-primary" />,
@@ -29,9 +31,9 @@ const featuresData = [
     description: 'Monitor all incoming, outgoing, and missed calls, as well as text messages.',
   },
   {
-    icon: <FiBarChart2 size={28} className="mb-4 text-dark-primary" />,
-    title: 'App Usage Analytics',
-    description: 'Get detailed reports on which applications are being used and for how long.',
+    icon: <FiMessageSquare size={28} className="mb-4 text-dark-primary" />,
+    title: 'Live Chat View + Typing Preview',
+    description: 'Watch ongoing chats on WhatsApp, Instagram, Snapchat & Signal as they happen.',
   },
 ];
 
