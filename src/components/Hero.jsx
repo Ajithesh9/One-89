@@ -7,7 +7,7 @@ const Hero = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // This will make children animate one by one
+        staggerChildren: 0.2,
       },
     },
   };
@@ -25,7 +25,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="h-screen w-full flex items-center justify-center bg-dark-background">
+    <section id="home" className="h-screen w-full flex items-center justify-center">
       <motion.div
         className="text-center px-4"
         variants={containerVariants}

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiCamera, FiMapPin, FiMic, FiImageIcon, FiPhone, FiBarChart2 } from 'react-icons/fi';
+import { FiCamera, FiMapPin, FiMic, FiImage, FiPhone, FiBarChart2 } from 'react-icons/fi';
 
 const featuresData = [
   {
@@ -19,7 +19,7 @@ const featuresData = [
     description: 'Listen to the ambient sounds around the target device for comprehensive monitoring.',
   },
   {
-    icon: <FiImageIcon size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiImage size={28} className="mb-4 text-dark-primary" />,
     title: 'Gallery & Media Access',
     description: 'View photos and videos saved on the device to ensure data integrity and security.',
   },
@@ -37,8 +37,8 @@ const featuresData = [
 
 const Features = () => {
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once
-    threshold: 0.1,    // Trigger when 10% of the section is visible
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   const containerVariants = {

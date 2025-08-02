@@ -1,6 +1,8 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Features from './components/Features'; // <-- 1. Import Features
+import Features from './components/Features';
+import HowItWorks from './components/HowItWorks';
+import Pricing from './components/Pricing'; // <-- 1. Import Pricing
 
 function App() {
   return (
@@ -8,12 +10,11 @@ function App() {
       <Navbar />
       <main>
         <Hero />
-        <Features /> {/* <-- 2. Use the Features component */}
+        <Features />
+        <HowItWorks />
+        <Pricing /> {/* <-- 2. Use the Pricing component */}
         
-        {/* Placeholders for the remaining sections */}
-        <div id="pricing" style={{ height: '100vh', paddingTop: '80px' }}>
-          <h1 className="text-4xl text-center">Pricing Section Placeholder</h1>
-        </div>
+        {/* Placeholder for the last section */}
         <div id="faq" style={{ height: '100vh', paddingTop: '80px' }}>
           <h1 className="text-4xl text-center">FAQ Section Placeholder</h1>
         </div>
