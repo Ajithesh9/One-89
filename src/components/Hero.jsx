@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { FiDownload } from 'react-icons/fi';
+import '../Hero.css';
 
 const Hero = () => {
   const containerVariants = {
@@ -25,38 +26,38 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="h-screen w-full flex items-center justify-center">
+    <section id="home">
       <motion.div
-        className="text-center px-4"
+        className="hero-content"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.h1
           variants={itemVariants}
-          className="text-5xl md:text-7xl font-bold text-dark-onSurface leading-tight"
+          className="hero-title"
         >
           Complete Peace of Mind
           <br />
-          <span className="text-dark-primary">for Modern Systems</span>
+          <span className="hero-title-highlight">for Modern Systems</span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="mt-6 text-lg md:text-xl max-w-3xl mx-auto text-dark-onSurfaceSecondary"
+          className="hero-subtitle"
         >
           Our application gives you the powerful, easy-to-use tools you need to monitor and control your systems remotely, ensuring stability and performance.
         </motion.p>
 
         <motion.div
           variants={itemVariants}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="hero-buttons"
         >
-          <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-dark-primary text-dark-onPrimary font-bold py-3 px-8 rounded-lg hover:bg-opacity-80 transition-all transform hover:scale-105">
+          <button className="hero-button hero-button-primary">
             <FiDownload />
             <span>Download for Primary</span>
           </button>
-          <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-dark-surface text-dark-onSurface font-bold py-3 px-8 rounded-lg hover:bg-opacity-80 transition-all transform hover:scale-105">
+          <button className="hero-button hero-button-secondary">
             <span>Download for Node</span>
           </button>
         </motion.div>

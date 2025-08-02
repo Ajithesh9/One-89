@@ -15,7 +15,8 @@ export default {
           onPrimary: '#000000',
           onSurface: '#FFFFFF',
           onSurfaceSecondary: '#AAAAAA',
-        }
+        },parents: 'rgb(66, 235, 198)', // Teal
+        kids: 'rgb(187, 134, 252)',
       }
     },
   },

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiCheck, FiX, FiShield, FiStar, FiAward } from 'react-icons/fi';
 import FeatureComparisonTable from './FeatureComparisonTable'; // Import the new component
+import '../Pricing.css';
 
 // Data for the summary cards, structured from the provided screenshot
 const pricingPlans = [
@@ -63,48 +64,46 @@ const Pricing = () => {
   };
 
   return (
-    <section id="pricing" className="py-24 bg-dark-background">
+    <section id="pricing">
       <motion.div
         ref={ref}
         variants={containerVariants}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        className="pricing-container"
       >
-        <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-bold text-dark-onSurface">
+        <motion.h2 variants={itemVariants}>
           Choose Your Plan
         </motion.h2>
-        <motion.p variants={itemVariants} className="mt-4 text-lg text-dark-onSurfaceSecondary max-w-2xl mx-auto">
+        <motion.p variants={itemVariants} className="pricing-description">
           Simple, transparent pricing. Pick the plan that's right for you.
         </motion.p>
 
         {/* Pricing Summary Cards */}
-        <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        <div className="pricing-cards">
           {pricingPlans.map((plan) => (
             <motion.div
               key={plan.name}
               variants={itemVariants}
-              className={`relative flex flex-col bg-dark-surface rounded-2xl p-8 border ${
-                plan.recommended ? 'border-dark-primary' : 'border-white/10'
-              } ${plan.recommended ? 'lg:scale-105' : ''}`}
+              className={`pricing-card ${plan.recommended ? 'recommended' : ''}`}
             >
-              <div className="flex-grow">
-                <div className="flex justify-center mb-6">{plan.badgeIcon}</div>
-                <h3 className="text-2xl font-bold text-dark-onSurface">{plan.name}</h3>
-                <div className="mt-4 flex items-baseline justify-center gap-1">
-                  <span className="text-5xl font-extrabold text-dark-onSurface">₹{plan.price}</span>
-                  <span className="text-dark-onSurfaceSecondary">/Mo.</span>
+              <div className="card-content">
+                <div className="badge-icon">{plan.badgeIcon}</div>
+                <h3>{plan.name}</h3>
+                <div className="price">
+                  <span className="price-amount">₹{plan.price}</span>
+                  <span className="price-period">/Mo.</span>
                 </div>
-                <ul className="mt-8 space-y-4 text-left">
+                <ul className="features-list">
                   {plan.features.map((feature) => (
-                    <li key={feature.text} className="flex items-center gap-3">
-                      {feature.included ? ( <FiCheck className="w-5 h-5 text-dark-secondary flex-shrink-0" /> ) : ( <FiX className="w-5 h-5 text-red-500 flex-shrink-0" /> )}
-                      <span className={`text-dark-onSurfaceSecondary ${!feature.included && 'opacity-60'}`}>{feature.text}</span>
+                    <li key={feature.text} className="feature-item">
+                      {feature.included ? ( <FiCheck className="feature-icon-check" /> ) : ( <FiX className="feature-icon-x" /> )}
+                      <span className={`feature-text ${!feature.included && 'excluded'}`}>{feature.text}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <button className={`w-full mt-10 py-3 rounded-lg font-bold transition-colors ${plan.recommended ? 'bg-dark-primary text-dark-onPrimary hover:bg-opacity-90' : 'bg-white/10 text-dark-onSurface hover:bg-white/20'}`}>
+              <button className={`cta-button ${plan.recommended ? 'recommended' : 'default'}`}>
                 {plan.ctaText}
               </button>
             </motion.div>

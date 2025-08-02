@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiPlus, FiMinus } from 'react-icons/fi';
+import '../FAQ.css';
 
 const faqData = [
   {
@@ -38,29 +39,29 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-24 bg-dark-surface">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-dark-onSurface">
+    <section id="faq">
+      <div className="faq-container">
+        <div className="faq-header">
+          <h2>
             Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-lg text-dark-onSurfaceSecondary">
+          <p>
             Have questions? We're here to help.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="faq-list">
           {faqData.map((item, index) => (
-            <div key={index} className="bg-dark-background rounded-lg overflow-hidden">
+            <div key={index} className="faq-item">
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex justify-between items-center text-left p-6"
+                className="faq-question-button"
               >
-                <span className="text-lg font-medium text-dark-onSurface">{item.question}</span>
+                <span className="faq-question-text">{item.question}</span>
                 {activeIndex === index ? (
-                  <FiMinus className="w-6 h-6 text-dark-primary" />
+                  <FiMinus className="faq-icon faq-icon-minus" />
                 ) : (
-                  <FiPlus className="w-6 h-6 text-dark-onSurfaceSecondary" />
+                  <FiPlus className="faq-icon faq-icon-plus" />
                 )}
               </button>
               <AnimatePresence>
@@ -70,9 +71,9 @@ const FAQ = () => {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="px-6 pb-6"
+                    className="faq-answer"
                   >
-                    <p className="text-dark-onSurfaceSecondary">{item.answer}</p>
+                    <p>{item.answer}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

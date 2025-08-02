@@ -1,0 +1,104 @@
+#features {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #121212;
+}
+
+#features .features-container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  #features .features-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #features .features-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+#features h2 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  #features h2 {
+    font-size: 3rem;
+    line-height: 1;
+  }
+}
+
+#features .features-description {
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #aaaaaa;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#features .features-grid {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  #features .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  #features .features-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+#features .feature-card {
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transform: translateY(0);
+}
+
+#features .feature-card:hover {
+  border-color: rgba(187, 134, 252, 0.5);
+  transform: translateY(-0.5rem);
+}
+
+#features .feature-card .feature-icon {
+  margin-bottom: 1rem;
+  color: #bb86fc;
+}
+
+#features .feature-card .feature-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+#features .feature-card .feature-description-text {
+  margin-top: 0.5rem;
+  color: #aaaaaa;
+}

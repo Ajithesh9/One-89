@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiDownload, FiLink2, FiShield } from 'react-icons/fi';
+import '../HowItWorks.css';
 
 const stepsData = [
   {

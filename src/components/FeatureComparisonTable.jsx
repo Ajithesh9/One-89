@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiCheck, FiX } from 'react-icons/fi';
+import '../FeatureComparisonTable.css';
 
 // All features categorized and now ordered according to your UI preference
 const featureCategories = [
@@ -73,56 +74,58 @@ const FeatureComparisonTable = () => {
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
       variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-      className="mt-24 max-w-5xl mx-auto"
+      className="feature-comparison-table"
     >
-      <motion.h3 variants={itemVariants} className="text-3xl font-bold text-center mb-10">
+      <motion.h3 variants={itemVariants}>
         Detailed Feature Comparison
       </motion.h3>
       
-      <div className="bg-dark-surface rounded-xl p-2 md:p-4">
+      <div className="table-container">
         {/* Table Header */}
-        <motion.div variants={itemVariants} className="grid grid-cols-5 gap-2 md:gap-4 font-bold text-dark-onSurfaceSecondary text-sm md:text-base px-4 py-3">
-          <div className="col-span-2">Feature</div>
-          <div className="text-center">Bronze</div>
-          <div className="text-center">Silver</div>
-          <div className="text-center">Gold</div>
+        <motion.div variants={itemVariants} className="table-header">
+          <div className="feature-col">Feature</div>
+          <div className="plan-col">Bronze</div>
+          <div className="plan-col">Silver</div>
+          <div className="plan-col">Gold</div>
         </motion.div>
 
         {/* Table Body */}
-        {featureCategories.map((category) => (
-          <div key={category.category} className="mb-4">
-            <motion.div variants={itemVariants} className="px-4 py-2">
-              <h4 className="font-bold text-lg text-dark-onSurface">{category.category}</h4>
-            </motion.div>
-            {category.features
-              .sort((a, b) => getFeatureScore(b) - getFeatureScore(a))
-              .map((feature) => (
-              <motion.div
-                variants={itemVariants}
-                key={feature.name}
-                className="grid grid-cols-5 gap-2 md:gap-4 items-center px-4 py-3 border-t border-white/5 hover:bg-white/5 rounded-md"
-              >
-                <div className="col-span-2 text-dark-onSurfaceSecondary">{feature.name}</div>
-                {['bronze', 'silver', 'gold'].map((plan) => (
-                  <div key={plan} className="flex justify-center">
-                    {feature.plans[plan] ? (
-                      <FiCheck className="w-6 h-6 text-dark-secondary" />
-                    ) : (
-                      <FiX className="w-6 h-6 text-white/30" />
-                    )}
-                  </div>
-                ))}
+        <div className="table-body">
+          {featureCategories.map((category) => (
+            <div key={category.category} className="category-row">
+              <motion.div variants={itemVariants} className="category-header">
+                <h4>{category.category}</h4>
               </motion.div>
-            ))}
-          </div>
-        ))}
+              {category.features
+                .sort((a, b) => getFeatureScore(b) - getFeatureScore(a))
+                .map((feature) => (
+                <motion.div
+                  variants={itemVariants}
+                  key={feature.name}
+                  className="feature-row"
+                >
+                  <div className="feature-name">{feature.name}</div>
+                  {['bronze', 'silver', 'gold'].map((plan) => (
+                    <div key={plan} className="plan-cell">
+                      {feature.plans[plan] ? (
+                        <FiCheck className="check-icon" />
+                      ) : (
+                        <FiX className="x-icon" />
+                      )}
+                    </div>
+                  ))}
+                </motion.div>
+              ))}
+            </div>
+          ))}
+        </div>
 
         {/* Manual row for Max Devices */}
-        <motion.div variants={itemVariants} className="grid grid-cols-5 gap-2 md:gap-4 items-center px-4 py-3 border-t border-white/5 font-bold hover:bg-white/5 rounded-md">
-            <div className="col-span-2 text-dark-onSurfaceSecondary">Max Devices</div>
-            <div className="text-center text-dark-onSurface">1</div>
-            <div className="text-center text-dark-onSurface">2</div>
-            <div className="text-center text-dark-onSurface">5</div>
+        <motion.div variants={itemVariants} className="manual-row">
+            <div className="max-devices-label">Max Devices</div>
+            <div className="device-count">1</div>
+            <div className="device-count">2</div>
+            <div className="device-count">5</div>
         </motion.div>
       </div>
     </motion.div>

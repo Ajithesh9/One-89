@@ -1,0 +1,151 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  transition: all 0.3s;
+}
+
+.navbar.scrolled {
+  background-color: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.navbar-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .navbar-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-container {
+    padding: 0 2rem;
+  }
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+}
+
+.navbar-logo {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.desktop-menu {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktop-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.nav-link {
+  color: #aaaaaa;
+  transition: color 0.3s;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #bb86fc;
+}
+
+.cta-button-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .cta-button-desktop {
+    display: block;
+  }
+}
+
+.cta-button {
+  background-color: #bb86fc;
+  color: #000000;
+  font-weight: 700;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+}
+
+.cta-button:hover {
+  background-color: rgba(187, 134, 252, 0.8);
+}
+
+.mobile-menu-button {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu-button {
+    display: none;
+  }
+}
+
+.mobile-menu-icon {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.mobile-menu {
+  background-color: #1e1e1e;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .mobile-menu {
+    display: none;
+  }
+}
+
+.mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-nav-link {
+  color: #aaaaaa;
+  transition: color 0.3s;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.125rem;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: #bb86fc;
+}
+
+.mobile-cta-button {
+  background-color: #bb86fc;
+  color: #000000;
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+  width: 80%;
+}
+
+.mobile-cta-button:hover {
+  background-color: rgba(187, 134, 252, 0.8);
+}

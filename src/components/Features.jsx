@@ -2,36 +2,37 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 // Icons updated: FiBarChart2 removed, FiType and FiMessageSquare added
 import { FiCamera, FiMapPin, FiMic, FiImage, FiPhone, FiMessageSquare } from 'react-icons/fi';
+import '../Features.css';
 
 // Data updated to reflect the new features
 const featuresData = [
   {
-    icon: <FiCamera size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiCamera size={28} className="feature-icon" />,
     title: 'Live Remote Camera',
     description: "Securely access the device's camera to see its surroundings in real-time.",
   },
   {
-    icon: <FiMapPin size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiMapPin size={28} className="feature-icon" />,
     title: 'Real-time Location',
     description: 'Track the exact location with live GPS data and view a complete location history.',
   },
   {
-    icon: <FiMic size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiMic size={28} className="feature-icon" />,
     title: 'Live Microphone',
     description: 'Listen to the ambient sounds around the target device for comprehensive monitoring.',
   },
   {
-    icon: <FiImage size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiImage size={28} className="feature-icon" />,
     title: 'Gallery & Media Access',
     description: 'View photos and videos saved on the device to ensure data integrity and security.',
   },
   {
-    icon: <FiPhone size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiPhone size={28} className="feature-icon" />,
     title: 'Call & SMS Log',
     description: 'Monitor all incoming, outgoing, and missed calls, as well as text messages.',
   },
   {
-    icon: <FiMessageSquare size={28} className="mb-4 text-dark-primary" />,
+    icon: <FiMessageSquare size={28} className="feature-icon" />,
     title: 'Live Chat View + Typing Preview',
     description: 'Watch ongoing chats on WhatsApp, Instagram, Snapchat & Signal as they happen.',
   },
@@ -59,12 +60,12 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="py-20 bg-dark-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-dark-onSurface">
+    <section id="features">
+      <div className="features-container">
+        <h2>
           Explore Our Powerful Features
         </h2>
-        <p className="mt-4 text-lg text-dark-onSurfaceSecondary max-w-2xl mx-auto">
+        <p className="features-description">
           Everything you need to monitor, manage, and secure your systems, all in one place.
         </p>
 
@@ -73,17 +74,17 @@ const Features = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="features-grid"
         >
           {featuresData.map((feature, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="bg-dark-surface p-8 rounded-xl border border-white/10 hover:border-dark-primary/50 transition-colors duration-300 transform hover:-translate-y-2"
+              className="feature-card"
             >
               {feature.icon}
-              <h3 className="text-xl font-bold text-dark-onSurface">{feature.title}</h3>
-              <p className="mt-2 text-dark-onSurfaceSecondary">{feature.description}</p>
+              <h3 className="feature-title">{feature.title}</h3>
+              <p className="feature-description-text">{feature.description}</p>
             </motion.div>
           ))}
         </motion.div>
