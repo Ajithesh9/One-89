@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #121212; /* This is our dark:background color */
+  color: #FFFFFF; /* Sets the default text color to our dark:onSurface */
+}
