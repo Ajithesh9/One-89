@@ -8,7 +8,7 @@ const PixelBackground = () => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let pixels = [];
-    const colors = ['#1E1E1E', '#BB86FC1A', '#03DAC61A']; // Slightly more subtle colors
+    const colors = ['#1E1E1E', '#BB86FC20', '#03DAC620'];
     const gap = 14;
     let animationFrameId;
 
@@ -28,8 +28,6 @@ const PixelBackground = () => {
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.isShimmering = false;
         this.isReverse = false;
-        this.delay = Math.sqrt(Math.pow(x - canvas.width / 2, 2) + Math.pow(y - canvas.height / 2, 2));
-        this.counter = 0;
       }
 
       draw() {
@@ -39,13 +37,10 @@ const PixelBackground = () => {
       }
 
       update() {
-        if (this.counter < this.delay) {
-            this.counter += Math.random() * 4 + 10;
-            return;
+        if (this.size >= this.maxSize) {
+          this.isShimmering = true;
         }
 
-        if (this.size >= this.maxSize) this.isShimmering = true;
-        
         if (this.isShimmering) {
             if (this.size >= this.maxSize) this.isReverse = true;
             if (this.size <= 0.5) this.isReverse = false;
