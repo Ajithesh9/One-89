@@ -8,12 +8,13 @@
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+/* This is the new "glassmorphism" style for the scrolled state */
 .navbar.scrolled {
-  background-color: rgba(18, 18, 18, 0.8); /* Slightly darker scrolled background */
+  background-color: rgba(24, 27, 28, 0.6); /* A dark, semi-transparent base */
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px); /* For Safari */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Faint border to catch the light */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Subtle shadow for depth */
 }
 
 .navbar-container {
@@ -41,28 +42,28 @@
 }
 
 .logo-image {
-  height: 40px; /* Adjust size as needed */
+  height: 40px;
   width: auto;
 }
 
 /* Desktop Navigation Links */
 .desktop-menu {
-  display: none; /* Hidden on mobile */
+  display: none;
 }
 
 @media (min-width: 768px) {
   .desktop-menu {
     display: flex;
     align-items: center;
-    gap: 2.5rem; /* Increased spacing */
-    position: absolute; /* Center the links */
+    gap: 2.5rem;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 }
 
 .nav-link {
-  color: #a0aec0; /* Lighter gray for better contrast */
+  color: #a0aec0;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -92,7 +93,7 @@
   width: 100%;
 }
 
-/* Right-side Actions (CTA and Mobile Toggle) */
+/* Right-side Actions */
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -121,12 +122,12 @@
   }
 }
 
-/* Mobile Menu Specifics */
+/* Mobile Menu */
 .mobile-menu-button {
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  z-index: 60; /* Ensure it's above other nav content */
+  z-index: 60;
 }
 
 @media (min-width: 768px) {
@@ -142,7 +143,7 @@
 
 .mobile-menu {
   position: absolute;
-  top: 5rem; /* Position below the navbar */
+  top: 5rem;
   left: 0;
   right: 0;
   background-color: #121212;

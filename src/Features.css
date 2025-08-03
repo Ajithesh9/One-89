@@ -2,7 +2,7 @@
   padding-top: 5rem;
   padding-bottom: 5rem;
   background-color: #121212;
-  /* Add these two properties for the layering effect */
+  /* These two properties are essential for the hero layering effect */
   position: relative;
   z-index: 1;
 }
