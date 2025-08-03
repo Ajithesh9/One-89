@@ -1,7 +1,16 @@
+/* Using values from tailwind.config.js */
+:root {
+  --dark-surface: #1E1E1E;
+  --dark-background: #121212;
+  --dark-primary: #BB86FC;
+  --dark-onSurface: #FFFFFF;
+  --dark-onSurfaceSecondary: #AAAAAA;
+}
+
 .how-it-works-section {
   padding-top: 6rem;
   padding-bottom: 6rem;
-  background-color: #1e1e1e;
+  background-color: var(--dark-surface);
 }
 
 .how-it-works-container {
@@ -13,40 +22,19 @@
   text-align: center;
 }
 
-@media (min-width: 640px) {
-  .how-it-works-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .how-it-works-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
 .how-it-works-title {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  font-size: 2.25rem; /* 36px */
+  line-height: 2.5rem; /* 40px */
   font-weight: 700;
-  color: #ffffff;
-}
-
-@media (min-width: 768px) {
-  .how-it-works-title {
-    font-size: 3rem;
-    line-height: 1;
-  }
+  color: var(--dark-onSurface);
 }
 
 .how-it-works-subtitle {
   margin-top: 1rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  color: #aaaaaa;
-  max-width: 42rem;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem; /* 28px */
+  color: var(--dark-onSurfaceSecondary);
+  max-width: 42rem; /* 672px */
   margin-left: auto;
   margin-right: auto;
 }
@@ -56,12 +44,6 @@
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 3rem;
-}
-
-@media (min-width: 768px) {
-  .steps-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 .step-container {
@@ -74,28 +56,53 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #121212;
+  background-color: var(--dark-background);
   border-radius: 9999px;
   padding: 1.5rem;
   border-width: 2px;
-  border-color: rgba(187, 134, 252, 0.3);
+  border-color: rgba(187, 134, 252, 0.3); /* dark-primary with 30% opacity */
 }
 
 .step-icon {
-  width: 3rem;
-  height: 3rem;
-  color: #bb86fc;
+  width: 3rem;  /* 48px */
+  height: 3rem; /* 48px */
+  color: var(--dark-primary);
 }
 
 .step-title {
   margin-top: 1.5rem;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
   font-weight: 700;
-  color: #ffffff;
+  color: var(--dark-onSurface);
 }
 
 .step-description {
   margin-top: 0.5rem;
-  color: #aaaaaa;
+  color: var(--dark-onSurfaceSecondary);
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 640px) {
+  .how-it-works-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .how-it-works-title {
+    font-size: 3rem; /* 48px */
+    line-height: 1;
+  }
+  .steps-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .how-it-works-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
