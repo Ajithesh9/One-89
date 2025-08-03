@@ -8,7 +8,7 @@ const Hero = () => {
   const deploySteps = [
     { status: 'complete', time: '10:23:45', message: 'Monitoring agent initialized', detail: 'Connected to family network' },
     { status: 'complete', time: '10:23:46', message: 'Device discovery completed', detail: '4 devices detected' },
-    { status: 'complete', time: '10:23:47', message: 'Content filters activated', detail: 'Safe browsing enabled' },
+    { status: 'complete', time: '10:23:47', message: 'Content filters activated', detail: 'Safe Browse enabled' },
     { status: 'complete', time: '10:23:48', message: 'Screen time limits configured', detail: 'Age-appropriate restrictions applied' },
     { status: 'active', time: '10:23:49', message: 'Real-time monitoring active', detail: 'Protecting your family 24/7' },
   ];
@@ -20,21 +20,13 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Create a ref to the component we want to track for scrolling
   const targetRef = useRef(null);
-
-  // useScroll hook to track the scroll progress of the targetRef
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    // Animate from when the start of the element hits the start of the viewport,
-    // to when the end of the element hits the start of the viewport.
     offset: ["start start", "end start"] 
   });
 
-  // Transform the scroll progress (0 to 1) into a vertical movement (y)
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
-  
-  // Transform the scroll progress to change the z-index at the very end of the scroll
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "120%"]);
   const zIndex = useTransform(scrollYProgress, [0.9, 1], [10, -1]);
 
   const containerVariants = {
@@ -60,11 +52,9 @@ const Hero = () => {
   };
 
   return (
-    // Attach the ref to the main container of the Hero section
     <div ref={targetRef} className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden" style={{
       background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%)'
     }}>
-      {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full blur-3xl animate-pulse" style={{
           background: 'rgba(76, 230, 196, 0.1)'
@@ -83,7 +73,6 @@ const Hero = () => {
         <div className="container mx-auto px-6 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
             
-            {/* Left side - Content */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -107,24 +96,7 @@ const Hero = () => {
                     Family Safe
                   </span>
                   <br />
-                  <div className="flex items-center gap-4">
-                    <span>Online</span>
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium" 
-                      style={{
-                        background: 'rgba(76, 230, 196, 0.12)',
-                        border: '1px solid rgba(76, 230, 196, 0.25)',
-                        color: 'rgb(76, 230, 196)',
-                        fontSize: '0.75rem'
-                      }}
-                    >
-                      <FiShield className="w-3 h-3" />
-                      <span>Trusted by 50,000+ families</span>
-                    </motion.div>
-                  </div>
+                  <span>Online</span>
                 </h1>
               </motion.div>
 
@@ -151,7 +123,6 @@ const Hero = () => {
                 </button>
               </motion.div>
 
-              {/* Redesigned Feature Grid */}
               <motion.div variants={itemVariants} className="space-y-4">
                 <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">Key Features</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -198,14 +169,12 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right side - Interface Wrapper - APPLY ANIMATIONS HERE */}
             <motion.div
-              style={{ y, zIndex }} // Apply the transformed styles
+              style={{ y, zIndex }}
               variants={itemVariants}
-              className="relative"
+              className="relative lg:-translate-y-[271px]"
             >
               <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
-                {/* Header */}
                 <div className="bg-slate-800/80 border-b border-slate-700/50 px-6 py-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -223,7 +192,6 @@ const Hero = () => {
                   </div>
                 </div>
 
-                {/* Deploy Log */}
                 <div className="p-6 h-96 overflow-hidden">
                   <div className="space-y-3 font-mono text-sm">
                     {deploySteps.map((step, index) => (
@@ -294,7 +262,6 @@ const Hero = () => {
                     ))}
                   </div>
 
-                  {/* Success message */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ 
@@ -317,7 +284,6 @@ const Hero = () => {
                   </motion.div>
                 </div>
 
-                {/* Footer stats */}
                 <div className="bg-slate-800/80 border-t border-slate-700/50 px-6 py-4">
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
