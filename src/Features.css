@@ -2,6 +2,9 @@
   padding-top: 5rem;
   padding-bottom: 5rem;
   background-color: #121212;
+  /* Add these two properties for the layering effect */
+  position: relative;
+  z-index: 1;
 }
 
 #features .features-container {

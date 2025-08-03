@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import { FiPlay, FiArrowRight, FiCheck, FiClock, FiShield, FiMonitor, FiMessageCircle, FiHardDrive, FiActivity } from 'react-icons/fi';
 
 const Hero = () => {
@@ -19,6 +19,23 @@ const Hero = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, []);
+
+  // Create a ref to the component we want to track for scrolling
+  const targetRef = useRef(null);
+
+  // useScroll hook to track the scroll progress of the targetRef
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    // Animate from when the start of the element hits the start of the viewport,
+    // to when the end of the element hits the start of the viewport.
+    offset: ["start start", "end start"] 
+  });
+
+  // Transform the scroll progress (0 to 1) into a vertical movement (y)
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
+  
+  // Transform the scroll progress to change the z-index at the very end of the scroll
+  const zIndex = useTransform(scrollYProgress, [0.9, 1], [10, -1]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -43,7 +60,8 @@ const Hero = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden" style={{
+    // Attach the ref to the main container of the Hero section
+    <div ref={targetRef} className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden" style={{
       background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%)'
     }}>
       {/* Animated background elements */}
@@ -145,8 +163,9 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right side - Interface Wrapper */}
+            {/* Right side - Interface Wrapper - APPLY ANIMATIONS HERE */}
             <motion.div
+              style={{ y, zIndex }} // Apply the transformed styles
               variants={itemVariants}
               className="relative"
             >
@@ -181,13 +200,7 @@ const Hero = () => {
                           x: 0
                         }}
                         transition={{ delay: index * 0.5 }}
-                        className={`flex items-start gap-3 p-3 rounded-lg transition-all duration-500 ${
-                          index === deployStep && step.status === 'active'
-                            ? ''
-                            : index <= deployStep
-                            ? ''
-                            : ''
-                        }`}
+                        className={`flex items-start gap-3 p-3 rounded-lg transition-all duration-500`}
                         style={{
                           background: index === deployStep && step.status === 'active'
                             ? 'rgba(187, 134, 252, 0.1)'

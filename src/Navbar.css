@@ -1,15 +1,19 @@
+/* Base Navbar Styling */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 50;
-  transition: all 0.3s;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .navbar.scrolled {
-  background-color: rgba(30, 30, 30, 0.8);
-  backdrop-filter: blur(10px);
+  background-color: rgba(18, 18, 18, 0.8); /* Slightly darker scrolled background */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navbar-container {
@@ -24,50 +28,91 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .navbar-container {
-    padding: 0 2rem;
-  }
-}
-
 .navbar-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 5rem;
+  height: 5rem; /* 80px */
 }
 
+/* Logo Styling */
 .navbar-logo {
   flex-shrink: 0;
-  cursor: pointer;
 }
 
+.logo-image {
+  height: 40px; /* Adjust size as needed */
+  width: auto;
+}
+
+/* Desktop Navigation Links */
 .desktop-menu {
-  display: none;
+  display: none; /* Hidden on mobile */
 }
 
 @media (min-width: 768px) {
   .desktop-menu {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2.5rem; /* Increased spacing */
+    position: absolute; /* Center the links */
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
 .nav-link {
-  color: #aaaaaa;
-  transition: color 0.3s;
-  cursor: pointer;
+  color: #a0aec0; /* Lighter gray for better contrast */
   font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem 0;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #bb86fc;
+  transition: width 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #bb86fc;
+  color: #ffffff;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Right-side Actions (CTA and Mobile Toggle) */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .cta-button-desktop {
   display: none;
+  background: linear-gradient(135deg, rgb(76, 230, 196) 0%, rgb(187, 134, 252) 100%);
+  color: #000000;
+  font-weight: 600;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(76, 230, 196, 0.2);
+}
+
+.cta-button-desktop:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(76, 230, 196, 0.3);
 }
 
 @media (min-width: 768px) {
@@ -76,22 +121,12 @@
   }
 }
 
-.cta-button {
-  background-color: #bb86fc;
-  color: #000000;
-  font-weight: 700;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
-  transition: all 0.3s;
-}
-
-.cta-button:hover {
-  background-color: rgba(187, 134, 252, 0.8);
-}
-
+/* Mobile Menu Specifics */
 .mobile-menu-button {
   display: flex;
   align-items: center;
+  padding: 0.5rem;
+  z-index: 60; /* Ensure it's above other nav content */
 }
 
 @media (min-width: 768px) {
@@ -102,12 +137,17 @@
 
 .mobile-menu-icon {
   color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
 }
 
 .mobile-menu {
-  background-color: #1e1e1e;
-  padding-bottom: 1rem;
+  position: absolute;
+  top: 5rem; /* Position below the navbar */
+  left: 0;
+  right: 0;
+  background-color: #121212;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 0;
 }
 
 @media (min-width: 768px) {
@@ -120,32 +160,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .mobile-nav-link {
-  color: #aaaaaa;
-  transition: color 0.3s;
-  cursor: pointer;
+  color: #a0aec0;
   font-weight: 500;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
-.mobile-nav-link:hover,
 .mobile-nav-link.active {
   color: #bb86fc;
 }
 
 .mobile-cta-button {
-  background-color: #bb86fc;
+  background: linear-gradient(135deg, rgb(76, 230, 196) 0%, rgb(187, 134, 252) 100%);
   color: #000000;
-  font-weight: 700;
-  padding: 0.75rem 2rem;
+  font-weight: 600;
+  padding: 0.75rem 2.5rem;
   border-radius: 0.5rem;
-  transition: all 0.3s;
-  width: 80%;
-}
-
-.mobile-cta-button:hover {
-  background-color: rgba(187, 134, 252, 0.8);
+  font-size: 1.125rem;
 }

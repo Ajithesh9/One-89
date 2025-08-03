@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-scroll';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
-import Logo from '../assets/Logo'; // <-- 1. Import path is updated to point to the assets folder
+// IMPORTANT: Make sure you have an 'eyes.png' file in your 'src/assets' folder.
+import eyesLogo from '../assets/eyes.png'; 
 import '../Navbar.css';
 
 const navLinks = [
@@ -12,30 +13,50 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  // State to control navbar visibility
+  const controls = useAnimation();
+  const lastYPos = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const currentYPos = window.scrollY;
+      setIsScrolled(currentYPos > 10);
+
+      if (currentYPos > lastYPos.current && currentYPos > 100) {
+        // Scrolling down
+        controls.start("hidden");
+      } else {
+        // Scrolling up
+        controls.start("visible");
+      }
+      lastYPos.current = currentYPos;
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [controls]);
+
+  const navbarVariants = {
+    visible: { y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
+    hidden: { y: '-100%', transition: { duration: 0.3, ease: 'easeIn' } },
+  };
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      variants={navbarVariants}
+      animate={controls}
+      initial="visible"
+      className={`navbar ${isScrolled ? 'scrolled' : ''}`}
     >
       <div className="navbar-container">
         <div className="navbar-content">
           
           {/* Logo */}
           <div className="navbar-logo">
-            <Logo />
+            <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
           </div>
 
           {/* Desktop Menu */}
@@ -47,7 +68,7 @@ const Navbar = () => {
                 smooth={true}
                 duration={500}
                 spy={true}
-                offset={-70}
+                offset={-80} // Adjusted offset for better positioning
                 className="nav-link"
                 activeClass="active"
               >
@@ -56,17 +77,13 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="cta-button-desktop">
-            <button className="cta-button">
+          {/* CTA Button and Mobile Menu Toggle */}
+          <div className="navbar-actions">
+            <button className="cta-button-desktop">
               Download
             </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="mobile-menu-button">
-            <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-icon">
-              {menuOpen ? <FiX /> : <FiMenu />}
+            <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-button">
+              {menuOpen ? <FiX className="mobile-menu-icon" /> : <FiMenu className="mobile-menu-icon" />}
             </button>
           </div>
         </div>
@@ -75,8 +92,9 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
           className="mobile-menu"
         >
           <div className="mobile-menu-content">
@@ -87,7 +105,7 @@ const Navbar = () => {
                 smooth={true}
                 duration={500}
                 spy={true}
-                offset={-70}
+                offset={-80}
                 className="mobile-nav-link"
                 activeClass="active"
                 onClick={() => setMenuOpen(false)}
