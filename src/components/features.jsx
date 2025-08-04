@@ -4,58 +4,46 @@ import { Smartphone, Shield, Bell, Activity, MapPin, Camera, Mic, ImageIcon, Mes
 import frameImage from '../assets/frame.png';
 import '../Features.css';
 
+// --- Helper function to pre-calculate all color styles ---
+const generateColorVariations = (hex) => {
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b);
+
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) {
+    return {
+      iconColor: '#FFFFFF', // Default color
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      borderColor: 'rgba(255, 255, 255, 0.2)',
+      boxShadow: '0 0 20px 0px rgba(255, 255, 255, 0.15)',
+    };
+  }
+
+  const r = parseInt(result[1], 16);
+  const g = parseInt(result[2], 16);
+  const b = parseInt(result[3], 16);
+
+  return {
+    iconColor: hex,
+    backgroundColor: `rgba(${r}, ${g}, ${b}, 0.15)`,
+    borderColor: `rgba(${r}, ${g}, ${b}, 0.3)`,
+    boxShadow: `0 0 20px 0px rgba(${r}, ${g}, ${b}, 0.2)`,
+  };
+};
+
 const featuresData = [
-  {
-    id: 0,
-    icon: <AppWindow size={32} />,
-    title: 'Intuitive & Beautiful UI',
-    description: "Our application is designed with a clean, intuitive interface that makes powerful monitoring tools easy to use. The dashboard provides an at-a-glance overview of all connected devices.",
-    isDashboard: true,
-    color: '#a78bfa' // Purple
-  },
-  {
-    id: 1,
-    icon: <Camera size={32} />,
-    title: 'Live Remote Camera',
-    description: "Securely access the device's camera to see its surroundings in real-time. Perfect for ensuring your loved ones are safe or for locating a lost device.",
-    color: '#4ade80' // Green
-  },
-  {
-    id: 2,
-    icon: <MapPin size={32} />,
-    title: 'Real-time Location',
-    description: 'Track the exact location with live GPS data and view a complete location history. Set up geofences to receive alerts when a device enters or leaves a specific area.',
-    color: '#38bdf8' // Blue
-  },
-  {
-    id: 3,
-    icon: <Mic size={32} />,
-    title: 'Live Microphone',
-    description: 'Listen to the ambient sounds around the target device for comprehensive monitoring. Understand the context of a situation with one-way audio.',
-    color: '#f472b6' // Pink
-  },
-  {
-    id: 4,
-    icon: <ImageIcon size={32} />,
-    title: 'Gallery & Media Access',
-    description: 'View photos and videos saved on the device. Our secure viewer ensures that you can monitor media without leaving a trace.',
-    color: '#fb923c' // Orange
-  },
-  {
-    id: 5,
-    icon: <Phone size={32} />,
-    title: 'Call & SMS Log',
-    description: 'Monitor all incoming, outgoing, and missed calls, as well as text messages. Get a clear picture of all communications.',
-    color: '#facc15' // Yellow
-  },
-  {
-    id: 6,
-    icon: <MessageSquare size={32} />,
-    title: 'Live Chat View',
-    description: 'Watch ongoing chats on popular platforms like WhatsApp, Instagram, Snapchat & Signal as they happen, including a preview of what\'s being typed.',
-    color: '#2dd4bf' // Teal
-  },
-];
+    { id: 0, icon: <AppWindow size={32} />, title: 'Intuitive & Beautiful UI', description: "Our application is designed with a clean, intuitive interface that makes powerful monitoring tools easy to use. The dashboard provides an at-a-glance overview of all connected devices.", isDashboard: true, color: '#a78bfa'},
+    { id: 1, icon: <Camera size={32} />, title: 'Live Remote Camera', description: "Securely access the device's camera to see its surroundings in real-time. Perfect for ensuring your loved ones are safe or for locating a lost device.", color: '#4ade80'},
+    { id: 2, icon: <MapPin size={32} />, title: 'Real-time Location', description: 'Track the exact location with live GPS data and view a complete location history. Set up geofences to receive alerts when a device enters or leaves a specific area.', color: '#38bdf8'},
+    { id: 3, icon: <Mic size={32} />, title: 'Live Microphone', description: 'Listen to the ambient sounds around the target device for comprehensive monitoring. Understand the context of a situation with one-way audio.', color: '#f472b6'},
+    { id: 4, icon: <ImageIcon size={32} />, title: 'Gallery & Media Access', description: 'View photos and videos saved on the device. Our secure viewer ensures that you can monitor media without leaving a trace.', color: '#fb923c'},
+    { id: 5, icon: <Phone size={32} />, title: 'Call & SMS Log', description: 'Monitor all incoming, outgoing, and missed calls, as well as text messages. Get a clear picture of all communications.', color: '#facc15'},
+    { id: 6, icon: <MessageSquare size={32} />, title: 'Live Chat View', description: 'Watch ongoing chats on popular platforms like WhatsApp, Instagram, Snapchat & Signal as they happen, including a preview of what\'s being typed.', color: '#2dd4bf'},
+].map(feature => ({
+  ...feature,
+  styles: generateColorVariations(feature.color),
+}));
+
 
 const ScreenContent = ({ feature }) => {
   if (feature.isDashboard) {
@@ -85,21 +73,6 @@ const ScreenContent = ({ feature }) => {
   );
 };
 
-// More robust helper function to convert hex color to an RGB object
-const hexToRgb = (hex) => {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, (m, r, g, b) => {
-    return r + r + g + g + b + b;
-  });
-
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-};
-
 
 const Features = () => {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
@@ -109,7 +82,6 @@ const Features = () => {
   const dropDistance = '-100vh';
   const finalDropPosition = '9vh';
   const parallaxUpDistance = '-18%';
-  // --------------------------
 
   const { scrollYProgress } = useScroll({
     target: featureSectionRef,
@@ -149,8 +121,7 @@ const Features = () => {
     animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
-  const activeColor = featuresData[activeFeatureIndex].color;
-  const activeColorRgb = hexToRgb(activeColor);
+  const activeFeature = featuresData[activeFeatureIndex];
 
   return (
     <section id="features" ref={featureSectionRef}>
@@ -159,7 +130,7 @@ const Features = () => {
           <div className="background-pattern" />
           <AnimatePresence mode="wait">
             <motion.div
-              key={featuresData[activeFeatureIndex].id}
+              key={activeFeature.id}
               variants={textVariants}
               initial="initial"
               animate="animate"
@@ -169,17 +140,17 @@ const Features = () => {
               <motion.div
                 className="feature-icon-wrapper"
                 style={{
-                  '--icon-color': activeColor,
-                  '--icon-color-r': activeColorRgb.r,
-                  '--icon-color-g': activeColorRgb.g,
-                  '--icon-color-b': activeColorRgb.b,
+                  color: activeFeature.styles.iconColor,
+                  backgroundColor: activeFeature.styles.backgroundColor,
+                  borderColor: activeFeature.styles.borderColor,
+                  boxShadow: activeFeature.styles.boxShadow,
                 }}
                 variants={itemVariants}
               >
-                {featuresData[activeFeatureIndex].icon}
+                {activeFeature.icon}
               </motion.div>
-              <motion.h2 variants={itemVariants} className="feature-title-scrolly">{featuresData[activeFeatureIndex].title}</motion.h2>
-              <motion.p variants={itemVariants} className="feature-description-scrolly">{featuresData[activeFeatureIndex].description}</motion.p>
+              <motion.h2 variants={itemVariants} className="feature-title-scrolly">{activeFeature.title}</motion.h2>
+              <motion.p variants={itemVariants} className="feature-description-scrolly">{activeFeature.description}</motion.p>
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -191,14 +162,14 @@ const Features = () => {
                     <div className="device-screen">
                         <AnimatePresence mode="wait">
                             <motion.div
-                            key={featuresData[activeFeatureIndex].id}
+                            key={activeFeature.id}
                             variants={textVariants}
                             initial="initial"
                             animate="animate"
                             exit="exit"
                             className="device-content-inner"
                             >
-                            <ScreenContent feature={featuresData[activeFeatureIndex]} />
+                            <ScreenContent feature={activeFeature} />
                             </motion.div>
                         </AnimatePresence>
                     </div>
@@ -209,4 +180,5 @@ const Features = () => {
     </section>
   );
 };
+
 export default Features;

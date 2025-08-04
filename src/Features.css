@@ -56,17 +56,13 @@
 /* Styling the icon wrapper for a softer look and better visibility */
 .feature-icon-wrapper {
   margin-bottom: 1.5rem;
-  color: var(--icon-color);
-  background-color: rgba(var(--icon-color-r), var(--icon-color-g), var(--icon-color-b), 0.15);
   width: 56px;
   height: 56px;
   border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Adding a subtle glow for better visibility */
-  box-shadow: 0 0 20px 0px rgba(var(--icon-color-r), var(--icon-color-g), var(--icon-color-b), 0.2);
-  border: 1px solid rgba(var(--icon-color-r), var(--icon-color-g), var(--icon-color-b), 0.3);
+  border: 1px solid; /* The color is now applied via inline style */
   transition: transform 0.3s ease;
 }
 
