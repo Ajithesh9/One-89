@@ -1,53 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { FiCamera, FiMapPin, FiMic, FiImage, FiPhone, FiMessageSquare, FiGrid, FiShield, FiBell, FiActivity, FiUser } from 'react-icons/fi';
+import { Smartphone, Shield, Bell, Activity, MapPin, Camera, Mic, ImageIcon, MessageSquare, Phone, AppWindow } from 'lucide-react';
 import frameImage from '../assets/frame.png';
-import '../Features.css';
+import '../Features.css'; // Assumes Features.css is in the parent directory
 
 const featuresData = [
-  {
-    id: 0,
-    icon: <FiGrid size={32} />,
-    title: 'Intuitive & Beautiful UI',
-    description: "Our application is designed with a clean, intuitive interface that makes powerful monitoring tools easy to use. The dashboard provides an at-a-glance overview of all connected devices.",
-    isDashboard: true,
-  },
-  {
-    id: 1,
-    icon: <FiCamera size={32} />,
-    title: 'Live Remote Camera',
-    description: "Securely access the device's camera to see its surroundings in real-time. Perfect for ensuring your loved ones are safe or for locating a lost device.",
-  },
-  {
-    id: 2,
-    icon: <FiMapPin size={32} />,
-    title: 'Real-time Location',
-    description: 'Track the exact location with live GPS data and view a complete location history. Set up geofences to receive alerts when a device enters or leaves a specific area.',
-  },
-  {
-    id: 3,
-    icon: <FiMic size={32} />,
-    title: 'Live Microphone',
-    description: 'Listen to the ambient sounds around the target device for comprehensive monitoring. Understand the context of a situation with one-way audio.',
-  },
-  {
-    id: 4,
-    icon: <FiImage size={32} />,
-    title: 'Gallery & Media Access',
-    description: 'View photos and videos saved on the device. Our secure viewer ensures that you can monitor media without leaving a trace.',
-  },
-  {
-    id: 5,
-    icon: <FiPhone size={32} />,
-    title: 'Call & SMS Log',
-    description: 'Monitor all incoming, outgoing, and missed calls, as well as text messages. Get a clear picture of all communications.',
-  },
-  {
-    id: 6,
-    icon: <FiMessageSquare size={32} />,
-    title: 'Live Chat View',
-    description: 'Watch ongoing chats on popular platforms like WhatsApp, Instagram, Snapchat & Signal as they happen, including a preview of what\'s being typed.',
-  },
+  { id: 0, icon: <AppWindow size={32} />, title: 'Intuitive & Beautiful UI', description: "Our application is designed with a clean, intuitive interface that makes powerful monitoring tools easy to use. The dashboard provides an at-a-glance overview of all connected devices.", isDashboard: true, color: '#a78bfa' },
+  { id: 1, icon: <Camera size={32} />, title: 'Live Remote Camera', description: "Securely access the device's camera to see its surroundings in real-time. Perfect for ensuring your loved ones are safe or for locating a lost device.", color: '#4ade80' },
+  { id: 2, icon: <MapPin size={32} />, title: 'Real-time Location', description: 'Track the exact location with live GPS data and view a complete location history. Set up geofences to receive alerts when a device enters or leaves a specific area.', color: '#38bdf8' },
+  { id: 3, icon: <Mic size={32} />, title: 'Live Microphone', description: 'Listen to the ambient sounds around the target device for comprehensive monitoring. Understand the context of a situation with one-way audio.', color: '#f472b6' },
+  { id: 4, icon: <ImageIcon size={32} />, title: 'Gallery & Media Access', description: 'View photos and videos saved on the device. Our secure viewer ensures that you can monitor media without leaving a trace.', color: '#fb923c' },
+  { id: 5, icon: <Phone size={32} />, title: 'Call & SMS Log', description: 'Monitor all incoming, outgoing, and missed calls, as well as text messages. Get a clear picture of all communications.', color: '#facc15' },
+  { id: 6, icon: <MessageSquare size={32} />, title: 'Live Chat View', description: 'Watch ongoing chats on popular platforms like WhatsApp, Instagram, Snapchat & Signal as they happen, including a preview of what\'s being typed.', color: '#2dd4bf' },
 ];
 
 const ScreenContent = ({ feature }) => {
@@ -55,13 +19,13 @@ const ScreenContent = ({ feature }) => {
     return (
       <div className="dashboard-ui">
         <div className="dashboard-header">
-            <FiUser /> <span>John's Dashboard</span> <div className="online-dot" />
+            <Smartphone /> <span>John's Dashboard</span> <div className="online-dot" />
         </div>
         <div className="dashboard-grid">
-            <div className="dashboard-card"><FiShield /><span>Device Secure</span></div>
-            <div className="dashboard-card"><FiBell /><span>3 New Alerts</span></div>
-            <div className="dashboard-card"><FiActivity /><span>Live Activity</span></div>
-            <div className="dashboard-card"><FiMapPin /><span>Geofence On</span></div>
+            <div className="dashboard-card"><Shield /><span>Device Secure</span></div>
+            <div className="dashboard-card"><Bell /><span>3 New Alerts</span></div>
+            <div className="dashboard-card"><Activity /><span>Live Activity</span></div>
+            <div className="dashboard-card"><MapPin /><span>Geofence On</span></div>
         </div>
         <div className="dashboard-footer">
             Dashboard
@@ -72,25 +36,20 @@ const ScreenContent = ({ feature }) => {
 
   return (
     <div className="feature-display">
-      <div className="feature-display-icon">{feature.icon}</div>
+      <div className="feature-display-icon" style={{ color: feature.color }}>{feature.icon}</div>
       <h3 className="feature-display-title">{feature.title}</h3>
     </div>
   );
 };
-
 
 const Features = () => {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
   const featureSectionRef = useRef(null);
 
   // --- ANIMATION CONTROLS ---
-  // 1. How far the device drops from the top initially.
   const dropDistance = '-100vh';
-  // 2. The final resting position of the device (0vh is vertically centered).
   const finalDropPosition = '9vh';
-  // 3. How far the device moves UP as you scroll down.
   const parallaxUpDistance = '-18%';
-  // --------------------------
 
   const { scrollYProgress } = useScroll({
     target: featureSectionRef,
@@ -120,10 +79,17 @@ const Features = () => {
   }, [scrollYProgress]);
 
   const textVariants = {
-    initial: { opacity: 0, y: 30 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-    exit: { opacity: 0, y: -30, transition: { duration: 0.3, ease: 'easeIn' } },
+    initial: { opacity: 0, y: 20, filter: 'blur(8px)' },
+    animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.7, ease: [0.4, 0.0, 0.2, 1], staggerChildren: 0.1 } },
+    exit: { opacity: 0, y: -20, filter: 'blur(8px)', transition: { duration: 0.4, ease: [0.4, 0.0, 0.2, 1] } },
   };
+
+  const itemVariants = {
+    initial: { opacity: 0, y: 20, filter: 'blur(5px)' },
+    animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: 'easeOut' } },
+  };
+
+  const activeFeature = featuresData[activeFeatureIndex];
 
   return (
     <section id="features" ref={featureSectionRef}>
@@ -132,16 +98,21 @@ const Features = () => {
           <div className="background-pattern" />
           <AnimatePresence mode="wait">
             <motion.div
-              key={featuresData[activeFeatureIndex].id}
+              key={activeFeature.id}
               variants={textVariants}
               initial="initial"
               animate="animate"
               exit="exit"
               className="feature-text-content"
             >
-              <div className="feature-icon-wrapper">{featuresData[activeFeatureIndex].icon}</div>
-              <h2 className="feature-title-scrolly">{featuresData[activeFeatureIndex].title}</h2>
-              <p className="feature-description-scrolly">{featuresData[activeFeatureIndex].description}</p>
+              <motion.div
+                className={`feature-icon-wrapper feature-${activeFeature.id}`}
+                variants={itemVariants}
+              >
+                {activeFeature.icon}
+              </motion.div>
+              <motion.h2 variants={itemVariants} className="feature-title-scrolly">{activeFeature.title}</motion.h2>
+              <motion.p variants={itemVariants} className="feature-description-scrolly">{activeFeature.description}</motion.p>
             </motion.div>
           </AnimatePresence>
         </motion.div>
@@ -153,14 +124,14 @@ const Features = () => {
                     <div className="device-screen">
                         <AnimatePresence mode="wait">
                             <motion.div
-                            key={featuresData[activeFeatureIndex].id}
+                            key={activeFeature.id}
                             variants={textVariants}
                             initial="initial"
                             animate="animate"
                             exit="exit"
                             className="device-content-inner"
                             >
-                            <ScreenContent feature={featuresData[activeFeatureIndex]} />
+                            <ScreenContent feature={activeFeature} />
                             </motion.div>
                         </AnimatePresence>
                     </div>
