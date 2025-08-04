@@ -85,21 +85,19 @@ const ScreenContent = ({ feature }) => {
   );
 };
 
-// Helper function to convert hex color to an RGB string
+// More robust helper function to convert hex color to an RGB object
 const hexToRgb = (hex) => {
-  let r = 0, g = 0, b = 0;
-  // 3 digits
-  if (hex.length === 4) {
-    r = "0x" + hex[1] + hex[1];
-    g = "0x" + hex[2] + hex[2];
-    b = "0x" + hex[3] + hex[3];
-  // 6 digits
-  } else if (hex.length === 7) {
-    r = "0x" + hex[1] + hex[2];
-    g = "0x" + hex[3] + hex[4];
-    b = "0x" + hex[5] + hex[6];
-  }
-  return `${+r}, ${+g}, ${+b}`;
+  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, (m, r, g, b) => {
+    return r + r + g + g + b + b;
+  });
+
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
 };
 
 
@@ -108,11 +106,8 @@ const Features = () => {
   const featureSectionRef = useRef(null);
 
   // --- ANIMATION CONTROLS ---
-  // 1. How far the device drops from the top initially.
   const dropDistance = '-100vh';
-  // 2. The final resting position of the device (0vh is vertically centered).
   const finalDropPosition = '9vh';
-  // 3. How far the device moves UP as you scroll down.
   const parallaxUpDistance = '-18%';
   // --------------------------
 
@@ -175,7 +170,9 @@ const Features = () => {
                 className="feature-icon-wrapper"
                 style={{
                   '--icon-color': activeColor,
-                  '--icon-color-rgb': activeColorRgb
+                  '--icon-color-r': activeColorRgb.r,
+                  '--icon-color-g': activeColorRgb.g,
+                  '--icon-color-b': activeColorRgb.b,
                 }}
                 variants={itemVariants}
               >
