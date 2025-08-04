@@ -9,13 +9,19 @@ import Pricing from './components/Pricing';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import PrivacyModal from './components/PrivacyModal';
+import DownloadModal from './components/DownloadModal';
 
 function App() {
   const [isPrivacyModalOpen, setPrivacyModalOpen] = useState(false);
+  const [isDownloadModalOpen, setDownloadModalOpen] = useState(false);
   const lenisRef = useRef(null);
 
   const openPrivacyModal = () => setPrivacyModalOpen(true);
   const closePrivacyModal = () => setPrivacyModalOpen(false);
+
+  const openDownloadModal = () => setDownloadModalOpen(true);
+  const closeDownloadModal = () => setDownloadModalOpen(false);
+
 
   useEffect(() => {
     // ================================================================
@@ -89,19 +95,19 @@ function App() {
   
   useEffect(() => {
     if (lenisRef.current) {
-      if (isPrivacyModalOpen) {
+      if (isPrivacyModalOpen || isDownloadModalOpen) {
         lenisRef.current.stop();
       } else {
         lenisRef.current.start();
       }
     }
-  }, [isPrivacyModalOpen]);
+  }, [isPrivacyModalOpen, isDownloadModalOpen]);
 
   return (
     <div className="bg-dark-background min-h-screen text-dark-onSurface">
       <Navbar />
       <main>
-        <Hero />
+        <Hero onDownloadClick={openDownloadModal} />
         <Features />
         <HowItWorks />
         <Pricing />
@@ -111,6 +117,9 @@ function App() {
 
       <AnimatePresence>
         {isPrivacyModalOpen && <PrivacyModal onClose={closePrivacyModal} />}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isDownloadModalOpen && <DownloadModal onClose={closeDownloadModal} />}
       </AnimatePresence>
     </div>
   );

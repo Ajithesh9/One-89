@@ -1,0 +1,136 @@
+/* Shared Overlay for all modals to apply background blur */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(8px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(8px); /* For Safari */
+  z-index: 100; /* High z-index to be on top */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.download-modal {
+  background-color: #1E1E1E; /* Dark surface color */
+  border-radius: 0.75rem;
+  width: 100%;
+  max-width: 32rem; /* Optimal width for a download modal */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.download-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.download-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+/* Reusable close button style */
+.modal-close-button {
+  color: #aaaaaa;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-close-button:hover {
+  color: #bb86fc; /* Primary accent color */
+  transform: rotate(10deg);
+}
+
+.download-modal-content {
+  padding: 2rem 1.5rem;
+  color: #aaaaaa; /* onSurfaceSecondary */
+}
+
+.download-modal-description {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.download-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.download-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  transform: perspective(1px) scale(1);
+}
+
+.download-button:hover {
+    transform: perspective(1px) scale(1.01);
+    box-shadow: 0 7px 25px rgba(0,0,0,0.2);
+}
+
+/* Parent App Button Styling */
+.download-button.parent-app {
+  background-color: #334155; /* A subtle blue-grey */
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.download-button.parent-app:hover {
+  background-color: #475569;
+  border-color: rgba(3, 218, 198, 0.5); /* Teal accent on hover */
+}
+
+/* Kids App Button Styling */
+.download-button.kids-app {
+  background-color: #334155;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.download-button.kids-app:hover {
+  background-color: #475569;
+  border-color: rgba(187, 134, 252, 0.5); /* Purple accent on hover */
+}
+
+
+.download-button-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.download-button.parent-app .download-button-icon {
+    color: #03DAC6; /* Teal */
+}
+
+.download-button.kids-app .download-button-icon {
+    color: #BB86FC; /* Purple */
+}
+
+.button-text-wrapper {
+  text-align: left;
+}
+
+.button-main-text {
+  font-weight: 600;
+  display: block;
+  font-size: 1.1rem;
+  color: #FFFFFF;
+}
+
+.button-sub-text {
+  font-size: 0.875rem;
+  color: #AAAAAA;
+}

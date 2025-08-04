@@ -1,10 +1,10 @@
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { FiPlay, FiArrowRight, FiCheck, FiClock } from 'react-icons/fi';
+import { FiDownload, FiCheck, FiClock, FiPlay } from 'react-icons/fi'; // Added FiPlay
 import { DEPLOY_STEPS, KEY_FEATURES } from './heroContent';
 import '../Hero.css';
 
-const Hero = () => {
+const Hero = ({ onDownloadClick }) => {
   const [deployStep, setDeployStep] = useState(0);
 
   useEffect(() => {
@@ -91,14 +91,20 @@ const Hero = () => {
             </motion.p>
 
             <motion.div variants={itemVariants} className="hero-buttons">
-              <button className="hero-button primary">
-                <span>Get Started</span>
-                <FiArrowRight className="hero-button-icon" />
+              <button className="hero-button primary" onClick={onDownloadClick}>
+                <span>Download Now</span>
+                <FiDownload className="hero-button-icon" />
               </button>
-              <button className="hero-button secondary">
+              {/* === THIS BUTTON IS NOW AN <a> TAG === */}
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hero-button secondary"
+              >
                 <FiPlay className="hero-button-icon" />
                 <span>Watch Demo</span>
-              </button>
+              </a>
             </motion.div>
 
             <motion.div variants={itemVariants} className="key-features-container">
