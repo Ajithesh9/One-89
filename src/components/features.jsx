@@ -89,7 +89,7 @@ const Features = () => {
   // 2. The final resting position of the device (0vh is vertically centered).
   const finalDropPosition = '7vh';
   // 3. How far the device moves UP as you scroll down.
-  const parallaxUpDistance = '-18%';
+  const parallaxUpDistance = '-15%';
   // --------------------------
 
   const { scrollYProgress } = useScroll({
