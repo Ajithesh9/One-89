@@ -3,7 +3,7 @@ import { Link } from 'react-scroll';
 import { motion, useAnimation } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 // IMPORTANT: Make sure you have an 'eyes.png' file in your 'src/assets' folder.
-import eyesLogo from '../assets/eyes.png'; 
+import eyesLogo from '../assets/eyes.png';
 import '../Navbar.css';
 
 const navLinks = [
@@ -14,22 +14,23 @@ const navLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   
-  // State to control navbar visibility
   const controls = useAnimation();
   const lastYPos = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentYPos = window.scrollY;
-      setIsScrolled(currentYPos > 10);
+
+      if (menuOpen) {
+        controls.start("visible");
+        lastYPos.current = currentYPos;
+        return;
+      }
 
       if (currentYPos > lastYPos.current && currentYPos > 100) {
-        // Scrolling down
         controls.start("hidden");
       } else {
-        // Scrolling up
         controls.start("visible");
       }
       lastYPos.current = currentYPos;
@@ -37,11 +38,11 @@ const Navbar = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [controls]);
+  }, [controls, menuOpen]);
 
   const navbarVariants = {
     visible: { y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
-    hidden: { y: '-100%', transition: { duration: 0.3, ease: 'easeIn' } },
+    hidden: { y: '-150%', transition: { duration: 0.3, ease: 'easeIn' } },
   };
 
   return (
@@ -49,43 +50,40 @@ const Navbar = () => {
       variants={navbarVariants}
       animate={controls}
       initial="visible"
-      className={`navbar ${isScrolled ? 'scrolled' : ''}`}
+      className="navbar" // Main positioning wrapper
     >
-      <div className="navbar-container">
-        <div className="navbar-content">
-          
-          {/* Logo */}
-          <div className="navbar-logo">
-            <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
-          </div>
+      <div className="navbar-content-wrapper"> {/* The visible pill container */}
+        {/* Logo */}
+        <div className="navbar-logo">
+          <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
+        </div>
 
-          {/* Desktop Menu */}
-          <div className="desktop-menu">
-            {navLinks.map((link) => (
-              <Link
-                key={link.id}
-                to={link.id}
-                smooth={true}
-                duration={500}
-                spy={true}
-                offset={-80} // Adjusted offset for better positioning
-                className="nav-link"
-                activeClass="active"
-              >
-                {link.title}
-              </Link>
-            ))}
-          </div>
+        {/* Desktop Menu */}
+        <div className="desktop-menu">
+          {navLinks.map((link) => (
+            <Link
+              key={link.id}
+              to={link.id}
+              smooth={true}
+              duration={500}
+              spy={true}
+              offset={-100} // Adjusted offset for new fixed position
+              className="nav-link"
+              activeClass="active"
+            >
+              {link.title}
+            </Link>
+          ))}
+        </div>
 
-          {/* CTA Button and Mobile Menu Toggle */}
-          <div className="navbar-actions">
-            <button className="cta-button-desktop">
-              Download
-            </button>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-button">
-              {menuOpen ? <FiX className="mobile-menu-icon" /> : <FiMenu className="mobile-menu-icon" />}
-            </button>
-          </div>
+        {/* CTA Button and Mobile Menu Toggle */}
+        <div className="navbar-actions">
+          <button className="cta-button-desktop">
+            Download
+          </button>
+          <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-button">
+            {menuOpen ? <FiX className="mobile-menu-icon" /> : <FiMenu className="mobile-menu-icon" />}
+          </button>
         </div>
       </div>
 

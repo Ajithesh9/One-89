@@ -20,41 +20,35 @@ const Hero = () => {
     offset: ["start start", "end start"]
   });
 
-  // SMOOTHNESS CONFIGURATION - Adjust these values for different smoothness levels
+  // ============================================================================
+  // RESPONSIVE SMOOTHNESS - Follows scroll naturally with extended smoothness
+  // ============================================================================
+  
+  // SMOOTH SCROLL FOLLOWING: Responsive to user scroll but with refined physics
   const smoothProgress = useSpring(scrollYProgress, {
-    // STIFFNESS: Higher = more responsive, Lower = more laggy
-    // Range: 50-2000 (recommended: 100-400 for smooth, 800-2000 for snappy)
-    stiffness: 300,
-    
-    // DAMPING: Higher = less oscillation, Lower = more bouncy
-    // Range: 10-200 (recommended: 30-80 for smooth, 100+ for heavily damped)
-    damping: 100,
-    
-    // MASS: Higher = slower response, Lower = faster response
-    // Range: 0.1-5 (recommended: 0.5-2 for natural feel)
-    mass: 0.8,
-    
-    // REST_DELTA: Smaller = more precise, Larger = settles faster
-    // Range: 0.0001-0.01 (recommended: 0.001 for precision)
-    restDelta: 0.0002,
-    
-    // REST_SPEED: Smaller = more precise, Larger = settles faster
-    // Range: 0.001-1 (recommended: 0.01 for smooth settling)
-    restSpeed: 0.001
+    // RESPONSIVE SETTINGS - Follows scroll immediately but smooths the motion
+    stiffness: 400,      // High responsiveness to follow scroll
+    damping: 40,         // Moderate damping for natural feel
+    mass: 0.5,           // Light mass for quick response
+    restDelta: 0.001,    // Quick settling
+    restSpeed: 0.01      // Responsive settling
   });
 
-  // PARALLAX INTENSITY - Adjust the movement range
-  // Increase the second value for more dramatic parallax effect
-  // Decrease for subtler movement
-  const y = useTransform(smoothProgress, [0, 1], ["0%", "135%"]);
-  
-  // Z-INDEX TRANSITION - Controls when element goes behind other content
-  // Adjust the first value (0.9) to change when the transition happens
-  // 0.8 = earlier transition, 0.95 = later transition
-  const zIndex = useTransform(scrollYProgress, [0.9, 1], [10, -1]);
+  // EXTENDED SMOOTHNESS: Animation continues slightly after scroll stops
+  const extendedSmooth = useSpring(smoothProgress, {
+    stiffness: 180,      // Lower stiffness extends the animation
+    damping: 35,         // Lower damping for longer tail
+    mass: 0.8,           // Slightly heavier for extended motion
+    restDelta: 0.0008,   // Precise but not too tight
+    restSpeed: 0.008     // Allows for extended settling
+  });
 
-  // OPTIONAL: Rotation for dynamic effect (currently disabled)
-  // const rotateX = useTransform(smoothProgress, [0, 1], [0, 5]);
+  // PARALLAX MOVEMENT - Adjust range for desired effect
+  // Higher second value = more dramatic movement
+  const y = useTransform(extendedSmooth, [0, 1], ["0%", "130%"]);
+  
+  // Z-INDEX TRANSITION - When element goes behind content
+  const zIndex = useTransform(scrollYProgress, [0.9, 1], [10, -1]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -125,13 +119,12 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* HERO INTERFACE - BUTTERY SMOOTH PARALLAX */}
+          {/* RESPONSIVE SMOOTH HERO INTERFACE - Follows scroll naturally */}
           <motion.div
             style={{ 
               y, 
               zIndex,
-              willChange: 'transform', // Hint to browser for optimization
-              // rotateX, // Optional: Uncomment for rotation effect
+              willChange: 'transform',
             }}
             variants={itemVariants}
             className="hero-interface-wrapper"
