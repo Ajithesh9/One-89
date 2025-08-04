@@ -22,13 +22,13 @@ const Hero = () => {
 
   // 2. Create a smoothed scroll value with gentle physics for a smooth, non-choppy effect.
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 300, // Controls the "springiness"
+    stiffness: 2000, // Controls the "springiness"
     damping: 50,    // Controls the "resistance" or "drag"
     restDelta: 0.001
   });
 
   // 3. Use the SMOOTH progress value for the transformation.
-  const y = useTransform(smoothProgress, [0, 1], ["0%", "120%"]);
+  const y = useTransform(smoothProgress, [0, 1], ["0%", "130%"]);
   const zIndex = useTransform(scrollYProgress, [0.9, 1], [10, -1]);
 
   const containerVariants = {
