@@ -87,7 +87,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.p variants={itemVariants} className="hero-subtitle">
-              Comprehensive parental monitoring and control. Set screen time limits, block inappropriate content, and monitor activity across all devices in real-time.
+              Digital safety, simplified. Control and monitor all family devices in real-time. Keep them safe, wherever they are.
             </motion.p>
 
             <motion.div variants={itemVariants} className="hero-buttons">

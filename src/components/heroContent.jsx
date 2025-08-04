@@ -17,7 +17,7 @@ export const KEY_FEATURES = [
     {
         icon: <FiHardDrive />,
         title: 'Smart Control',
-        description: 'Intelligent content filtering and access control',
+        description: 'Intelligent access control over essentials',
     },
     {
         icon: <FiMessageCircle />,

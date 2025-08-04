@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 import { FiDownload, FiLink2, FiShield } from 'react-icons/fi';
 import '../HowItWorks.css';
 
+
 const stepsData = [
   {
     icon: <FiDownload className="step-icon" />,
@@ -38,7 +39,7 @@ const HowItWorks = () => {
   };
 
   return (
-    <section className="how-it-works-section">
+    <section className="how-it-works-section" id="howitworks">
       <motion.div
         ref={ref}
         variants={containerVariants}

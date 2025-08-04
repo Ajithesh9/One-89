@@ -1,58 +1,34 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
-// IMPORTANT: Make sure you have an 'eyes.png' file in your 'src/assets' folder.
 import eyesLogo from '../assets/eyes.png';
 import '../Navbar.css';
 
 const navLinks = [
   { id: 'features', title: 'Features' },
+  { id: 'howitworks', title: 'How it works' },
   { id: 'pricing', title: 'Pricing' },
   { id: 'faq', title: 'FAQ' },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  
-  const controls = useAnimation();
-  const lastYPos = useRef(0);
+  const [isSolid, setIsSolid] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentYPos = window.scrollY;
-
-      if (menuOpen) {
-        controls.start("visible");
-        lastYPos.current = currentYPos;
-        return;
-      }
-
-      if (currentYPos > lastYPos.current && currentYPos > 100) {
-        controls.start("hidden");
-      } else {
-        controls.start("visible");
-      }
-      lastYPos.current = currentYPos;
+      // Set navbar to solid if scrolled more than 10px, otherwise it's faded
+      setIsSolid(window.scrollY > 10);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [controls, menuOpen]);
-
-  const navbarVariants = {
-    visible: { y: 0, transition: { duration: 0.3, ease: 'easeOut' } },
-    hidden: { y: '-150%', transition: { duration: 0.3, ease: 'easeIn' } },
-  };
+  }, []);
 
   return (
-    <motion.nav
-      variants={navbarVariants}
-      animate={controls}
-      initial="visible"
-      className="navbar" // Main positioning wrapper
-    >
-      <div className="navbar-content-wrapper"> {/* The visible pill container */}
+    <nav className={`navbar ${isSolid ? 'solid' : 'faded'}`}>
+      <div className="navbar-content-wrapper">
         {/* Logo */}
         <div className="navbar-logo">
           <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
@@ -67,7 +43,7 @@ const Navbar = () => {
               smooth={true}
               duration={500}
               spy={true}
-              offset={-100} // Adjusted offset for new fixed position
+              offset={-100}
               className="nav-link"
               activeClass="active"
             >
@@ -117,7 +93,7 @@ const Navbar = () => {
           </div>
         </motion.div>
       )}
-    </motion.nav>
+    </nav>
   );
 };
 

@@ -1,44 +1,59 @@
 /* Main positioning wrapper for the navbar */
 .navbar {
-  position: fixed;
-  top: 0.8rem; /* Space from the top of the viewport */
+  position: fixed; /* <-- CHANGED back to fixed for the floating effect */
+  top: 0.8rem;     /* <-- This now creates the space ABOVE the navbar */
   left: 0;
   width: 100%;
   z-index: 50;
   display: flex;
   justify-content: center;
-  padding: 0 1rem; /* Padding on smaller screens */
-  transition: transform 0.3s ease-in-out;
+  padding: 0 1rem; /* Padding for spacing on small screens */
 }
 
-/* The visible navbar container, inspired by the screenshot */
+/* The visible navbar container */
 .navbar-content-wrapper {
   display: flex;
   align-items: center;
-  //justify-content: space-between; /* This will push logo to the left and actions to the right */
   gap: 1rem;
   width: 100%;
-  max-width: 80rem; /* Make it wider */
+  max-width: 80rem;
   padding: 0.25rem 0.75rem;
-  background-color: rgba(20, 20, 20, 0.6); /* Dark, semi-transparent base */
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px); /* For Safari */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.75rem; /* A subtle radius, not a full pill shape */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 0.75rem;
+  border: 1px solid transparent; /* Set a transparent border by default to prevent layout shifts */
+  
+  /* Add smooth transitions for all properties that change */
+  transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
 }
+
+/* FADED STATE: Transparent when at the very top of the page */
+.navbar.faded .navbar-content-wrapper {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* SOLID STATE: Blurred background appears as soon as you scroll */
+.navbar.solid .navbar-content-wrapper {
+  background-color: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.37);
+}
+
 
 /* Logo Styling */
 .navbar-logo {
   flex-shrink: 0;
   background-color: rgba(40, 40, 40, 1);
-  border-radius: 0.5rem; /* Rounded square */
+  border-radius: 0.5rem;
   padding: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  
 }
 
 .logo-image {
@@ -56,7 +71,6 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    /* This will center the menu between the logo and actions */
     flex-grow: 1;
     justify-content: right;
   }
@@ -70,12 +84,6 @@
   transition: color 0.3s ease, background-color 0.3s ease;
   padding: 0.25rem 1.1rem;
   border-radius: 0.5rem;
-}
-
-/* Remove the old underline effect */
-.nav-link::after {
-  content: '';
-  display: none;
 }
 
 .nav-link:hover,
@@ -94,8 +102,8 @@
 /* CTA Button for Desktop */
 .cta-button-desktop {
   display: none;
-  background-color: #6ee7b7; /* Mint-green color from screenshot */
-  color: #111827; /* Dark text */
+  background-color: #6ee7b7;
+  color: #111827;
   font-weight: 600;
   padding: 0.25rem 0.8rem;
   border-radius: 0.5rem;
@@ -114,6 +122,7 @@
     display: block;
   }
 }
+
 /* Mobile Menu Button & Icon */
 .mobile-menu-button {
   display: flex;
@@ -136,7 +145,8 @@
 /* Mobile Menu Panel */
 .mobile-menu {
   position: absolute;
-  top: calc(100% + 0.5rem); /* Position below the navbar */
+  top: 100%; /* Position below the navbar content wrapper */
+  margin-top: 0.5rem;
   left: 0;
   right: 0;
   background-color: rgba(24, 27, 28, 0.9);
@@ -145,15 +155,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   padding: 2rem 0;
-  margin: 0 auto;
-  width: calc(100% - 2rem); /* Match padding of the wrapper */
-  max-width: 80rem;
-}
-
-@media (min-width: 768px) {
-  .mobile-menu {
-    display: none;
-  }
+  width: 100%;
 }
 
 .mobile-menu-content {
