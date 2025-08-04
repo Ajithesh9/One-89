@@ -57,7 +57,7 @@
 .feature-icon-wrapper {
   margin-bottom: 1.5rem;
   color: var(--icon-color);
-  background-color: color-mix(in srgb, var(--icon-color) 15%, transparent);
+  background-color: rgba(var(--icon-color-rgb), 0.15);
   width: 56px;
   height: 56px;
   border-radius: 16px;
@@ -65,8 +65,8 @@
   align-items: center;
   justify-content: center;
   /* Adding a subtle glow for better visibility */
-  box-shadow: 0 0 20px 0px color-mix(in srgb, var(--icon-color) 20%, transparent);
-  border: 1px solid color-mix(in srgb, var(--icon-color) 30%, transparent);
+  box-shadow: 0 0 20px 0px rgba(var(--icon-color-rgb), 0.2);
+  border: 1px solid rgba(var(--icon-color-rgb), 0.3);
   transition: transform 0.3s ease;
 }
 

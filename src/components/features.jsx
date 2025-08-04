@@ -85,6 +85,23 @@ const ScreenContent = ({ feature }) => {
   );
 };
 
+// Helper function to convert hex color to an RGB string
+const hexToRgb = (hex) => {
+  let r = 0, g = 0, b = 0;
+  // 3 digits
+  if (hex.length === 4) {
+    r = "0x" + hex[1] + hex[1];
+    g = "0x" + hex[2] + hex[2];
+    b = "0x" + hex[3] + hex[3];
+  // 6 digits
+  } else if (hex.length === 7) {
+    r = "0x" + hex[1] + hex[2];
+    g = "0x" + hex[3] + hex[4];
+    b = "0x" + hex[5] + hex[6];
+  }
+  return `${+r}, ${+g}, ${+b}`;
+};
+
 
 const Features = () => {
   const [activeFeatureIndex, setActiveFeatureIndex] = useState(0);
@@ -137,6 +154,8 @@ const Features = () => {
     animate: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
+  const activeColor = featuresData[activeFeatureIndex].color;
+  const activeColorRgb = hexToRgb(activeColor);
 
   return (
     <section id="features" ref={featureSectionRef}>
@@ -155,7 +174,8 @@ const Features = () => {
               <motion.div
                 className="feature-icon-wrapper"
                 style={{
-                  '--icon-color': featuresData[activeFeatureIndex].color
+                  '--icon-color': activeColor,
+                  '--icon-color-rgb': activeColorRgb
                 }}
                 variants={itemVariants}
               >
