@@ -36,7 +36,7 @@ const Hero = () => {
 
   // EXTENDED SMOOTHNESS: Animation continues slightly after scroll stops
   const extendedSmooth = useSpring(smoothProgress, {
-    stiffness: 180,      // Lower stiffness extends the animation
+    stiffness: 400,      // Lower stiffness extends the animation
     damping: 35,         // Lower damping for longer tail
     mass: 0.8,           // Slightly heavier for extended motion
     restDelta: 0.0008,   // Precise but not too tight
