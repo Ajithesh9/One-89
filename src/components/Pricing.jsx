@@ -1,52 +1,51 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiCheck, FiX, FiShield, FiStar, FiAward } from 'react-icons/fi';
-import FeatureComparisonTable from './FeatureComparisonTable'; // Import the new component
+import FeatureComparisonTable from './FeatureComparisonTable';
 import '../Pricing.css';
 
-// Data for the summary cards, structured from the provided screenshot
 const pricingPlans = [
   {
     name: 'Bronze',
     price: 0,
-    badgeIcon: <FiShield className="w-12 h-12 text-purple-400" />,
+    description: 'Get started with essential monitoring features for one device.',
+    badgeIcon: <FiShield />,
     features: [
-      { text: 'Can Bind 1 Device', included: true },
-      { text: 'Bronze Features', included: true },
+      { text: 'Bind 1 Device', included: true },
+      { text: 'Basic Features', included: true },
       { text: 'Device Monitoring', included: true },
       { text: 'Device Control', included: false },
-      { text: 'Ad Free Experience', included: false },
     ],
-    ctaText: 'Download',
+    ctaText: 'Get Started for Free',
     recommended: false,
   },
   {
     name: 'Silver',
     price: 79,
-    badgeIcon: <FiStar className="w-12 h-12 text-teal-400" />,
+    description: 'A balanced plan with advanced features for multiple devices.',
+    badgeIcon: <FiStar />,
     features: [
-      { text: 'Can Bind 2 Devices', included: true },
-      { text: 'Silver Features', included: true },
-      { text: 'Device Monitoring', included: true },
-      { text: 'Device Control', included: true },
-      { text: 'Ad Free Experience', included: true },
+      { text: 'Bind up to 2 Devices', included: true },
+      { text: 'All Silver Features', included: true },
+      { text: 'Advanced Monitoring', included: true },
+      { text: 'Full Device Control', included: true },
     ],
-    ctaText: 'Subscribe',
-    recommended: true,
+    ctaText: 'Choose Silver',
+    recommended: false,
   },
   {
     name: 'Gold',
     price: 149,
-    badgeIcon: <FiAward className="w-12 h-12 text-rose-400" />,
+    description: 'The ultimate package for complete control and monitoring.',
+    badgeIcon: <FiAward />,
     features: [
-      { text: 'Can Bind 5 Devices', included: true },
-      { text: 'Gold Features', included: true },
-      { text: 'Device Monitoring', included: true },
+      { text: 'Bind up to 5 Devices', included: true },
+      { text: 'All Gold Features', included: true },
+      { text: 'Ultimate Monitoring', included: true },
       { text: 'Ultimate Device Control', included: true },
-      { text: 'Ad Free Experience', included: true },
     ],
-    ctaText: 'Subscribe',
-    recommended: false,
+    ctaText: 'Go for Gold',
+    recommended: true, // Gold is now the recommended plan
   },
 ];
 
@@ -55,12 +54,12 @@ const Pricing = () => {
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
   };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6 } },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
   };
 
   return (
@@ -79,31 +78,35 @@ const Pricing = () => {
           Simple, transparent pricing. Pick the plan that's right for you.
         </motion.p>
 
-        {/* Pricing Summary Cards */}
         <div className="pricing-cards">
           {pricingPlans.map((plan) => (
             <motion.div
               key={plan.name}
               variants={itemVariants}
-              className={`pricing-card ${plan.recommended ? 'recommended' : ''}`}
+              className={`pricing-card ${plan.name.toLowerCase()} ${plan.recommended ? 'recommended' : ''}`}
+              whileHover={{ y: -5, transition: { duration: 0.2, ease: 'easeInOut' } }}
             >
-              <div className="card-content">
+              {plan.recommended && <div className="recommended-badge">Most Popular</div>}
+              <div className="card-header">
                 <div className="badge-icon">{plan.badgeIcon}</div>
                 <h3>{plan.name}</h3>
+              </div>
+              <div className="card-content">
+                <p className="plan-description">{plan.description}</p>
                 <div className="price">
                   <span className="price-amount">₹{plan.price}</span>
-                  <span className="price-period">/Mo.</span>
+                  {plan.price > 0 && <span className="price-period">/ month</span>}
                 </div>
                 <ul className="features-list">
-                  {plan.features.map((feature) => (
-                    <li key={feature.text} className="feature-item">
+                  {plan.features.map((feature, index) => (
+                    <li key={index} className="feature-item">
                       {feature.included ? ( <FiCheck className="feature-icon-check" /> ) : ( <FiX className="feature-icon-x" /> )}
                       <span className={`feature-text ${!feature.included && 'excluded'}`}>{feature.text}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <button className={`cta-button ${plan.recommended ? 'recommended' : 'default'}`}>
+              <button className="cta-button">
                 {plan.ctaText}
               </button>
             </motion.div>
@@ -111,7 +114,6 @@ const Pricing = () => {
         </div>
       </motion.div>
 
-      {/* The new, detailed comparison table */}
       <FeatureComparisonTable />
     </section>
   );
