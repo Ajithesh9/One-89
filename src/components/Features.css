@@ -1,0 +1,73 @@
+import { AppWindow, Camera, MapPin, Mic, ImageIcon, Phone, MessageSquare } from 'lucide-react';
+import Carousel from './Carousel';
+import '../Features.css';
+
+const featuresData = [
+  {
+    id: 1,
+    title: 'Intuitive UI',
+    description: "Clean, intuitive interface for powerful monitoring.",
+    icon: <AppWindow className="w-4 h-4 text-white" />,
+  },
+  {
+    id: 2,
+    title: 'Live Camera',
+    description: "Securely access device camera in real-time.",
+    icon: <Camera className="w-4 h-4 text-white" />,
+  },
+  {
+    id: 3,
+    title: 'Real-time Location',
+    description: 'Track exact location with live GPS data.',
+    icon: <MapPin className="w-4 h-4 text-white" />,
+  },
+  {
+    id: 4,
+    title: 'Live Microphone',
+    description: 'Listen to ambient sounds securely.',
+    icon: <Mic className="w-4 h-4 text-white" />,
+  },
+  {
+    id: 5,
+    title: 'Gallery Access',
+    description: 'View photos and videos remotely.',
+    icon: <ImageIcon className="w-4 h-4 text-white" />,
+  },
+  {
+    id: 6,
+    title: 'Call Logs',
+    description: 'Monitor incoming and outgoing calls.',
+    icon: <Phone className="w-4 h-4 text-white" />,
+  },
+  {
+    id: 7,
+    title: 'Chat Monitoring',
+    description: 'Watch chats on WhatsApp, Instagram, etc.',
+    icon: <MessageSquare className="w-4 h-4 text-white" />,
+  },
+];
+
+const Features = () => {
+  return (
+    <section id="features" className="py-20 bg-[#121212] flex flex-col items-center justify-center min-h-[600px]">
+      <div className="text-center mb-10 max-w-2xl px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Powerful Features</h2>
+        <p className="text-gray-400">Everything you need to keep your family safe and connected.</p>
+      </div>
+      
+      <div style={{ height: '500px', width: '100%', position: 'relative', display: 'flex', justifyContent: 'center' }}>
+        <Carousel
+          items={featuresData}
+          baseWidth={320}
+          autoplay={true}
+          autoplayDelay={3000}
+          pauseOnHover={true}
+          loop={true}
+          round={false}
+        />
+      </div>
+    </section>
+  );
+};
+
+export default Features;
