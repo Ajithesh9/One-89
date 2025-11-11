@@ -1,4 +1,11 @@
+/* src/Features.css */
+
 #features {
-  min-height: 85vh;
   background-color: #121212;
+  scroll-margin-top: 80px; /* Adjustment for fixed navbar */
+}
+
+/* Optional: Ensures smooth transitions for any non-framer elements */
+button {
+  -webkit-tap-highlight-color: transparent;
 }
