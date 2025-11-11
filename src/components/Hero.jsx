@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { FiDownload, FiPlay } from 'react-icons/fi';
+import heroImg from '../assets/Hero.png'; // Importing the new image
 import '../Hero.css';
 
 const Hero = ({ onDownloadClick }) => {
@@ -16,10 +17,16 @@ const Hero = ({ onDownloadClick }) => {
     visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
   return (
     <div ref={targetRef} className="hero-section">
       <div className="hero-container">
         <div className="hero-grid">
+          {/* Left Side: Content */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -55,6 +62,16 @@ const Hero = ({ onDownloadClick }) => {
                 <span>Watch Demo</span>
               </a>
             </motion.div>
+          </motion.div>
+
+          {/* Right Side: Image */}
+          <motion.div
+            variants={imageVariants}
+            initial="hidden"
+            animate="visible"
+            className="hero-image-container"
+          >
+            <img src={heroImg} alt="Hero Display" className="hero-image" />
           </motion.div>
         </div>
       </div>

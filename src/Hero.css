@@ -1,41 +1,52 @@
 /* Hero Section Base */
 .hero-section {
-  min-height: 85vh; /* <--- CHANGE THIS VALUE to adjust section height (e.g., 60vh, 100vh) */
-  background: #121212;
+  min-height: 100vh; /* Restored to 100vh for better vertical centering */
+  /* background-color removed to be transparent/match body */
   position: relative;
   overflow: hidden;
 }
 
-/* Main Container and Grid */
+/* Main Container */
 .hero-container {
   position: relative;
   z-index: 10;
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 1.5rem;
+  
+  /* UPDATED PADDING: 
+     - Top: 8rem (pushes content down to account for navbar) 
+     - Sides: 1.5rem 
+     - Bottom: 4rem 
+  */
+  padding: 8rem 1.5rem 4rem 1.5rem; 
   height: 100%;
 }
 
+/* Grid Layout: Single column mobile, Two columns desktop */
 .hero-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Horizontal Left Align */
-  justify-content: center; /* Vertical Center Align */
-  text-align: left;
-  min-height: 85vh; /* <--- Match this to hero-section height for perfect centering */
+  display: grid;
+  grid-template-columns: 1fr; /* Default to stack */
+  gap: 3rem;
+  align-items: center; /* Vertically centers items in the grid row */
+  min-height: 62vh; /* Ensures grid takes up enough vertical space to center content */
 }
 
-/* Content Container */
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr 1fr; /* Split into 2 columns */
+    gap: 4rem;
+  }
+}
+
+/* Left Side Content */
 .hero-content-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   max-width: 48rem;
   align-items: flex-start;
-
-  /* <--- UNCOMMENT THE LINE BELOW TO MOVE CONTENT UP OR DOWN ---> */
-  /* transform: translateY(-3rem); */ /* Negative = Up, Positive = Down */
+  /* transform removed to rely on flexbox/grid centering */
 }
 
 @media (min-width: 1024px) {
@@ -48,6 +59,22 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+/* Right Side Image */
+.hero-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3)); 
 }
 
 /* Typography */
