@@ -23,7 +23,7 @@ const Hero = ({ onDownloadClick }) => {
   // ============================================================================
   // RESPONSIVE SMOOTHNESS - Follows scroll naturally with extended smoothness
   // ============================================================================
-  
+
   // SMOOTH SCROLL FOLLOWING: Responsive to user scroll but with refined physics
   const smoothProgress = useSpring(scrollYProgress, {
     // RESPONSIVE SETTINGS - Follows scroll immediately but smooths the motion
@@ -46,7 +46,7 @@ const Hero = ({ onDownloadClick }) => {
   // PARALLAX MOVEMENT - Adjust range for desired effect
   // Higher second value = more dramatic movement
   const y = useTransform(extendedSmooth, [0, 1], ["0%", "130%"]);
-  
+
   // Z-INDEX TRANSITION - When element goes behind content
   const zIndex = useTransform(scrollYProgress, [0.9, 1], [10, -1]);
 
@@ -96,10 +96,10 @@ const Hero = ({ onDownloadClick }) => {
                 <FiDownload className="hero-button-icon" />
               </button>
               {/* === THIS BUTTON IS NOW AN <a> TAG === */}
-              <a 
-                href="https://www.youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hero-button secondary"
               >
                 <FiPlay className="hero-button-icon" />
@@ -127,8 +127,8 @@ const Hero = ({ onDownloadClick }) => {
 
           {/* RESPONSIVE SMOOTH HERO INTERFACE - Follows scroll naturally */}
           <motion.div
-            style={{ 
-              y, 
+            style={{
+              y,
               zIndex,
               willChange: 'transform',
             }}
@@ -136,22 +136,7 @@ const Hero = ({ onDownloadClick }) => {
             className="hero-interface-wrapper"
           >
             <div className="interface-container">
-              <div className="interface-header">
-                <div className="interface-header-content">
-                  <div className="window-controls">
-                    <div className="window-dots-container">
-                      <div className="window-dot red"></div>
-                      <div className="window-dot yellow"></div>
-                      <div className="window-dot green"></div>
-                    </div>
-                    <h3 className="interface-title">Family Guardian Setup</h3>
-                  </div>
-                  <div className="live-indicator">
-                    <div className="live-dot"></div>
-                    <span>Live</span>
-                  </div>
-                </div>
-              </div>
+              {/* HEADER REMOVED HERE */}
 
               <div className="interface-body">
                 <div className="deploy-log">

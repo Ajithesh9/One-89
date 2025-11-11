@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { FiX, FiDownload } from 'react-icons/fi';
 import { FaGooglePlay } from 'react-icons/fa';
 import '../DownloadModal.css';
-import kidsAppApk from '../assets/watcher-kids-installer.apk';
+//import kidsAppApk from '../assets/watcher-kids-installer.apk';
 
 const DownloadModal = ({ onClose }) => {
   return (
@@ -51,7 +51,7 @@ const DownloadModal = ({ onClose }) => {
               className="download-button kids-app"
             >
               <FiDownload className="download-button-icon" />
-               <div className="button-text-wrapper">
+              <div className="button-text-wrapper">
                 <span className="button-main-text">Kids App</span>
                 <span className="button-sub-text">Download APK Installer</span>
               </div>

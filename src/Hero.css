@@ -1,6 +1,6 @@
 /* Hero Section Base */
 .hero-section {
-  min-height: 100vh;
+  min-height: 85vh; /* <--- CHANGE THIS to '85vh' to reduce overall section height */
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%);
   position: relative;
   overflow: hidden;
@@ -52,13 +52,13 @@
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding: 5rem 1.5rem;
+  padding: 1.8rem 1.5rem; /* <--- CHANGE THIS to '3rem 1.5rem' to reduce vertical padding */
 }
 .hero-grid {
   display: grid;
   gap: 3rem;
   align-items: center;
-  min-height: 80vh;
+  min-height: 80vh; /* <--- CHANGE THIS to '60vh' to pull content closer together */
 }
 @media (min-width: 1024px) {
   .hero-grid {
@@ -238,231 +238,4 @@
 .key-feature-icon-wrapper svg {
   width: 1.25rem;
   height: 1.25rem;
-}
-.key-feature-title {
-  font-weight: 600;
-  color: white;
-  margin-bottom: 0.25rem;
-}
-.key-feature-description {
-  font-size: 0.875rem;
-  color: #94a3b8;
-  line-height: 1.625;
-}
-
-/* Right Side Interface */
-.hero-interface-wrapper {
-  position: relative;
-  width: 115%;
-  left: -7.5%;
-}
-
-/**
- * HOW TO ADJUST THE STARTING POINT:
- * You can change the 'top' value below to control the initial vertical position
- * of the "Family Guardian Setup" panel on large screens.
- * - A more negative value (e.g., -8rem) will move it higher.
- * - A less negative value (e.g., -4rem) or a positive value will move it lower.
- */
-@media (min-width: 1024px) {
-    .hero-interface-wrapper {
-      top: -2.5rem; /* ADJUST THIS VALUE to move the panel up or down */
-    }
-}
-
-.interface-container {
-  background-color: rgba(45, 55, 72, 0.8);
-  backdrop-filter: blur(24px);
-  border: 1px solid rgba(100, 116, 139, 0.7);
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
-}
-.interface-header {
-  background-color: rgba(45, 55, 72, 0.8);
-  border-bottom: 1px solid rgba(71, 85, 105, 0.5);
-  padding: 1rem 1.5rem;
-}
-.interface-header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.window-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.window-dots-container {
-  display: flex;
-  gap: 0.5rem;
-}
-.window-dot {
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 9999px;
-}
-.window-dot.red { background-color: #ef4444; }
-.window-dot.yellow { background-color: #f59e0b; }
-.window-dot.green { background-color: #22c55e; }
-
-.interface-title {
-  color: white;
-  font-weight: 600;
-}
-.live-indicator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  color: rgb(76, 230, 196);
-}
-.live-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 9999px;
-  background-color: rgb(76, 230, 196);
-  animation: pulse 1.5s infinite;
-}
-
-.interface-body {
-  padding: 1.5rem;
-  height: 24rem;
-  overflow: hidden;
-}
-
-.deploy-log {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  font-family: monospace;
-  font-size: 0.875rem;
-}
-.deploy-step {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 0.5rem;
-  transition: all 0.5s;
-  background-color: rgba(51, 65, 85, 0.3);
-  border: 1px solid transparent;
-}
-.deploy-step.active {
-  background-color: rgba(187, 134, 252, 0.1);
-  border: 1px solid rgba(187, 134, 252, 0.2);
-}
-.deploy-step.complete {
-  background-color: rgba(76, 230, 196, 0.1);
-  border: 1px solid rgba(76, 230, 196, 0.1);
-}
-.deploy-step-icon {
-  flex-shrink: 0;
-  margin-top: 0.125rem;
-}
-.spinner {
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgba(187, 134, 252, 0.3);
-  border-top-color: rgb(187, 134, 252);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-.check-icon {
-  width: 1rem;
-  height: 1rem;
-  color: rgb(76, 230, 196);
-}
-.clock-icon {
-  width: 1rem;
-  height: 1rem;
-  color: #64748b;
-}
-.deploy-step-text {
-  flex: 1 1 0%;
-  min-width: 0;
-}
-.deploy-step-header {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.25rem;
-}
-.deploy-time {
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-.deploy-step:not(.complete):not(.active) .deploy-time {
-  color: #64748b;
-}
-.deploy-message {
-  font-weight: 500;
-  color: white;
-}
-.deploy-step.active .deploy-message {
-  color: rgb(187, 134, 252);
-}
-.deploy-step:not(.complete):not(.active) .deploy-message {
-  color: #64748b;
-}
-.deploy-detail {
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-.deploy-step:not(.complete):not(.active) .deploy-detail {
-  color: #475569;
-}
-.success-message {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: rgba(76, 230, 196, 0.1);
-  border: 1px solid rgba(76, 230, 196, 0.2);
-}
-.success-message-content {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  color: rgb(76, 230, 196);
-}
-.success-message-detail {
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  color: rgba(76, 230, 196, 0.8);
-}
-.interface-footer {
-  background-color: rgba(45, 55, 72, 0.8);
-  border-top: 1px solid rgba(71, 85, 105, 0.5);
-  padding: 1rem 1.5rem;
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  text-align: center;
-}
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-}
-.stat-number.purple { color: rgb(187, 134, 252); }
-.stat-number.green { color: rgb(76, 230, 196); }
-.stat-label {
-  font-size: 0.75rem;
-  color: #94a3b8;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: .5;
-    }
 }
