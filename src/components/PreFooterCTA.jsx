@@ -4,19 +4,36 @@ import eyesLogo from '../assets/eyes.png';
 import './PreFooterCTA.css';
 
 const PreFooterCTA = () => {
+
+    const handleScrollToTop = () => {
+        if (window.lenis) {
+            window.lenis.scrollTo(0);
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+
+    const handleScrollToPricing = () => {
+        if (window.lenis) {
+            window.lenis.scrollTo('#pricing');
+        } else {
+            document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section className="prefooter-section">
             <div className="prefooter-container">
 
-                {/* Main CTA Card */}
+                {/* Lighter Glassmorphic Card */}
                 <div className="prefooter-card">
 
-                    {/* Ambient Background Glow */}
+                    {/* Ambient Glow Effect */}
                     <div className="prefooter-glow"></div>
 
                     <div className="prefooter-content">
 
-                        {/* Logo Badge */}
+                        {/* Logo - Navbar Style */}
                         <div className="prefooter-logo-wrapper">
                             <img
                                 src={eyesLogo}
@@ -25,49 +42,64 @@ const PreFooterCTA = () => {
                             />
                         </div>
 
-                        {/* Headlines */}
-                        <h2 className="prefooter-title">
-                            Ready to secure their <br className="hidden md:block" />
-                            <span className="prefooter-title-highlight">digital journey?</span>
-                        </h2>
-
-                        <p className="prefooter-description">
-                            Join thousands of parents who trust Watcher to keep their children safe online.
-                            Start your free trial today—no credit card required.
-                        </p>
+                        {/* Text Content */}
+                        <div>
+                            <h2 className="prefooter-title">
+                                Ready to secure their digital journey?
+                            </h2>
+                            <p className="prefooter-description mt-3">
+                                Join thousands of parents who trust Watcher to keep their children safe online.
+                                Start your free trial today.
+                            </p>
+                        </div>
 
                         {/* Action Buttons */}
                         <div className="prefooter-buttons">
-                            <button className="prefooter-btn-primary group">
-                                <Download className="w-5 h-5" />
-                                Download Now
+                            <button onClick={handleScrollToTop} className="prefooter-btn-primary">
+                                <Download className="w-4 h-4" />
+                                Download App
                             </button>
-                            <button className="prefooter-btn-secondary">
+                            <button onClick={handleScrollToPricing} className="prefooter-btn-secondary">
                                 View Pricing
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-4 h-4" />
                             </button>
                         </div>
 
                         {/* Trust Indicators */}
-                        <div className="prefooter-trust-container">
-                            <TrustItem icon={Lock} text="Bank-Level Encryption" />
-                            <TrustItem icon={Smartphone} text="Works on All Devices" />
-                            <TrustItem icon={ShieldCheck} text="GDPR Compliant" />
+                        <div className="prefooter-trust">
+                            <div className="prefooter-trust-item">
+                                <Lock className="prefooter-trust-icon" />
+                                <span>Bank-Level Encryption</span>
+                            </div>
+                            <div className="prefooter-trust-item">
+                                <ShieldCheck className="prefooter-trust-icon" />
+                                <span>GDPR Compliant</span>
+                            </div>
+                            <div className="prefooter-trust-item">
+                                <Smartphone className="prefooter-trust-icon" />
+                                <span>Works on All Devices *</span>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
+
+            {/* Single Hill Footer Style */}
+            <div className="prefooter-hill-container">
+                <svg
+                    className="prefooter-hill-svg"
+                    viewBox="0 0 1200 120"
+                    preserveAspectRatio="none"
+                >
+                    <path
+                        d="M0,120 Q600,0 1200,120 Z"
+                        className="prefooter-hill-path"
+                    ></path>
+                </svg>
+            </div>
         </section>
     );
 };
-
-// Helper Component for Trust Items
-const TrustItem = ({ icon: Icon, text }) => (
-    <div className="prefooter-trust-item">
-        <Icon className="prefooter-trust-icon" />
-        <span>{text}</span>
-    </div>
-);
 
 export default PreFooterCTA;
