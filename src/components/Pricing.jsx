@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, Zap, Users, Shield, ArrowRight } from 'lucide-react';
+import { Check, Zap, Users, Shield, ArrowRight, CheckCircle2 } from 'lucide-react'; // Added CheckCircle2
 import { motion, AnimatePresence } from 'framer-motion';
 import '../Pricing.css';
 
@@ -85,7 +85,7 @@ const Pricing = () => {
 
           {/* Left Column: Content */}
           <div className="lg:col-span-7 mb-12 lg:mb-0">
-            <div className="max-w-2xl">
+            <div className="max-w-2xl -mt-8">
               <h4 className="pricing-eyebrow">
                 Pricing
               </h4>
@@ -238,8 +238,10 @@ const Pricing = () => {
                     </span>
                     <span className="price-period">/{activePlan.period}</span>
                   </div>
-                  {/* Show billing note if it exists (e.g. "Billed Yearly") */}
+
+                  {/* UPDATED: Enhanced Visibility for Cancel Anytime */}
                   <p className="price-subtext">
+                    <CheckCircle2 className="w-3 h-3 mr-1.5" />
                     {activePlan.billingNote ? activePlan.billingNote : 'Cancel anytime'}
                   </p>
 

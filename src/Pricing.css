@@ -67,18 +67,10 @@
 /* --- TAB SWITCHER --- */
 
 .tab-group {
-  /* * CUSTOMIZE TAB GROUP SIZE HERE:
-   * - p-1.5: Padding around the buttons. Increase to p-2 or p-3 for a larger container.
-   * - mb-8: Margin bottom. Increase to add more space between tabs and card.
-   */
   @apply flex p-1.5 mb-8 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 relative;
 }
 
 .tab-button {
-  /* * CUSTOMIZE TAB BUTTON SIZE HERE:
-   * - py-2.5: Vertical padding. Increase to py-3 or py-4 for taller buttons.
-   * - text-sm: Font size. Increase to text-base for larger text.
-   */
   @apply flex-1 relative py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 z-10;
 }
 
@@ -93,9 +85,6 @@
 }
 
 .card-content {
-  /* * CUSTOMIZE CARD CONTENT SIZE HERE:
-   * - p-8: Internal padding. Increase to p-10 or p-12 to make the card visibly larger.
-   */
   @apply p-5;
 }
 
@@ -107,8 +96,11 @@
   @apply text-sm text-gray-400 leading-normal;
 }
 
+/* --- IMPROVED PRICING VISIBILITY --- */
+
 .price-wrapper {
-  @apply mt-6 flex items-baseline;
+  /* Added gap for better breathing room */
+  @apply mt-6 flex items-baseline gap-1;
 }
 
 .price-amount {
@@ -116,17 +108,19 @@
 }
 
 .price-period {
-  @apply ml-2 text-sm font-medium text-gray-500;
+  /* Increased size and brightness for better readability */
+  @apply text-lg font-medium text-gray-400;
 }
 
 .price-subtext {
-  @apply mt-1 text-xs text-gray-600;
+  /* CHANGED: Styled as a badge/pill for better visibility without just bolding */
+  @apply mt-3 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-gray-300 tracking-wide;
 }
 
 /* --- CARD FEATURES LIST --- */
 
 .card-features {
-  @apply mt-6 pt-4 border-t border-white/5 space-y-4;
+  @apply mt-5 pt-3 border-t border-white/5 space-y-4;
 }
 
 .card-features-title {
