@@ -4,7 +4,7 @@ import PreFooterCTA from './PreFooterCTA';
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
 import eyesLogo from '../assets/eyes.png'; // Import the logo
 
-const Footer = () => {
+const Footer = ({ onPrivacyClick }) => {
   return (
     <div className="relative w-full">
       {/* The Pre-Footer CTA Section */}
@@ -13,14 +13,14 @@ const Footer = () => {
       {/* ==========================================
           SECTION 2: ACTUAL FOOTER (Dark Background) 
          ========================================== */}
-      <footer className="bg-slate-900 text-white pt-12 pb-12">
+      <footer id="footer" className="bg-slate-900 text-white pt-12 pb-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
 
             {/* Column 1: Brand Info */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-3 mb-4">
-                {/* UPDATED: Replaced ShieldCheck with Logo Image */}
+                {/* Logo Container */}
                 <div className="bg-[#282828] p-1.5 rounded-lg border border-white/10">
                   <img
                     src={eyesLogo}
@@ -81,7 +81,7 @@ const Footer = () => {
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm">© 2025 Watcher Inc. All rights reserved.</p>
             <div className="flex gap-6 text-slate-500 text-sm">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <button onClick={onPrivacyClick} className="hover:text-white transition-colors text-left">Privacy Policy</button>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
             </div>
