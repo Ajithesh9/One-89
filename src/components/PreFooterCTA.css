@@ -1,0 +1,33 @@
+/* src/components/PreFooterCTA.css */
+
+.prefooter-wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg); 
+  z-index: 5; 
+}
+
+.prefooter-wave-svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px; 
+}
+
+/* Match this to your footer color (bg-slate-900) */
+.prefooter-wave-path {
+  fill: #0f172a; 
+}
+
+.prefooter-cta-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prefooter-cta-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.3); /* Blue shadow for blue card */
+}

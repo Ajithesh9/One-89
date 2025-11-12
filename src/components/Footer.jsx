@@ -1,52 +1,88 @@
-import { FiMail } from 'react-icons/fi';
-import { FaGooglePlay, FaTelegramPlane } from 'react-icons/fa';
-import '../Footer.css';
+// src/components/Footer.jsx
+import React from 'react';
+import PreFooterCTA from './PreFooterCTA'; // Import the new PreFooterCTA component
+import { Facebook, Twitter, Instagram, Linkedin, Mail, ShieldCheck } from 'lucide-react';
 
-const Footer = ({ onPrivacyClick }) => {
-  const currentYear = new Date().getFullYear();
-
+const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-container">
-        {/* Social & Contact Links */}
-        <div className="social-links">
-          <a
-            href="https://play.google.com/store/apps/details?id=com.deku.watcher"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Google Play Store"
-            className="social-link"
-          >
-            <FaGooglePlay size={24} />
-          </a>
-          <a
-            href="#" // Placeholder link for Telegram
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Telegram"
-            className="social-link"
-          >
-            <FaTelegramPlane size={24} />
-          </a>
-          <a
-            href="mailto:support@one89.in"
-            aria-label="Email Support"
-            className="social-link"
-          >
-            <FiMail size={24} />
-          </a>
-        </div>
+    <div className="relative w-full">
+      {/* The Pre-Footer CTA Section will be rendered here */}
+      <PreFooterCTA />
 
-        {/* Legal Link - Terms of Service Removed */}
-        <div className="legal-links">
-          <button onClick={onPrivacyClick} className="privacy-button">
-            Privacy Policy
-          </button>
-        </div>
+      {/* ==========================================
+          SECTION 2: ACTUAL FOOTER (Dark Background) 
+          Your main footer content goes here.
+         ========================================== */}
+      <footer className="bg-slate-900 text-white pt-12 pb-12">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
 
-        <p>© {currentYear} One89. All rights reserved.</p>
-      </div>
-    </footer>
+            {/* Column 1: Brand Info */}
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <ShieldCheck className="w-8 h-8 text-blue-500" />
+                <span className="text-2xl font-bold">Watcher</span>
+              </div>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                Empowering parents with modern tools to ensure digital safety and healthy habits for children everywhere.
+              </p>
+              {/* Social Icons */}
+              <div className="flex gap-4">
+                <a href="#" className="text-slate-400 hover:text-white transition-colors"><Facebook size={20} /></a>
+                <a href="#" className="text-slate-400 hover:text-white transition-colors"><Twitter size={20} /></a>
+                <a href="#" className="text-slate-400 hover:text-white transition-colors"><Instagram size={20} /></a>
+                <a href="#" className="text-slate-400 hover:text-white transition-colors"><Linkedin size={20} /></a>
+              </div>
+            </div>
+
+            {/* Column 2: Product */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Product</h3>
+              <ul className="space-y-3 text-slate-400 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Download App</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Co-Parenting</a></li>
+              </ul>
+            </div>
+
+            {/* Column 3: Company */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Company</h3>
+              <ul className="space-y-3 text-slate-400 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              </ul>
+            </div>
+
+            {/* Column 4: Support */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Support</h3>
+              <ul className="space-y-3 text-slate-400 text-sm">
+                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Safety Guide</a></li>
+                <li className="flex items-center gap-2">
+                  <Mail size={16} /> <a href="mailto:support@watcher.com" className="hover:text-white transition-colors">support@watcher.com</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-slate-500 text-sm">© 2025 Watcher Inc. All rights reserved.</p>
+            <div className="flex gap-6 text-slate-500 text-sm">
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+    </div>
   );
 };
 

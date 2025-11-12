@@ -1,61 +1,36 @@
-.footer {
-  background-color: #1e1e1e;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+/* src/components/PreFooterCTA.css */
+
+/* --- Wave SVG Styles --- */
+.prefooter-wave-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg); /* Flips the wave to point upwards */
+  /* Ensures the wave is above the actual footer but below the CTA card */
+  z-index: 5; 
 }
 
-.footer-container {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
-  color: #aaaaaa;
+.prefooter-wave-svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px); /* Small adjustment for smooth edges */
+  height: 80px; /* Reduced height for a less dramatic wave */
 }
 
-@media (min-width: 640px) {
-  .footer-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
+.prefooter-wave-path {
+  /* This must match your main footer's background color */
+  fill: #0f172a; /* Tailwind's bg-slate-900 */
 }
 
-@media (min-width: 1024px) {
-  .footer-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+/* --- Floating Card Hover Effect (Optional, but nice) --- */
+.prefooter-cta-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-link {
-  transition-property: color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.social-link:hover {
-  color: #bb86fc;
-}
-
-.legal-links {
-  margin-bottom: 1rem;
-}
-
-.privacy-button {
-  transition-property: color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.privacy-button:hover {
-  color: #bb86fc;
+.prefooter-cta-card-hover:hover {
+  transform: translateY(-4px); /* Slightly less lift */
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15); /* Softer shadow on hover */
 }
