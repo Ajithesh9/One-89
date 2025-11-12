@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PlusCircle } from 'lucide-react';
+import { PlusCircle, ArrowRight } from 'lucide-react';
 import '../FAQ.css';
+
+const avatars = [];
 
 const faqData = [
   {
@@ -56,9 +58,10 @@ const FAQ = () => {
               <div key={index} className="faq-item">
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="faq-trigger"
+                  /* Added 'group' here so group-hover works on children */
+                  className="faq-trigger group"
                 >
-                  {/* Icon with 45deg Rotation Animation */}
+                  {/* Icon Animation */}
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.3, ease: "circOut" }}
@@ -88,16 +91,28 @@ const FAQ = () => {
           })}
         </div>
 
-        {/* Footer / Still have questions */}
-        <div className="faq-footer">
-          <div className="faq-footer-content">
-            <h3 className="faq-footer-title">Still have questions?</h3>
-            <p className="faq-footer-text">
-              Can’t find the answer you’re looking for? Please chat to our friendly team.
+        {/* Footer / Support */}
+        <div className="faq-support-container">
+          <div className="faq-avatar-group">
+            {avatars.map((src, i) => (
+              <img key={i} src={src} alt="Support Team" className="faq-avatar" />
+            ))}
+          </div>
+
+          <div className="faq-support-content">
+            <h4 className="faq-support-title">Still have questions?</h4>
+            <p className="faq-support-text">
+              Can’t find the answer you’re looking for?{' '}
+              <a
+                href="#footer"
+                onClick={handleContactClick}
+                /* Added 'group' here for the arrow animation */
+                className="faq-support-link group"
+              >
+                Get in touch
+                <ArrowRight className="faq-link-arrow" />
+              </a>
             </p>
-            <button onClick={handleContactClick} className="faq-contact-button">
-              Get in touch
-            </button>
           </div>
         </div>
 
