@@ -13,10 +13,10 @@
 }
 
 .download-modal {
-  background-color: #1E1E1E; /* Dark surface color */
+  background-color: #0C0E12; /* Updated from #1E1E1E */
   border-radius: 0.75rem;
   width: 100%;
-  max-width: 32rem; /* Optimal width for a download modal */
+  max-width: 32rem;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(255, 255, 255, 0.1);

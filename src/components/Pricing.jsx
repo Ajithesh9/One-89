@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FiCheck, FiX, FiShield, FiStar, FiAward } from 'react-icons/fi';
-import FeatureComparisonTable from './FeatureComparisonTable';
+// Removed FeatureComparisonTable import
 import '../Pricing.css';
 
 const pricingPlans = [
@@ -45,7 +45,7 @@ const pricingPlans = [
       { text: 'Ultimate Device Control', included: true },
     ],
     ctaText: 'Go for Gold',
-    recommended: true, // Gold is now the recommended plan
+    recommended: true,
   },
 ];
 
@@ -114,7 +114,7 @@ const Pricing = () => {
         </div>
       </motion.div>
 
-      <FeatureComparisonTable />
+      {/* Removed FeatureComparisonTable component */}
     </section>
   );
 };

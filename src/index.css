@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #121212; /* This is our dark:background color */
-  color: #FFFFFF; /* Sets the default text color to our dark:onSurface */
+  background-color: #0C0E12; /* Updated from #121212 */
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
 }

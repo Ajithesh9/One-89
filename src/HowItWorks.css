@@ -1,7 +1,6 @@
-/* Using values from tailwind.config.js */
 :root {
-  --dark-surface: #1E1E1E;
-  --dark-background: #121212;
+  --dark-surface: #0C0E12; /* Updated from #1E1E1E */
+  --dark-background: #0C0E12; /* Updated from #121212 */
   --dark-primary: #BB86FC;
   --dark-secondary: #03DAC6;
   --dark-onSurface: #FFFFFF;
@@ -15,7 +14,7 @@
   position: relative;
   overflow: hidden;
 }
-
+/* ... rest of file ... */
 .how-it-works-container {
   max-width: 80rem;
   margin-left: auto;

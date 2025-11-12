@@ -2,20 +2,24 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // <-- This line tells Tailwind to scan all your component files
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'],
+      },
       colors: {
         dark: {
-          background: '#121212',
-          surface: '#1E1E1E',
+          background: '#0C0E12', // Updated from #121212
+          surface: '#0C0E12',    // Updated from #1E1E1E
           primary: '#BB86FC',
           secondary: '#03DAC6',
           onPrimary: '#000000',
           onSurface: '#FFFFFF',
           onSurfaceSecondary: '#AAAAAA',
-        },parents: 'rgb(66, 235, 198)', // Teal
+        },
+        parents: 'rgb(66, 235, 198)',
         kids: 'rgb(187, 134, 252)',
       }
     },

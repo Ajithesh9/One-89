@@ -114,7 +114,7 @@ const FeatureItem = ({ feature, color }) => {
   return (
     <div className="flex items-center gap-3 p-2.5 rounded-xl bg-black/30 border border-white/5 hover:border-white/10 transition-colors group">
       <div
-        className="p-2 rounded-lg bg-[#1E1E1E] transition-transform"
+        className="p-2 rounded-lg bg-[#0C0E12] transition-transform"
         style={{ color: color }}
       >
         <Icon size={18} />
@@ -187,7 +187,7 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="py-16 bg-[#121212] flex justify-center overflow-hidden">
+    <section id="features" className="py-16 bg-[#0C0E12] flex justify-center overflow-hidden">
       <div className="w-full max-w-7xl px-4 flex flex-col items-center gap-8">
 
         {/* Section Header */}
@@ -201,7 +201,7 @@ const Features = () => {
         </div>
 
         {/* Top Navigation Bar */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-3 bg-[#1E1E1E] p-2 rounded-full border border-white/5 shadow-xl">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 bg-[#0C0E12] p-2 rounded-full border border-white/5 shadow-xl">
           {featureCategories.map((item, index) => (
             <FeaturePill
               key={item.id}
@@ -227,7 +227,7 @@ const Features = () => {
           {/* Main Card */}
           <div className="flex-1 max-w-4xl relative">
             <div
-              className="w-full bg-[#1E1E1E] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+              className="w-full bg-[#0C0E12] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
               style={{ minHeight: '400px' }} // Sleek, reduced height
             >
               <AnimatePresence initial={false} custom={direction} mode="wait">

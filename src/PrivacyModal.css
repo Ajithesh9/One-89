@@ -10,7 +10,7 @@
 }
 
 .privacy-modal {
-  background-color: #1e1e1e;
+  background-color: #0C0E12; /* Updated from #1e1e1e */
   border-radius: 0.75rem;
   width: 100%;
   max-width: 56rem;

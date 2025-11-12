@@ -6,8 +6,8 @@ import eyesLogo from '../assets/eyes.png'; // Import the logo
 
 const PreFooterCTA = () => {
     return (
-        // SECTION BACKGROUND: rgb(30, 30, 30) -> Hex: #1e1e1e
-        <div className="relative w-full bg-[#1e1e1e] pt-16 pb-32 z-10">
+        // SECTION BACKGROUND: Updated to #0C0E12
+        <div className="relative w-full bg-[#0C0E12] pt-16 pb-32 z-10">
             <div className="container mx-auto px-4">
 
                 {/* FLOATING CARD */}
