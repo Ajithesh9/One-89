@@ -3,125 +3,141 @@ import { Check, Zap, Users, Shield, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../Pricing.css';
 
-// Using colors strictly from Features.jsx capabilities
+// Data reordered: Bronze -> Silver -> Gold -> Diamond
 const plans = [
   {
     id: 'bronze',
     name: 'Bronze',
-    price: '0',
-    description: 'Essential monitoring for a single device.',
+    price: '79.00',
+    period: 'Weekly',
+    description: 'Flexible weekly monitoring for fewer devices.',
     features: [
-      'Bind 1 Device',
-      'Basic Features',
-      'Device Monitoring',
-      'Limited Control',
+      'Starting From ₹79.00 | Weekly',
+      'Can Pair Upto 3 Devices',
+      'Essential Monitoring Features',
+      'Basic Device Control',
     ],
     popular: false,
     color: '#BB86FC', // Purple
-    buttonText: 'Get Started Free'
+    buttonText: 'Get Bronze'
   },
   {
     id: 'silver',
     name: 'Silver',
-    price: '79',
-    description: 'Advanced features for small families.',
+    price: '300.00',
+    period: 'Monthly',
+    description: 'Standard monthly plan for up to 5 devices.',
     features: [
-      'Bind up to 2 Devices',
-      'All Silver Features',
-      'Advanced Monitoring',
-      'Full Device Control',
+      'Starting From ₹300.00 | Monthly',
+      'Can Pair Upto 5 Devices',
+      'Standard Monitoring',
+      'Device Restrictions',
     ],
     popular: false,
-    color: '#03DAC6', // Teal
-    buttonText: 'Choose Silver'
+    color: '#9CA3AF', // Silver/Gray
+    buttonText: 'Get Silver'
   },
   {
     id: 'gold',
     name: 'Gold',
-    price: '149',
-    description: 'Ultimate control for complete peace of mind.',
+    price: '250.00',
+    period: 'Monthly',
+    billingNote: 'Billed 6 Months',
+    description: 'Balanced plan for medium-sized needs.',
     features: [
-      'Bind up to 5 Devices',
-      'All Gold Features',
-      'Ultimate Monitoring',
-      'Ultimate Device Control',
+      'Starting From ₹250.0 | Monthly (Billed 6 Months)',
+      'Can Pair Upto 7 Devices',
+      'Advanced Monitoring',
+      'Enhanced Controls',
     ],
-    popular: true,
+    popular: false,
     color: '#FBBF24', // Gold/Yellow
-    buttonText: 'Go for Gold'
+    buttonText: 'Get Gold'
+  },
+  {
+    id: 'diamond',
+    name: 'Diamond',
+    price: '200.00',
+    period: 'Monthly',
+    billingNote: 'Billed Yearly',
+    description: 'Maximum value for larger families.',
+    features: [
+      'Starting From ₹200.0 | Monthly (Billed Yearly)',
+      'Can Pair Upto 10 Devices',
+      'Full Suite of Features',
+      'Priority Support',
+    ],
+    popular: true, // Best Value (Yearly)
+    color: '#60A5FA', // Blue (from Capabilities)
+    buttonText: 'Get Diamond'
   }
 ];
 
 const Pricing = () => {
-  const [activePlanId, setActivePlanId] = useState('gold');
+  // Default to the "Best Value" plan (Diamond)
+  const [activePlanId, setActivePlanId] = useState('diamond');
   const activePlan = plans.find(p => p.id === activePlanId);
 
   return (
-    <section id="pricing" className="bg-[#0C0E12] py-16 sm:py-20 relative overflow-hidden border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-16 lg:items-center">
+    <section id="pricing" className="pricing-section">
+      <div className="pricing-container">
+        <div className="pricing-grid">
 
           {/* Left Column: Content */}
-          <div className="lg:col-span-7 mb-10 lg:mb-0">
+          <div className="lg:col-span-7 mb-12 lg:mb-0">
             <div className="max-w-2xl">
-              <h4 className="text-xs font-semibold text-[#BB86FC] mb-2 tracking-wide uppercase">
+              <h4 className="pricing-eyebrow">
                 Pricing
               </h4>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
+              <h2 className="pricing-title">
                 Simple, Transparent Pricing
               </h2>
-              <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+              <p className="pricing-description">
                 Choose the plan that fits your family's needs. No hidden fees, cancel anytime.
               </p>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {/* Feature 1 */}
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/10 border border-purple-500/20 text-[#BB86FC]">
-                      <Users className="h-5 w-5" />
-                    </div>
+                <div className="feature-row">
+                  <div className="feature-icon-box bg-purple-500/10 border-purple-500/20 text-[#BB86FC]">
+                    <Users className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">
+                    <h3 className="feature-title">
                       Family First
                     </h3>
-                    <p className="mt-1 text-gray-400 text-sm leading-relaxed">
+                    <p className="feature-desc">
                       Scale from a single device to covering the whole household easily.
                     </p>
                   </div>
                 </div>
 
                 {/* Feature 2 */}
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-500/10 border border-teal-500/20 text-[#03DAC6]">
-                      <Zap className="h-5 w-5" />
-                    </div>
+                <div className="feature-row">
+                  <div className="feature-icon-box bg-teal-500/10 border-teal-500/20 text-[#03DAC6]">
+                    <Zap className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">
+                    <h3 className="feature-title">
                       Instant Updates
                     </h3>
-                    <p className="mt-1 text-gray-400 text-sm leading-relaxed">
+                    <p className="feature-desc">
                       Real-time data synchronization ensuring you never miss a moment.
                     </p>
                   </div>
                 </div>
 
                 {/* Feature 3 */}
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                      <Shield className="h-5 w-5" />
-                    </div>
+                <div className="feature-row">
+                  <div className="feature-icon-box bg-blue-500/10 border-blue-500/20 text-blue-400">
+                    <Shield className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold text-white">
+                    <h3 className="feature-title">
                       Total Security
                     </h3>
-                    <p className="mt-1 text-gray-400 text-sm leading-relaxed">
+                    <p className="feature-desc">
                       Enterprise-grade encryption keeps your family's data private and secure.
                     </p>
                   </div>
@@ -130,37 +146,36 @@ const Pricing = () => {
             </div>
           </div>
 
-          {/* Right Column: Compact Pricing Card */}
+          {/* Right Column: Pricing Card */}
           <div className="lg:col-span-5">
 
-            {/* Compact Tab Switcher */}
-            <div className="flex p-1 mb-5 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 relative">
+            {/* Tab Switcher */}
+            <div className="tab-group">
               {plans.map((plan) => (
                 <button
                   key={plan.id}
                   onClick={() => setActivePlanId(plan.id)}
-                  className="flex-1 relative py-1.5 text-xs font-medium rounded-md transition-all duration-200 z-10"
+                  className="tab-button"
                   style={{
                     color: activePlanId === plan.id ? '#0C0E12' : '#9CA3AF',
                     backgroundColor: activePlanId === plan.id ? plan.color : 'transparent',
-                    fontWeight: activePlanId === plan.id ? 700 : 500
                   }}
                 >
                   {plan.name}
 
-                  {/* "Most Popular!" Arrow Annotation (Gold Tab) */}
-                  {plan.id === 'gold' && (
-                    <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-max flex flex-col items-center pointer-events-none z-50">
-                      <span className="text-xs font-bold text-white rotate-[-6deg] mb-0.5 tracking-wide" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
-                        Most popular!
+                  {/* Arrow Annotation for Best Value (Diamond Plan) */}
+                  {plan.id === 'diamond' && (
+                    <div className="arrow-annotation">
+                      <span className="arrow-text">
+                        Best Value!
                       </span>
                       <svg
-                        width="24"
-                        height="20"
+                        width="28"
+                        height="24"
                         viewBox="0 0 45 35"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="text-white rotate-[-6deg] drop-shadow-md opacity-90"
+                        className="arrow-svg"
                       >
                         <path
                           d="M10 5 C 15 20, 25 25, 35 30"
@@ -184,76 +199,79 @@ const Pricing = () => {
               ))}
             </div>
 
-            {/* The Sleek Card */}
+            {/* Pricing Card Box */}
             <AnimatePresence mode='wait'>
               <motion.div
                 key={activePlan.id}
-                initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -8, scale: 0.98 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
-                className="relative overflow-hidden rounded-xl border border-white/10 bg-[#15171B] shadow-xl shadow-black/50"
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="pricing-card-container"
               >
-                {/* Inner Badge */}
+                {/* Badge */}
                 {activePlan.popular && (
                   <div
-                    className="absolute top-0 right-0 px-2.5 py-0.5 rounded-bl-lg text-[9px] font-bold uppercase tracking-wider text-[#121212]"
+                    className="popular-badge-inner"
                     style={{ backgroundColor: activePlan.color }}
                   >
                     Best Value
                   </div>
                 )}
 
-                <div className="p-5 sm:p-6">
-                  <div className="flex flex-col gap-0.5">
+                <div className="card-content">
+                  <div className="flex flex-col gap-1">
                     <h3
-                      className="text-lg font-bold"
+                      className="plan-name"
                       style={{ color: activePlan.color }}
                     >
                       {activePlan.name} Plan
                     </h3>
-                    <p className="text-xs text-gray-400 leading-snug">
+                    <p className="plan-desc">
                       {activePlan.description}
                     </p>
                   </div>
 
-                  <div className="mt-4 flex items-baseline">
-                    <span className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                  <div className="price-wrapper">
+                    <span className="price-amount">
                       ₹{activePlan.price}
                     </span>
-                    <span className="ml-1.5 text-xs font-medium text-gray-500">/month</span>
+                    <span className="price-period">/{activePlan.period}</span>
                   </div>
-                  <p className="mt-0.5 text-[10px] text-gray-600">Billed monthly • Cancel anytime</p>
+                  {/* Show billing note if it exists (e.g. "Billed Yearly") */}
+                  <p className="price-subtext">
+                    {activePlan.billingNote ? activePlan.billingNote : 'Cancel anytime'}
+                  </p>
 
-                  <div className="mt-5 pt-5 border-t border-white/5 space-y-3">
-                    <h4 className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider">
+                  <div className="card-features">
+                    <h4 className="card-features-title">
                       What's Included
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {activePlan.features.map((feature, i) => (
-                        <li key={i} className="flex gap-2.5 items-start">
+                        <li key={i} className="card-feature-item">
                           <div className="flex-shrink-0 mt-0.5">
                             <Check
-                              className="h-3.5 w-3.5"
+                              className="h-4 w-4"
                               style={{ color: activePlan.color }}
                             />
                           </div>
-                          <span className="text-xs sm:text-sm text-gray-300">{feature}</span>
+                          <span className="card-feature-text">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="mt-6">
+                  <div className="action-button-wrapper">
                     <button
-                      className="w-full group flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-bold text-[#121212] transition-all duration-200 hover:brightness-110 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#0C0E12]"
+                      className="action-button group"
                       style={{
                         backgroundColor: activePlan.color,
-                        boxShadow: `0 4px 15px -4px ${activePlan.color}40`
+                        boxShadow: `0 4px 20px -5px ${activePlan.color}40`
                       }}
                     >
                       {activePlan.buttonText}
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
                 </div>
