@@ -37,7 +37,8 @@
 
 /* --- TRIGGER BUTTON --- */
 .faq-trigger {
-  @apply w-full flex items-start gap-4 py-6 text-left focus:outline-none cursor-pointer group;
+  /* Removed 'group' from here */
+  @apply w-full flex items-start gap-4 py-6 text-left focus:outline-none cursor-pointer;
 }
 
 .faq-icon-wrapper {
@@ -61,12 +62,11 @@
   @apply text-gray-400 pb-8 pl-[2.75rem] pr-4 leading-relaxed;
 }
 
-/* --- SUPPORT SECTION (Enhanced) --- */
+/* --- FOOTER (CONTACT) --- */
 .faq-support-container {
   @apply mt-16 flex flex-col items-center gap-6;
 }
 
-/* Avatar Group */
 .faq-avatar-group {
   @apply flex -space-x-4;
 }
@@ -75,7 +75,6 @@
   @apply w-12 h-12 rounded-full border-4 border-dark-background object-cover ring-1 ring-white/10;
 }
 
-/* Support Text & Link */
 .faq-support-content {
   @apply text-center space-y-2;
 }
@@ -89,10 +88,10 @@
 }
 
 .faq-support-link {
-  @apply inline-flex items-center gap-2 text-dark-primary font-semibold hover:text-white transition-all duration-300 cursor-pointer group;
+  /* Removed 'group' from here */
+  @apply inline-flex items-center gap-2 text-dark-primary font-semibold hover:text-white transition-all duration-300 cursor-pointer;
 }
 
-/* Animated Arrow */
 .faq-link-arrow {
   @apply w-4 h-4 transition-transform duration-300 group-hover:translate-x-1;
 }
