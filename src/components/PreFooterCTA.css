@@ -7,7 +7,6 @@
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  transform: rotate(180deg); 
   z-index: 5; 
 }
 
@@ -15,10 +14,10 @@
   position: relative;
   display: block;
   width: calc(100% + 1.3px);
-  height: 60px; 
+  height: 120px; /* Height for the hill angle */
 }
 
-/* Match this to your footer color (bg-slate-900) */
+/* MUST MATCH FOOTER BACKGROUND (slate-900 / #0f172a) */
 .prefooter-wave-path {
   fill: #0f172a; 
 }
@@ -29,5 +28,5 @@
 
 .prefooter-cta-card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.3); /* Blue shadow for blue card */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6); /* Darker shadow for dark theme */
 }

@@ -1,17 +1,17 @@
 // src/components/Footer.jsx
 import React from 'react';
-import PreFooterCTA from './PreFooterCTA'; // Import the new PreFooterCTA component
-import { Facebook, Twitter, Instagram, Linkedin, Mail, ShieldCheck } from 'lucide-react';
+import PreFooterCTA from './PreFooterCTA';
+import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
+import eyesLogo from '../assets/eyes.png'; // Import the logo
 
 const Footer = () => {
   return (
     <div className="relative w-full">
-      {/* The Pre-Footer CTA Section will be rendered here */}
+      {/* The Pre-Footer CTA Section */}
       <PreFooterCTA />
 
       {/* ==========================================
           SECTION 2: ACTUAL FOOTER (Dark Background) 
-          Your main footer content goes here.
          ========================================== */}
       <footer className="bg-slate-900 text-white pt-12 pb-12">
         <div className="container mx-auto px-4">
@@ -19,8 +19,15 @@ const Footer = () => {
 
             {/* Column 1: Brand Info */}
             <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <ShieldCheck className="w-8 h-8 text-blue-500" />
+              <div className="flex items-center gap-3 mb-4">
+                {/* UPDATED: Replaced ShieldCheck with Logo Image */}
+                <div className="bg-[#282828] p-1.5 rounded-lg border border-white/10">
+                  <img
+                    src={eyesLogo}
+                    alt="Watcher Logo"
+                    className="w-6 h-6 object-contain"
+                  />
+                </div>
                 <span className="text-2xl font-bold">Watcher</span>
               </div>
               <p className="text-slate-400 text-sm leading-relaxed mb-6">
