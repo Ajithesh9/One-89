@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
 import eyesLogo from '../assets/eyes.png';
 import '../Navbar.css';
@@ -18,10 +18,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Set navbar to solid if scrolled more than 10px, otherwise it's faded
-      setIsSolid(window.scrollY > 10);
+      setIsSolid(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -29,7 +27,8 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isSolid ? 'solid' : 'faded'}`}>
       <div className="navbar-content-wrapper">
-        {/* Logo */}
+
+        {/* Logo - Restored to Original Boxed Style */}
         <div className="navbar-logo">
           <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
         </div>
@@ -52,26 +51,33 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA Button and Mobile Menu Toggle */}
+        {/* Actions */}
         <div className="navbar-actions">
           <button className="cta-button-desktop">
             Download
           </button>
-          <button onClick={() => setMenuOpen(!menuOpen)} className="mobile-menu-button">
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="mobile-menu-button"
+            aria-label="Toggle menu"
+          >
             {menuOpen ? <FiX className="mobile-menu-icon" /> : <FiMenu className="mobile-menu-icon" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="mobile-menu"
-        >
-          <div className="mobile-menu-content">
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="mobile-menu-container"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.id}
@@ -88,11 +94,11 @@ const Navbar = () => {
               </Link>
             ))}
             <button className="mobile-cta-button">
-              Download
+              Download App
             </button>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
