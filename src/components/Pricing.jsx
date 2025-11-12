@@ -100,7 +100,7 @@ const Pricing = () => {
                 <ul className="features-list">
                   {plan.features.map((feature, index) => (
                     <li key={index} className="feature-item">
-                      {feature.included ? ( <FiCheck className="feature-icon-check" /> ) : ( <FiX className="feature-icon-x" /> )}
+                      {feature.included ? (<FiCheck className="feature-icon-check" />) : (<FiX className="feature-icon-x" />)}
                       <span className={`feature-text ${!feature.included && 'excluded'}`}>{feature.text}</span>
                     </li>
                   ))}

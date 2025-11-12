@@ -63,7 +63,7 @@ const FeatureComparisonTable = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
-  
+
   const getFeatureScore = (feature) => {
     return (feature.plans.bronze ? 1 : 0) + (feature.plans.silver ? 1 : 0) + (feature.plans.gold ? 1 : 0);
   };
@@ -79,7 +79,7 @@ const FeatureComparisonTable = () => {
       <motion.h3 variants={itemVariants}>
         Detailed Feature Comparison
       </motion.h3>
-      
+
       <div className="table-container">
         {/* Table Header */}
         <motion.div variants={itemVariants} className="table-header">
@@ -99,33 +99,33 @@ const FeatureComparisonTable = () => {
               {category.features
                 .sort((a, b) => getFeatureScore(b) - getFeatureScore(a))
                 .map((feature) => (
-                <motion.div
-                  variants={itemVariants}
-                  key={feature.name}
-                  className="feature-row"
-                >
-                  <div className="feature-name">{feature.name}</div>
-                  {['bronze', 'silver', 'gold'].map((plan) => (
-                    <div key={plan} className="plan-cell">
-                      {feature.plans[plan] ? (
-                        <FiCheck className="check-icon" />
-                      ) : (
-                        <FiX className="x-icon" />
-                      )}
-                    </div>
-                  ))}
-                </motion.div>
-              ))}
+                  <motion.div
+                    variants={itemVariants}
+                    key={feature.name}
+                    className="feature-row"
+                  >
+                    <div className="feature-name">{feature.name}</div>
+                    {['bronze', 'silver', 'gold'].map((plan) => (
+                      <div key={plan} className="plan-cell" data-plan={plan}>
+                        {feature.plans[plan] ? (
+                          <FiCheck className="check-icon" />
+                        ) : (
+                          <FiX className="x-icon" />
+                        )}
+                      </div>
+                    ))}
+                  </motion.div>
+                ))}
             </div>
           ))}
         </div>
 
         {/* Manual row for Max Devices */}
         <motion.div variants={itemVariants} className="manual-row">
-            <div className="max-devices-label">Max Devices</div>
-            <div className="device-count">1</div>
-            <div className="device-count">2</div>
-            <div className="device-count">5</div>
+          <div className="max-devices-label">Max Devices</div>
+          <div className="device-count" data-plan="bronze">1</div>
+          <div className="device-count" data-plan="silver">2</div>
+          <div className="device-count" data-plan="gold">5</div>
         </motion.div>
       </div>
     </motion.div>
