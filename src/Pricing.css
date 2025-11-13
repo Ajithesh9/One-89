@@ -67,8 +67,8 @@
 /* --- TAB SWITCHER --- */
 
 .tab-group {
-  /* Fixed typo: removed 'WX' from border-white/10 */
-  @apply flex p-1.5 mb-8 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 relative;
+  /* Increased margin-bottom from mb-8 to mb-16 to make space for the annotation below */
+  @apply flex p-1.5 mb-16 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 relative;
 }
 
 .tab-button {
@@ -147,15 +147,16 @@
 /* --- ANNOTATIONS (ARROW) --- */
 
 .arrow-annotation {
-  /* z-index reduced to 20 to stay below the Navbar (z-100) */
-  @apply absolute -top-14 left-1/2 -translate-x-1/2 w-max flex flex-col items-center pointer-events-none z-20;
+  /* Moved from -top-14 to top-full (below the button) to avoid Navbar overlap */
+  @apply absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max flex flex-col items-center pointer-events-none z-20;
 }
 
 .arrow-text {
-  @apply text-sm font-bold text-white rotate-[-6deg] mb-1 tracking-wide;
+  @apply text-sm font-bold text-white rotate-[-6deg] mt-1 tracking-wide;
   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
 .arrow-svg {
-  @apply text-white rotate-[-6deg] drop-shadow-md opacity-90;
+  /* Removed fixed rotation here to handle it in JSX/Utility */
+  @apply text-white drop-shadow-md opacity-90;
 }

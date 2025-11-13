@@ -28,6 +28,9 @@ const PreFooterCTA = () => {
                 {/* Lighter Glassmorphic Card */}
                 <div className="prefooter-card">
 
+                    {/* Noise Overlay for smoother gradients */}
+                    <div className="prefooter-noise"></div>
+
                     {/* Ambient Glow Effect */}
                     <div className="prefooter-glow"></div>
 
@@ -93,7 +96,7 @@ const PreFooterCTA = () => {
                     preserveAspectRatio="none"
                 >
                     <path
-                        d="M0,120 Q600,0 1200,120 Z"
+                        d="M0,120 Q600,-50 1200,120 Z"
                         className="prefooter-hill-path"
                     ></path>
                 </svg>
