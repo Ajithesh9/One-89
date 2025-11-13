@@ -1,133 +1,85 @@
-:root {
-  --dark-surface: #0C0E12; /* Updated from #1E1E1E */
-  --dark-background: #0C0E12; /* Updated from #121212 */
-  --dark-primary: #BB86FC;
-  --dark-secondary: #03DAC6;
-  --dark-onSurface: #FFFFFF;
-  --dark-onSurfaceSecondary: #AAAAAA;
+/* src/HowItWorks.css */
+
+/* --- SECTION BASE --- */
+.how-it-works-section {
+  @apply bg-dark-background py-24 relative overflow-hidden ;
+  scroll-margin-top: 80px;
 }
 
-.how-it-works-section {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
-  background-color: var(--dark-background);
-  position: relative;
-  overflow: hidden;
+/* Background Glow */
+.how-it-works-section::before {
+  content: '';
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  transform: translate(-30%, -50%);
+  pointer-events: none;
+  z-index: 0;
 }
-/* ... rest of file ... */
+
 .how-it-works-container {
-  max-width: 80rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
+  @apply container mx-auto px-4 sm:px-6 lg:px-8 relative z-10;
+}
+
+/* --- TYPOGRAPHY --- */
+.how-it-works-eyebrow {
+  @apply text-sm font-semibold text-dark-primary mb-3 tracking-wide uppercase;
 }
 
 .how-it-works-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--dark-onSurface);
-  margin-bottom: 1rem;
+  @apply text-3xl md:text-4xl font-bold text-white mb-6;
 }
 
 .how-it-works-subtitle {
-  margin-top: 1rem;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  color: var(--dark-onSurfaceSecondary);
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
+  @apply text-lg text-gray-400 leading-relaxed;
 }
 
+/* --- GRID LAYOUT --- */
 .steps-grid {
-  margin-top: 5rem;
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 2rem;
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8;
 }
 
-/* The new step card design */
+/* --- STEP CARD --- */
 .step-card {
-  background-color: var(--dark-surface);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  padding: 2.5rem 2rem;
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  @apply relative overflow-hidden rounded-2xl border border-white/10 bg-[#15171B] p-8 h-full transition-all duration-300;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-.step-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+/* .step-card:hover {
+  @apply border-white/20 -translate-y-2;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+} */
+
+/* --- ICON BOX --- */
+.step-icon-box {
+  @apply w-14 h-14 rounded-xl flex items-center justify-center mb-6 border transition-transform duration-300;
 }
 
-.step-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
+/* .step-card:hover .step-icon-box {
+  transform: scale(1.1);
+} */
+
+/* --- CARD TEXT --- */
+.step-card-title {
+  @apply text-xl font-semibold text-white mb-3;
 }
 
-.step-card-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: color-mix(in srgb, var(--dark-primary) 15%, transparent);
-  color: var(--dark-primary);
-  border: 1px solid rgba(187, 134, 252, 0.3);
+.step-card-description {
+  @apply text-gray-400 leading-relaxed text-sm md:text-base;
 }
 
-.step-card-icon svg {
-    width: 24px;
-    height: 24px;
-}
-
-.step-card-number {
-  font-size: 3rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.1);
+/* --- BACKGROUND NUMBER DECORATION --- */
+.step-number-bg {
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  font-size: 8rem;
+  font-weight: 800;
   line-height: 1;
-}
-
-.step-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--dark-onSurface);
-  margin-bottom: 0.75rem;
-}
-
-.step-description {
-  color: var(--dark-onSurfaceSecondary);
-  line-height: 1.6;
-}
-
-/* Card 2 accent color */
-.step-card:nth-child(2) .step-card-icon {
-  background-color: color-mix(in srgb, var(--dark-secondary) 15%, transparent);
-  color: var(--dark-secondary);
-  border: 1px solid rgba(3, 218, 198, 0.3);
-}
-
-
-/* Responsive Breakpoints */
-@media (min-width: 768px) {
-  .how-it-works-title {
-    font-size: 3rem;
-    line-height: 1;
-  }
-  .steps-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .how-it-works-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
 }

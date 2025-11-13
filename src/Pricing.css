@@ -21,7 +21,7 @@
 /* --- LAYOUT COMPONENTS --- */
 
 .pricing-section {
-  @apply bg-dark-background py-20 sm:py-24 relative overflow-hidden border-t border-white/5;
+  @apply bg-dark-background py-20 sm:py-24 relative overflow-hidden;
 }
 
 .pricing-container {

@@ -192,7 +192,10 @@ const Features = () => {
 
         {/* Section Header */}
         <div className="text-center max-w-xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+          <h4 className="text-sm font-semibold text-dark-primary mb-3 tracking-wide uppercase">
+            Features
+          </h4>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Powerful Capabilities
           </h2>
           <p className="text-gray-400">

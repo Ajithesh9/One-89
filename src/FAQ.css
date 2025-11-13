@@ -50,7 +50,7 @@
 }
 
 .faq-question {
-  @apply text-lg font-semibold text-white leading-snug pt-0.5 transition-colors group-hover:text-dark-primary;
+  @apply text-lg font-semibold text-white leading-snug pt-0.5 transition-colors group-hover:text-[#9ea0a3];
 }
 
 /* --- ANSWER CONTENT --- */

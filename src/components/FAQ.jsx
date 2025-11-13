@@ -46,7 +46,10 @@ const FAQ = () => {
 
         {/* Header */}
         <div className="faq-header">
-          <h2 className="faq-title">Frequently asked questions</h2>
+          <h4 className="text-sm font-semibold text-dark-primary mb-3 tracking-wide uppercase">
+            FAQ
+          </h4>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Frequently asked questions</h2>
           <p className="faq-subtitle">Everything you need to know about the product and billing.</p>
         </div>
 
