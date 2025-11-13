@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Download, Link, ShieldCheck } from 'lucide-react';
 import '../HowItWorks.css';
 
@@ -28,41 +26,20 @@ const stepsData = [
 ];
 
 const HowItWorks = () => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
-  };
-
   return (
     <section id="howitworks" className="how-it-works-section">
-      <motion.div
-        ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-        className="how-it-works-container"
-      >
+      <div className="how-it-works-container">
         {/* Section Header */}
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <motion.h4 variants={itemVariants} className="how-it-works-eyebrow">
+          <h4 className="how-it-works-eyebrow">
             Easy Setup
-          </motion.h4>
-          <motion.h2 variants={itemVariants} className="how-it-works-title">
+          </h4>
+          <h2 className="how-it-works-title">
             Get Started in Minutes
-          </motion.h2>
-          <motion.p variants={itemVariants} className="how-it-works-subtitle">
+          </h2>
+          <p className="how-it-works-subtitle">
             No complex rooting or technical skills required. Just three simple steps to peace of mind.
-          </motion.p>
+          </p>
         </div>
 
         {/* Steps Grid */}
@@ -70,9 +47,8 @@ const HowItWorks = () => {
           {stepsData.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div
+              <div
                 key={step.id}
-                variants={itemVariants}
                 className="step-card group"
               >
                 {/* Step Number Background - Fixed Opacity */}
@@ -96,11 +72,11 @@ const HowItWorks = () => {
                   <h3 className="step-card-title">{step.title}</h3>
                   <p className="step-card-description">{step.description}</p>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
