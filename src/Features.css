@@ -7,12 +7,12 @@
 }
 
 .features-container {
-  @apply container mx-auto px-4 md:px-6 max-w-7xl;
+  @apply container mx-auto px-4 md:px-6 max-w-6xl;
 }
 
 /* --- HEADER --- */
 .features-header {
-  @apply text-center mb-16 max-w-3xl mx-auto;
+  @apply text-center mb-12 max-w-3xl mx-auto;
 }
 
 .features-eyebrow {
@@ -30,155 +30,129 @@
   color: transparent;
 }
 
-.features-subtitle {
-  @apply text-lg text-gray-400 leading-relaxed;
+/* --- CAROUSEL WRAPPER --- */
+.carousel-wrapper {
+  @apply relative w-full flex justify-center;
 }
 
-/* --- BENTO GRID LAYOUT --- */
-.bento-grid {
-  @apply grid grid-cols-1 md:grid-cols-3 gap-5;
-  grid-auto-rows: minmax(240px, auto); 
+/* --- MAIN CARD CONTAINER --- */
+.carousel-card-container {
+  @apply w-full max-w-5xl relative;
+  /* Fixed height to prevent jumping when content changes. 
+     600px should accommodate the longest list (Device Control). 
+  */
+  height: 600px; 
 }
 
-/* --- CARD BASE STYLES --- */
-.bento-card {
-  /* FIXED: Replaced arbitrary @apply value with standard CSS */
+/* --- CAROUSEL CARD --- */
+.carousel-card {
   background-color: #15171B;
-  border-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   
-  @apply relative border rounded-3xl overflow-hidden flex flex-col transition-all duration-300 group;
+  @apply w-full h-full rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative;
 }
 
-.bento-card:hover {
-  @apply border-white/10 -translate-y-1 shadow-2xl shadow-black/50;
+/* --- LEFT SIDE: IMAGE PLACEHOLDER --- */
+.card-image-container {
+  /* Removed bg-black/20 and border to unify the background */
+  @apply w-full md:w-5/12 p-8 flex items-center justify-center relative;
 }
 
-/* Noise Texture */
-.bento-noise {
-  position: absolute;
-  inset: 0;
-  opacity: 0.05;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  z-index: 0;
+/* The dashed box for the icon */
+.image-placeholder {
+  @apply w-full h-64 md:h-5/6 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-6 transition-colors duration-300;
+  background-color: rgba(255, 255, 255, 0.02); /* Very subtle tint */
 }
 
-.bento-content {
-  @apply relative z-10 p-6 md:p-8 flex flex-col h-full;
+.placeholder-icon-box {
+  @apply opacity-90 transition-transform duration-500;
 }
 
-/* --- CARD TYPOGRAPHY & ICONS --- */
-.bento-icon-box {
-  @apply w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300;
+.carousel-card:hover .placeholder-icon-box {
+  transform: scale(1.1) rotate(5deg);
 }
 
-.bento-card:hover .bento-icon-box {
-  transform: scale(1.1) rotate(3deg);
+.placeholder-label {
+  @apply text-sm font-bold opacity-80 uppercase tracking-wide;
 }
 
-.bento-title {
-  @apply text-xl font-bold text-white mb-2;
+/* --- RIGHT SIDE: CONTENT --- */
+.card-content {
+  @apply w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center;
 }
 
-.bento-desc {
-  @apply text-sm text-gray-400 leading-relaxed mb-4;
+.card-header {
+  @apply mb-8;
 }
 
-/* --- VISUALS (CSS DRAWINGS) --- */
-.bento-visual {
-  /* Use standard CSS for colors to be safe */
-  background-color: rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.05);
-  
-  @apply mt-auto w-full rounded-xl border overflow-hidden relative;
+.card-category-title {
+  @apply text-3xl font-bold mb-3;
 }
 
-/* 1. Camera Visual */
-.visual-camera {
-  height: 160px;
-  background: radial-gradient(circle at center, #222, #111);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.card-category-desc {
+  @apply text-gray-400 text-base leading-relaxed max-w-md;
 }
 
-.cam-rec-dot {
-  @apply absolute top-3 right-3 w-2 h-2 bg-red-500 rounded-full animate-pulse;
+/* --- FEATURE LIST GRID --- */
+.card-features-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3;
 }
 
-.cam-frame {
-  @apply w-3/4 h-3/4 border border-white/10 rounded-lg relative overflow-hidden;
+.feature-list-item {
+  @apply flex items-center gap-3 p-2 rounded-lg transition-colors duration-200;
 }
 
-.cam-subject {
-  @apply absolute inset-0 bg-gradient-to-br from-gray-800 to-black opacity-50;
+.feature-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
-.cam-interface {
-  /* Replaced bg-black/60 with standard CSS */
-  background-color: rgba(0, 0, 0, 0.6);
-  border-color: rgba(255, 255, 255, 0.05);
-  
-  @apply absolute bottom-0 left-0 right-0 p-2 backdrop-blur-sm flex justify-between items-center border-t;
+.feature-icon-small {
+  @apply flex-shrink-0 opacity-90;
 }
 
-/* 2. Map Visual */
-.visual-map {
-  height: 200px;
-  background-color: #1a1d24;
-  position: relative;
+.feature-text {
+  @apply text-sm text-gray-300 font-medium;
 }
 
-.map-grid {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-
-.map-route {
+/* --- NAVIGATION BUTTONS (UPDATED) --- */
+.nav-button {
+  /* Absolute positioning to float on the sides */
   position: absolute;
   top: 50%;
-  left: 20%;
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #3b82f6);
-  transform: rotate(-15deg);
+  transform: translateY(-50%);
+  z-index: 20;
+  
+  @apply p-4 rounded-full bg-[#1F2937] text-white border border-white/10 shadow-xl transition-all duration-200;
 }
 
-.map-pin {
-  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+.nav-button:hover {
+  @apply bg-[#374151] scale-110 border-white/30;
 }
 
-.map-user-dot {
-  @apply w-3 h-3 bg-blue-500 rounded-full border-2 border-white shadow-lg relative z-10;
+/* Move buttons outside the card on desktop */
+.prev-button {
+  left: -3rem;
 }
 
-.map-pin-pulse {
-  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-blue-500/20 rounded-full animate-ping;
+.next-button {
+  right: -3rem;
 }
 
-.map-card {
-  @apply absolute bottom-4 left-4 right-4 bg-[#15171B] border border-white/10 p-2 rounded-lg flex justify-between items-center shadow-lg;
+/* On tablet/mobile, move them inside or hide if using swipe (optional, here we keep them visible but tighter) */
+@media (max-width: 1024px) {
+  .prev-button { left: 1rem; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
+  .next-button { right: 1rem; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
 }
 
-/* 3. Files Visual */
-.visual-files {
-  height: 100px;
-  @apply flex items-center gap-3 px-4;
-  background: transparent;
-  border: none;
+/* --- DOTS --- */
+.carousel-dots {
+  @apply flex justify-center gap-3 mt-6; /* Reduced margin-top */
 }
 
-.file-item {
-  @apply w-16 h-20 bg-white/5 rounded-lg border border-white/10 relative transition-all duration-300;
+.dot {
+  @apply w-2 h-2 rounded-full bg-gray-700 transition-all duration-300 cursor-pointer;
 }
 
-.file-item.selected {
-  @apply bg-yellow-500/10 border-yellow-500/50 -translate-y-2;
-}
-
-.check-badge {
-  @apply absolute -top-2 -right-2 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center text-[10px] text-black font-bold shadow-sm;
+.dot.active {
+  @apply w-8 bg-white; /* Elongate active dot */
 }
