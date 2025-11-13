@@ -1,10 +1,184 @@
 /* src/Features.css */
 
-#features {
-  background-color: #0C0E12; /* Updated from #121212 */
+/* --- SECTION BASE --- */
+.features-section {
+  @apply bg-dark-background py-24 relative overflow-hidden;
   scroll-margin-top: 80px;
 }
 
-button {
-  -webkit-tap-highlight-color: transparent;
+.features-container {
+  @apply container mx-auto px-4 md:px-6 max-w-7xl;
+}
+
+/* --- HEADER --- */
+.features-header {
+  @apply text-center mb-16 max-w-3xl mx-auto;
+}
+
+.features-eyebrow {
+  @apply text-sm font-bold text-dark-primary mb-3 tracking-widest uppercase;
+}
+
+.features-title {
+  @apply text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #BB86FC, #03DAC6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.features-subtitle {
+  @apply text-lg text-gray-400 leading-relaxed;
+}
+
+/* --- BENTO GRID LAYOUT --- */
+.bento-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-5;
+  grid-auto-rows: minmax(240px, auto); 
+}
+
+/* --- CARD BASE STYLES --- */
+.bento-card {
+  /* FIXED: Replaced arbitrary @apply value with standard CSS */
+  background-color: #15171B;
+  border-color: rgba(255, 255, 255, 0.05);
+  
+  @apply relative border rounded-3xl overflow-hidden flex flex-col transition-all duration-300 group;
+}
+
+.bento-card:hover {
+  @apply border-white/10 -translate-y-1 shadow-2xl shadow-black/50;
+}
+
+/* Noise Texture */
+.bento-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.bento-content {
+  @apply relative z-10 p-6 md:p-8 flex flex-col h-full;
+}
+
+/* --- CARD TYPOGRAPHY & ICONS --- */
+.bento-icon-box {
+  @apply w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300;
+}
+
+.bento-card:hover .bento-icon-box {
+  transform: scale(1.1) rotate(3deg);
+}
+
+.bento-title {
+  @apply text-xl font-bold text-white mb-2;
+}
+
+.bento-desc {
+  @apply text-sm text-gray-400 leading-relaxed mb-4;
+}
+
+/* --- VISUALS (CSS DRAWINGS) --- */
+.bento-visual {
+  /* Use standard CSS for colors to be safe */
+  background-color: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.05);
+  
+  @apply mt-auto w-full rounded-xl border overflow-hidden relative;
+}
+
+/* 1. Camera Visual */
+.visual-camera {
+  height: 160px;
+  background: radial-gradient(circle at center, #222, #111);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cam-rec-dot {
+  @apply absolute top-3 right-3 w-2 h-2 bg-red-500 rounded-full animate-pulse;
+}
+
+.cam-frame {
+  @apply w-3/4 h-3/4 border border-white/10 rounded-lg relative overflow-hidden;
+}
+
+.cam-subject {
+  @apply absolute inset-0 bg-gradient-to-br from-gray-800 to-black opacity-50;
+}
+
+.cam-interface {
+  /* Replaced bg-black/60 with standard CSS */
+  background-color: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.05);
+  
+  @apply absolute bottom-0 left-0 right-0 p-2 backdrop-blur-sm flex justify-between items-center border-t;
+}
+
+/* 2. Map Visual */
+.visual-map {
+  height: 200px;
+  background-color: #1a1d24;
+  position: relative;
+}
+
+.map-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.map-route {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #3b82f6);
+  transform: rotate(-15deg);
+}
+
+.map-pin {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.map-user-dot {
+  @apply w-3 h-3 bg-blue-500 rounded-full border-2 border-white shadow-lg relative z-10;
+}
+
+.map-pin-pulse {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-blue-500/20 rounded-full animate-ping;
+}
+
+.map-card {
+  @apply absolute bottom-4 left-4 right-4 bg-[#15171B] border border-white/10 p-2 rounded-lg flex justify-between items-center shadow-lg;
+}
+
+/* 3. Files Visual */
+.visual-files {
+  height: 100px;
+  @apply flex items-center gap-3 px-4;
+  background: transparent;
+  border: none;
+}
+
+.file-item {
+  @apply w-16 h-20 bg-white/5 rounded-lg border border-white/10 relative transition-all duration-300;
+}
+
+.file-item.selected {
+  @apply bg-yellow-500/10 border-yellow-500/50 -translate-y-2;
+}
+
+.check-badge {
+  @apply absolute -top-2 -right-2 w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center text-[10px] text-black font-bold shadow-sm;
 }

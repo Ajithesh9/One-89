@@ -167,14 +167,17 @@ const Pricing = () => {
                   {/* Arrow Annotation for Best Value (Diamond Plan) */}
                   {plan.id === 'diamond' && (
                     <div className="arrow-annotation">
-                      {/* SVG Arrow - Flipped Vertically to point UP */}
+                      <span className="arrow-text">
+                        Best Value!
+                      </span>
+                      {/* SVG Flipped Horizontally (scale-x-[-1]) to point LEFT at the button */}
                       <svg
-                        width="28"
-                        height="24"
+                        width="50"
+                        height="40"
                         viewBox="0 0 45 35"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="arrow-svg scale-y-[-1] rotate-[6deg]"
+                        className="arrow-svg scale-x-[-1] rotate-[15deg] -mt-1"
                       >
                         <path
                           d="M10 5 C 15 20, 25 25, 35 30"
@@ -192,9 +195,6 @@ const Pricing = () => {
                           fill="none"
                         />
                       </svg>
-                      <span className="arrow-text">
-                        Best Value!
-                      </span>
                     </div>
                   )}
                 </button>
