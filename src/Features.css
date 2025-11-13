@@ -2,8 +2,9 @@
 
 /* --- SECTION BASE --- */
 .features-section {
-  @apply bg-dark-background py-24 relative overflow-hidden;
+  @apply bg-dark-background py-20 relative overflow-hidden;
   scroll-margin-top: 80px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .features-container {
@@ -12,147 +13,129 @@
 
 /* --- HEADER --- */
 .features-header {
-  @apply text-center mb-12 max-w-3xl mx-auto;
+  @apply text-center mb-10 max-w-2xl mx-auto;
 }
 
 .features-eyebrow {
-  @apply text-sm font-bold text-dark-primary mb-3 tracking-widest uppercase;
+  @apply text-xs font-bold text-dark-primary mb-2 tracking-[0.15em] uppercase opacity-90;
 }
 
 .features-title {
-  @apply text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight leading-tight;
+  @apply text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight;
 }
 
-.text-gradient {
-  background: linear-gradient(to right, #BB86FC, #03DAC6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.features-subtitle {
+  @apply text-base text-gray-400 font-normal leading-relaxed;
 }
 
-/* --- CAROUSEL WRAPPER --- */
-.carousel-wrapper {
-  @apply relative w-full flex justify-center;
+/* --- TABS (Matching Pricing Section) --- */
+.features-tabs-wrapper {
+  @apply w-full max-w-4xl mx-auto mb-10;
 }
 
-/* --- MAIN CARD CONTAINER --- */
-.carousel-card-container {
-  @apply w-full max-w-5xl relative;
-  /* Fixed height to prevent jumping when content changes. 
-     600px should accommodate the longest list (Device Control). 
-  */
-  height: 600px; 
+.features-tab-group {
+  @apply flex flex-wrap md:flex-nowrap p-1.5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10;
 }
 
-/* --- CAROUSEL CARD --- */
-.carousel-card {
+.features-tab-button {
+  @apply flex-1 py-2.5 text-xs md:text-sm font-semibold rounded-lg transition-all duration-200 text-center whitespace-nowrap;
+}
+
+.features-tab-button:hover {
+  @apply text-white;
+}
+
+/* --- DISPLAY CARD --- */
+.features-card-wrapper {
+  @apply w-full max-w-5xl mx-auto relative;
+  min-height: 400px; /* Fixed height to prevent layout shift */
+}
+
+.feature-display-card {
   background-color: #15171B;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   
-  @apply w-full h-full rounded-3xl overflow-hidden flex flex-col md:flex-row shadow-2xl relative;
+  @apply w-full h-full rounded-2xl overflow-hidden flex flex-col md:flex-row;
 }
 
-/* --- LEFT SIDE: IMAGE PLACEHOLDER --- */
-.card-image-container {
-  /* Removed bg-black/20 and border to unify the background */
-  @apply w-full md:w-5/12 p-8 flex items-center justify-center relative;
+/* --- LEFT: VISUAL (MOCKUP) --- */
+.feature-card-visual {
+  @apply w-full md:w-5/12 bg-[#0f1115] relative flex items-center justify-center p-8 overflow-hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* The dashed box for the icon */
-.image-placeholder {
-  @apply w-full h-64 md:h-5/6 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center gap-6 transition-colors duration-300;
-  background-color: rgba(255, 255, 255, 0.02); /* Very subtle tint */
+@media (min-width: 768px) {
+  .feature-card-visual {
+    border-bottom: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
 }
 
-.placeholder-icon-box {
-  @apply opacity-90 transition-transform duration-500;
+.visual-content {
+  @apply relative w-full max-w-[260px] flex items-center justify-center z-10;
 }
 
-.carousel-card:hover .placeholder-icon-box {
-  transform: scale(1.1) rotate(5deg);
+.visual-image {
+  @apply w-full h-auto object-contain drop-shadow-2xl relative z-10;
+  transition: transform 0.5s ease;
 }
 
-.placeholder-label {
-  @apply text-sm font-bold opacity-80 uppercase tracking-wide;
+.feature-display-card:hover .visual-image {
+  transform: scale(1.02);
 }
 
-/* --- RIGHT SIDE: CONTENT --- */
-.card-content {
-  @apply w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center;
+.visual-glow {
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-full blur-[60px] opacity-20;
+  z-index: 0;
 }
 
-.card-header {
-  @apply mb-8;
+/* --- RIGHT: CONTENT LIST --- */
+.feature-card-content {
+  @apply w-full md:w-7/12 p-6 flex flex-col;
 }
 
-.card-category-title {
-  @apply text-3xl font-bold mb-3;
+/* Header Fixed Area */
+.content-header-fixed {
+  @apply mb-4 border-b border-white/5 pb-4;
+  min-height: 100px; /* Reserve space so title/desc don't push grid around */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.card-category-desc {
-  @apply text-gray-400 text-base leading-relaxed max-w-md;
+.content-title {
+  @apply text-2xl md:text-3xl font-bold mb-2;
 }
 
-/* --- FEATURE LIST GRID --- */
-.card-features-grid {
+.content-desc {
+  @apply text-gray-400 text-sm leading-relaxed;
+}
+
+/* Grid Wrapper */
+.features-grid-wrapper {
+  @apply flex-1;
+}
+
+.features-grid-list {
   @apply grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3;
 }
 
-.feature-list-item {
-  @apply flex items-center gap-3 p-2 rounded-lg transition-colors duration-200;
+/* Modernized List Item */
+.grid-item {
+  @apply flex items-center gap-3 p-2 rounded-lg border border-white/5 bg-white/[0.02] transition-all duration-200;
 }
 
-.feature-list-item:hover {
-  background-color: rgba(255, 255, 255, 0.03);
+.grid-item:hover {
+  @apply bg-white/5 border-white/10;
+  transform: translateX(4px);
 }
 
-.feature-icon-small {
-  @apply flex-shrink-0 opacity-90;
+.grid-icon-box {
+  @apply w-8 h-8 flex items-center justify-center flex-shrink-0;
+  /* Icons inherit color from inline style in JSX */
 }
 
-.feature-text {
-  @apply text-sm text-gray-300 font-medium;
-}
-
-/* --- NAVIGATION BUTTONS (UPDATED) --- */
-.nav-button {
-  /* Absolute positioning to float on the sides */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 20;
-  
-  @apply p-4 rounded-full bg-[#1F2937] text-white border border-white/10 shadow-xl transition-all duration-200;
-}
-
-.nav-button:hover {
-  @apply bg-[#374151] scale-110 border-white/30;
-}
-
-/* Move buttons outside the card on desktop */
-.prev-button {
-  left: -3rem;
-}
-
-.next-button {
-  right: -3rem;
-}
-
-/* On tablet/mobile, move them inside or hide if using swipe (optional, here we keep them visible but tighter) */
-@media (max-width: 1024px) {
-  .prev-button { left: 1rem; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
-  .next-button { right: 1rem; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); }
-}
-
-/* --- DOTS --- */
-.carousel-dots {
-  @apply flex justify-center gap-3 mt-6; /* Reduced margin-top */
-}
-
-.dot {
-  @apply w-2 h-2 rounded-full bg-gray-700 transition-all duration-300 cursor-pointer;
-}
-
-.dot.active {
-  @apply w-8 bg-white; /* Elongate active dot */
+.grid-text {
+  @apply text-sm font-medium text-gray-300 group-hover:text-white transition-colors;
 }
