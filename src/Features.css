@@ -28,44 +28,39 @@
   @apply text-base text-gray-400 font-normal leading-relaxed;
 }
 
-/* --- TABS --- */
+/* --- TABS (Matched to Pricing.css) --- */
 .features-tabs-wrapper {
   @apply w-full max-w-4xl mx-auto mb-8;
 }
 
 .features-tab-group {
-  @apply flex flex-wrap md:flex-nowrap p-1.5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10;
+  /* Matched Pricing: p-1.5, bg-white/5 */
+  @apply flex flex-wrap md:flex-nowrap gap-1 p-1.5 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10;
 }
 
 .features-tab-button {
-  @apply flex-1 py-2.5 text-xs md:text-sm font-semibold rounded-lg transition-all duration-200 text-center whitespace-nowrap;
-}
-
-.features-tab-button:hover {
-  @apply text-white;
+  /* Matched Pricing: duration-200, font-semibold */
+  @apply flex-1 py-2.5 px-2 text-sm font-semibold rounded-lg transition-all duration-200 text-center whitespace-nowrap;
 }
 
 /* --- DISPLAY CARD --- */
 .features-card-wrapper {
   @apply w-full max-w-5xl mx-auto relative;
-  /* Height auto to remove extra bottom space */
-  height: auto;
+  height: 340px;
+  width: 850px;
 }
 
 .feature-display-card {
   background-color: #15171B;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  //box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  
-  /* Added p-2 to frame the content */
   @apply w-full h-auto rounded-2xl flex flex-col md:flex-row p-1 gap-1;
-  height: 360px
+  height: 340px;
+  width: 850px;
 }
 
 /* --- LEFT: VISUAL (MOCKUP) --- */
 .feature-card-visual {
-  /* Added rounded-xl for inner border look */
-  @apply w-full md:w-5/12 bg-[#0f1115] relative flex items-center justify-center p-6 overflow-hidden rounded-xl;
+  @apply w-full md:w-5/12 bg-[#0f1115] relative flex items-center justify-center p-0 overflow-hidden rounded-xl;
 }
 
 .visual-content {
@@ -73,8 +68,7 @@
 }
 
 .visual-image {
-  /* Removed transition and hover effects */
-  @apply w-full h-auto object-contain drop-shadow-2xl relative z-10;
+  @apply w-[85%] h-auto object-contain drop-shadow-2xl relative z-10;
 }
 
 .visual-glow {
@@ -89,18 +83,18 @@
 
 /* Header Fixed Area */
 .content-header-fixed {
-  @apply mb-4 border-b border-white/5 pb-4;
+  @apply mb-6 border-b border-white/5 pb-4;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .content-title {
-  @apply text-xl md:text-2xl font-bold mb-2;
+  @apply text-2xl md:text-3xl font-bold mb-2 tracking-tight;
 }
 
 .content-desc {
-  @apply text-gray-400 text-sm leading-relaxed;
+  @apply text-slate-400 text-sm leading-relaxed max-w-md;
 }
 
 /* Grid Wrapper */
@@ -112,15 +106,15 @@
   @apply grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2;
 }
 
-/* Modernized List Item - Removed hover effects */
+/* --- CLEANER LIST ITEMS --- */
 .grid-item {
-  @apply flex items-center gap-1 p-2 rounded-lg border border-white/5 bg-white/[0.02];
+  @apply flex items-center gap-3 py-2 px-1 rounded-lg transition-colors duration-200 hover:bg-white/5;
 }
 
 .grid-icon-box {
-  @apply w-8 h-8 flex items-center justify-center flex-shrink-0;
+  @apply flex-shrink-0;
 }
 
 .grid-text {
-  @apply text-xs md:text-base font-medium text-gray-400;
+  @apply text-sm font-medium text-gray-300 leading-none;
 }

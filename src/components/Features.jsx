@@ -12,7 +12,7 @@ import {
   // Utils
   Cpu, Navigation,
 } from 'lucide-react';
-import phoneMockup from '../assets/phone-mockup.png'; // Placeholder
+import phoneMockup from '../assets/phone-mockup.png';
 import '../Features.css';
 
 const featuresData = [
@@ -107,33 +107,42 @@ const Features = () => {
           </p>
         </div>
 
-        {/* Tabs - Matching Pricing Layout */}
+        {/* Tabs */}
         <div className="features-tabs-wrapper">
           <div className="features-tab-group">
-            {featuresData.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTabId(cat.id)}
-                className="features-tab-button"
-                style={{
-                  backgroundColor: activeTabId === cat.id ? cat.color : 'transparent',
-                  color: activeTabId === cat.id ? '#121212' : '#9CA3AF',
-                }}
-              >
-                {cat.category}
-              </button>
-            ))}
+            {featuresData.map((cat) => {
+              const isActive = activeTabId === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveTabId(cat.id)}
+                  className="features-tab-button"
+                  style={{
+                    // Match Pricing.jsx style: Solid background, Dark text on active
+                    backgroundColor: isActive ? cat.color : 'transparent',
+                    color: isActive ? '#121212' : '#9CA3AF',
+                  }}
+                >
+                  {cat.category}
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Feature Display Card */}
         <div className="features-card-wrapper">
+          {/* Matched to Pricing.jsx: 
+             1. Added mode="wait" to prevent overlap glitch
+             2. Added scale effect (0.98 -> 1 -> 0.98)
+             3. Adjusted Y distance to match Pricing (10px)
+          */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
               className="feature-display-card"
             >
@@ -153,10 +162,8 @@ const Features = () => {
                 </div>
               </div>
 
-              {/* Right: Content (Fixed Layout) */}
+              {/* Right: Content */}
               <div className="feature-card-content">
-
-                {/* Header Area */}
                 <div className="content-header-fixed">
                   <h3 className="content-title" style={{ color: activeCategory.color }}>
                     {activeCategory.category}
@@ -166,7 +173,6 @@ const Features = () => {
                   </p>
                 </div>
 
-                {/* Scrollable/Fixed Grid Area */}
                 <div className="features-grid-wrapper">
                   <div className="features-grid-list">
                     {activeCategory.items.map((item) => {
@@ -174,7 +180,7 @@ const Features = () => {
                       return (
                         <div key={item.name} className="grid-item group">
                           <div className="grid-icon-box" style={{ color: activeCategory.color }}>
-                            <Icon size={18} />
+                            <Icon size={20} strokeWidth={2} />
                           </div>
                           <span className="grid-text">{item.name}</span>
                         </div>
@@ -182,7 +188,6 @@ const Features = () => {
                     })}
                   </div>
                 </div>
-
               </div>
 
             </motion.div>
