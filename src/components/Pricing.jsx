@@ -155,7 +155,12 @@ const Pricing = () => {
               {plans.map((plan) => (
                 <button
                   key={plan.id}
-                  onClick={() => setActivePlanId(plan.id)}
+                  // Fix: Prevent state update if clicking the already active plan
+                  onClick={() => {
+                    if (activePlanId !== plan.id) {
+                      setActivePlanId(plan.id);
+                    }
+                  }}
                   className="tab-button"
                   style={{
                     color: activePlanId === plan.id ? '#0C0E12' : '#9CA3AF',

@@ -29,7 +29,7 @@ const featuresData = [
     description: "Full control over the device's core functions and applications.",
     image: appMockup,
     imageScale: 1.26,       // Desktop Zoom
-    mobileImageScale: 1.2,  // Mobile Zoom (Adjusted)
+    mobileImageScale: 1.1,  // Mobile Zoom (Adjusted)
     items: [
       { name: "Device Apps", icon: AppWindow },
       { name: "Device Wallpaper", icon: ImageIcon },
@@ -45,7 +45,7 @@ const featuresData = [
     description: "Comprehensive logs of all calls, messages, and social interactions.",
     image: chatMockup,
     imageScale: 1.18,       // Desktop Zoom
-    mobileImageScale: 1.12, // Mobile Zoom (Adjusted)
+    mobileImageScale: 1.05, // Mobile Zoom (Adjusted)
     items: [
       { name: "Call History", icon: Phone },
       { name: "Make Calls", icon: PhoneCall },
@@ -80,7 +80,7 @@ const featuresData = [
     description: "Real-time surveillance of the device's surroundings and activity.",
     image: locationMockup,
     imageScale: 1.45,       // Desktop Zoom
-    mobileImageScale: 1.5,  // Mobile Zoom (Adjusted)
+    mobileImageScale: 1.3,  // Mobile Zoom (Adjusted)
     items: [
       { name: "Remote Camera", icon: Camera },
       { name: "One-Way Audio", icon: Mic },
@@ -97,7 +97,7 @@ const featuresData = [
     description: "Essential tracking and system information.",
     image: infoMockup,
     imageScale: 1.5,        // Desktop Zoom
-    mobileImageScale: 1.25,  // Mobile Zoom (Adjusted)
+    mobileImageScale: 1.2,  // Mobile Zoom (Adjusted)
     items: [
       { name: "Device Information", icon: Cpu },
       { name: "Device Location", icon: Navigation },
@@ -105,54 +105,54 @@ const featuresData = [
   }
 ];
 
-const Features = () => {
-  const [activeTabId, setActiveTabId] = useState('device');
-  const activeCategory = featuresData.find(cat => cat.id === activeTabId);
+// Moved VisualContent outside to prevent re-creation on every render
+const VisualContent = ({ category, isMobile }) => {
+  // Select the appropriate scale based on the isMobile prop
+  const scale = isMobile
+    ? (category.mobileImageScale || 1)
+    : (category.imageScale || 1);
 
-  // Reusable Visual Component with Dynamic Zoom Logic
-  const VisualContent = ({ isMobile }) => {
-    // Select the appropriate scale based on the isMobile prop
-    const scale = isMobile
-      ? (activeCategory.mobileImageScale || 1)
-      : (activeCategory.imageScale || 1);
-
-    return (
-      <div
-        className="visual-content"
+  return (
+    <div
+      className="visual-content"
+      style={{
+        width: '100%',
+        height: '100%',
+        maxWidth: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}
+    >
+      <img
+        src={category.image}
+        alt={category.category}
+        className="visual-image"
         style={{
           width: '100%',
           height: '100%',
-          maxWidth: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden'
+          objectFit: 'contain',
+          // Apply the dynamic scale here
+          transform: `scale(${scale})`,
+          transition: 'transform 0.3s ease'
         }}
-      >
-        <img
-          src={activeCategory.image}
-          alt={activeCategory.category}
-          className="visual-image"
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
-            // Apply the dynamic scale here
-            transform: `scale(${scale})`,
-            transition: 'transform 0.3s ease'
-          }}
-        />
-        <div
-          className="visual-glow"
-          style={{
-            backgroundColor: activeCategory.color,
-            width: '60%',
-            height: '60%'
-          }}
-        ></div>
-      </div>
-    );
-  };
+      />
+      <div
+        className="visual-glow"
+        style={{
+          backgroundColor: category.color,
+          width: '60%',
+          height: '60%'
+        }}
+      ></div>
+    </div>
+  );
+};
+
+const Features = () => {
+  const [activeTabId, setActiveTabId] = useState('device');
+  const activeCategory = featuresData.find(cat => cat.id === activeTabId);
 
   return (
     <section id="features" className="features-section">
@@ -176,7 +176,12 @@ const Features = () => {
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveTabId(cat.id)}
+                  // Fix: Prevent state update if clicking the already active tab
+                  onClick={() => {
+                    if (activeTabId !== cat.id) {
+                      setActiveTabId(cat.id);
+                    }
+                  }}
                   className="features-tab-button"
                   style={{
                     backgroundColor: isActive ? cat.color : 'transparent',
@@ -205,7 +210,7 @@ const Features = () => {
               {/* --- DESKTOP VISUAL (Left Column) --- */}
               {/* Hidden on Mobile */}
               <div className="feature-card-visual desktop-visual" style={{ padding: 0 }}>
-                <VisualContent isMobile={false} />
+                <VisualContent category={activeCategory} isMobile={false} />
               </div>
 
               {/* --- RIGHT CONTENT COLUMN --- */}
@@ -218,7 +223,7 @@ const Features = () => {
                   {/* --- MOBILE VISUAL (Top of Card) --- */}
                   {/* Hidden on Desktop */}
                   <div className="feature-card-visual mobile-visual" style={{ padding: 0 }}>
-                    <VisualContent isMobile={true} />
+                    <VisualContent category={activeCategory} isMobile={true} />
                   </div>
 
                   <div className="content-header-fixed">
