@@ -119,6 +119,20 @@
   @apply text-sm font-medium text-gray-300 leading-none;
 }
 
+/* Default Visibility (Desktop) */
+.mobile-visual {
+  display: none !important;
+}
+
+.desktop-visual {
+  display: flex !important;
+}
+
+.mobile-card-wrapper {
+  display: contents; /* Acts like it doesn't exist on desktop grid/flex */
+}
+
+
 /* ========================================================================
    MOBILE OPTIMIZATION (Max-width: 900px to cover the 850px fixed width)
    ======================================================================== */
@@ -130,37 +144,70 @@
     min-height: 0 !important;
   }
   
+  /* Remove card styling from the main wrapper on mobile */
   .feature-display-card {
     width: 100% !important;
     height: auto !important;
     flex-direction: column;
-    background-color: transparent; /* Clean look on mobile */
-    border: none;
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
     padding: 0;
-  }
-
-  /* 3. Disable Visual Image */
-  .feature-card-visual {
-    display: none !important;
+    gap: 1rem; /* Spacing between Mobile Card and Grid */
   }
 
   .feature-card-content {
     width: 100% !important;
-    padding: 0.5rem 0 !important; /* Remove internal padding to gain space */
-  }
-  
-  /* 2. Fix Grid Item Overflow */
-  .features-grid-list {
-    grid-template-columns: 1fr !important; /* Force single column */
-    gap: 0.75rem;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  /* 4. Remove Hover Animations */
+  /* 2. Create the "Mobile Card" (Image + Header) */
+  .mobile-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #15171B; /* The Desktop Card BG */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 0.5rem; /* Padding around image */
+    overflow: hidden;
+  }
+
+  /* 3. Mobile Visual (1:1 Ratio, Above Title) */
+  .desktop-visual {
+    display: none !important;
+  }
+
+  .mobile-visual {
+    display: flex !important;
+    width: 100% !important;
+    aspect-ratio: 1 / 1; /* 1:1 Ratio */
+    background-color: #0f1115; /* Inner visual bg */
+    border-radius: 0.75rem; /* Inner radius */
+    margin-bottom: 1.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .content-header-fixed {
+    border-bottom: none; /* Remove separator inside mobile card */
+    margin-bottom: 0;
+    padding: 0 1rem 1.5rem 1rem; /* Add padding for text inside card */
+    text-align: center; /* Center align text for mobile card feel */
+  }
+
+  /* 4. Fix Grid Item Overflow & Remove Hover */
+  .features-grid-list {
+    grid-template-columns: 1fr !important; /* Force single column */
+    gap: 0.5rem;
+  }
+
   .grid-item {
     pointer-events: none; /* Disables hover interactions completely */
-    background-color: rgba(255,255,255,0.03); /* Static background instead */
-    padding: 0.75rem;
-    margin-bottom: 0.25rem;
+    background-color: rgba(255,255,255,0.03); /* Static background */
+    padding: 1rem;
+    justify-content: flex-start;
   }
   
   .grid-item:hover {
@@ -173,7 +220,6 @@
   }
   
   .content-desc {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+    font-size: 0.95rem;
   }
 }
