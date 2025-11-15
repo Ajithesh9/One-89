@@ -12,7 +12,8 @@ const navLinks = [
   { id: 'faq', title: 'FAQ' },
 ];
 
-const Navbar = () => {
+// Destructure the onDownloadClick prop here
+const Navbar = ({ onDownloadClick }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSolid, setIsSolid] = useState(false);
 
@@ -28,7 +29,7 @@ const Navbar = () => {
     <nav className={`navbar ${isSolid ? 'solid' : 'faded'}`}>
       <div className="navbar-content-wrapper">
 
-        {/* Logo - Restored to Original Boxed Style */}
+        {/* Logo */}
         <div className="navbar-logo">
           <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
         </div>
@@ -53,7 +54,11 @@ const Navbar = () => {
 
         {/* Actions */}
         <div className="navbar-actions">
-          <button className="cta-button-desktop">
+          {/* Desktop Download Button */}
+          <button
+            className="cta-button-desktop"
+            onClick={onDownloadClick}
+          >
             Download
           </button>
 
@@ -93,7 +98,14 @@ const Navbar = () => {
                 {link.title}
               </Link>
             ))}
-            <button className="mobile-cta-button">
+            {/* Mobile Download Button */}
+            <button
+              className="mobile-cta-button"
+              onClick={() => {
+                setMenuOpen(false); // Close menu when clicked
+                onDownloadClick();  // Open modal
+              }}
+            >
               Download App
             </button>
           </motion.div>

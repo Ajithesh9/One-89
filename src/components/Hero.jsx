@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { FiDownload, FiPlay } from 'react-icons/fi';
-import heroImg from '../assets/Hero.png'; // Importing the new image
+import heroImg from '../assets/Hero.png';
 import '../Hero.css';
 
 const Hero = ({ onDownloadClick }) => {
@@ -48,6 +48,7 @@ const Hero = ({ onDownloadClick }) => {
             </motion.p>
 
             <motion.div variants={itemVariants} className="hero-buttons">
+              {/* Updated: Ensures the click opens the modal */}
               <button className="hero-button primary" onClick={onDownloadClick}>
                 <span>Download Now</span>
                 <FiDownload className="hero-button-icon" />
