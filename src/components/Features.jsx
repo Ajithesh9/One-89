@@ -12,16 +12,26 @@ import {
   // Utils
   Cpu, Navigation,
 } from 'lucide-react';
-import phoneMockup from '../assets/phone-mockup.png';
+
+import locationMockup from '../assets/location-mockup.png'; //Live Monitor
+import chatMockup from '../assets/chat-mockup.png'; //Communication
+import appMockup from '../assets/device-control.png'; //device control
+import galleryMockup from '../assets/gallery-images.png'; //data access
+import infoMockup from '../assets/utility.png'; //utility
+
 import '../Features.css';
 
+// ==================================================================================
+// 1. CUSTOMIZATION SECTION: Adjust 'imageScale' to zoom images per category
+// ==================================================================================
 const featuresData = [
   {
     id: 'device',
     category: "Device Control",
     color: "#BB86FC",
     description: "Full control over the device's core functions and applications.",
-    image: phoneMockup,
+    image: appMockup,
+    imageScale: 1.26, // Default Zoom
     items: [
       { name: "Device Apps", icon: AppWindow },
       { name: "Device Wallpaper", icon: ImageIcon },
@@ -35,7 +45,8 @@ const featuresData = [
     category: "Communication",
     color: "#03DAC6",
     description: "Comprehensive logs of all calls, messages, and social interactions.",
-    image: phoneMockup,
+    image: chatMockup,
+    imageScale: 1.18, // Default Zoom
     items: [
       { name: "Call History", icon: Phone },
       { name: "Make Calls", icon: PhoneCall },
@@ -52,7 +63,8 @@ const featuresData = [
     category: "Data Access",
     color: "#60A5FA",
     description: "Access, download, and manage files stored on the device.",
-    image: phoneMockup,
+    image: galleryMockup,
+    imageScale: 1.1, // Default Zoom
     items: [
       { name: "Image Gallery", icon: GalleryHorizontal },
       { name: "Download Files", icon: Download },
@@ -66,7 +78,8 @@ const featuresData = [
     category: "Live Monitoring",
     color: "#F43F5E",
     description: "Real-time surveillance of the device's surroundings and activity.",
-    image: phoneMockup,
+    image: locationMockup,
+    imageScale: 1.45, // <--- CUSTOM ZOOM for Map (1.5x size)
     items: [
       { name: "Remote Camera", icon: Camera },
       { name: "One-Way Audio", icon: Mic },
@@ -81,7 +94,8 @@ const featuresData = [
     category: "Utilities",
     color: "#FBBF24",
     description: "Essential tracking and system information.",
-    image: phoneMockup,
+    image: infoMockup,
+    imageScale: 1.5, // Default Zoom
     items: [
       { name: "Device Information", icon: Cpu },
       { name: "Device Location", icon: Navigation },
@@ -118,7 +132,6 @@ const Features = () => {
                   onClick={() => setActiveTabId(cat.id)}
                   className="features-tab-button"
                   style={{
-                    // Match Pricing.jsx style: Solid background, Dark text on active
                     backgroundColor: isActive ? cat.color : 'transparent',
                     color: isActive ? '#121212' : '#9CA3AF',
                   }}
@@ -132,11 +145,6 @@ const Features = () => {
 
         {/* Feature Display Card */}
         <div className="features-card-wrapper">
-          {/* Matched to Pricing.jsx: 
-             1. Added mode="wait" to prevent overlap glitch
-             2. Added scale effect (0.98 -> 1 -> 0.98)
-             3. Adjusted Y distance to match Pricing (10px)
-          */}
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory.id}
@@ -147,17 +155,42 @@ const Features = () => {
               className="feature-display-card"
             >
 
-              {/* Left: Image */}
-              <div className="feature-card-visual">
-                <div className="visual-content">
+              {/* Left: Image Visual */}
+              <div className="feature-card-visual" style={{ padding: 0 }}>
+                <div
+                  className="visual-content"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    maxWidth: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden' // Ensures zoomed image doesn't spill out
+                  }}
+                >
                   <img
                     src={activeCategory.image}
                     alt={activeCategory.category}
                     className="visual-image"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'contain',
+                      // 2. DYNAMIC SCALE APPLIED HERE
+                      transform: `scale(${activeCategory.imageScale || 1})`,
+                      transition: 'transform 0.3s ease' // Smooth transition if scale changes
+                    }}
                   />
+
+                  {/* Glow effect */}
                   <div
                     className="visual-glow"
-                    style={{ backgroundColor: activeCategory.color }}
+                    style={{
+                      backgroundColor: activeCategory.color,
+                      width: '60%',
+                      height: '60%'
+                    }}
                   ></div>
                 </div>
               </div>
