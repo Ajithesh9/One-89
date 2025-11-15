@@ -1,4 +1,4 @@
-/* src/components/PreFooterCTA.css */
+/* src/components/Footer.css */
 
 /* --- Wave SVG Styles --- */
 .prefooter-wave-container {
@@ -33,4 +33,19 @@
 .prefooter-cta-card-hover:hover {
   transform: translateY(-4px); /* Slightly less lift */
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.15); /* Softer shadow on hover */
+}
+
+/* ========================================================================
+   MOBILE OPTIMIZATION 
+   ======================================================================== */
+@media (max-width: 768px) {
+  /* Ensure no wave/hill interference on mobile footer optimization */
+  .prefooter-wave-container {
+    display: none !important;
+  }
+  
+  /* Optimize footer padding if accessed via ID */
+  #footer {
+    padding-top: 3rem !important; /* Reduce top padding on mobile */
+  }
 }

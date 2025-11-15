@@ -31,7 +31,7 @@ const featuresData = [
     color: "#BB86FC",
     description: "Full control over the device's core functions and applications.",
     image: appMockup,
-    imageScale: 1.26, // Default Zoom
+    imageScale: 1.27, // Default Zoom
     items: [
       { name: "Device Apps", icon: AppWindow },
       { name: "Device Wallpaper", icon: ImageIcon },

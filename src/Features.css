@@ -118,3 +118,62 @@
 .grid-text {
   @apply text-sm font-medium text-gray-300 leading-none;
 }
+
+/* ========================================================================
+   MOBILE OPTIMIZATION (Max-width: 900px to cover the 850px fixed width)
+   ======================================================================== */
+@media (max-width: 900px) {
+  /* 1. Fix Card & Content Overflow */
+  .features-card-wrapper {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  
+  .feature-display-card {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: column;
+    background-color: transparent; /* Clean look on mobile */
+    border: none;
+    padding: 0;
+  }
+
+  /* 3. Disable Visual Image */
+  .feature-card-visual {
+    display: none !important;
+  }
+
+  .feature-card-content {
+    width: 100% !important;
+    padding: 0.5rem 0 !important; /* Remove internal padding to gain space */
+  }
+  
+  /* 2. Fix Grid Item Overflow */
+  .features-grid-list {
+    grid-template-columns: 1fr !important; /* Force single column */
+    gap: 0.75rem;
+  }
+
+  /* 4. Remove Hover Animations */
+  .grid-item {
+    pointer-events: none; /* Disables hover interactions completely */
+    background-color: rgba(255,255,255,0.03); /* Static background instead */
+    padding: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .grid-item:hover {
+    background-color: rgba(255,255,255,0.03) !important;
+  }
+  
+  /* Adjust Text for Mobile */
+  .content-title {
+    font-size: 1.5rem;
+  }
+  
+  .content-desc {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+}
