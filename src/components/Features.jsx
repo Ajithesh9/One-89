@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Added useEffect
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   // Device
@@ -28,8 +28,8 @@ const featuresData = [
     color: "#BB86FC",
     description: "Full control over the device's core functions and applications.",
     image: appMockup,
-    imageScale: 1.26,
-    mobileImageScale: 1.1,
+    imageScale: 1.26,       
+    mobileImageScale: 1.1,  
     items: [
       { name: "Device Apps", icon: AppWindow },
       { name: "Device Wallpaper", icon: ImageIcon },
@@ -44,8 +44,8 @@ const featuresData = [
     color: "#03DAC6",
     description: "Comprehensive logs of all calls, messages, and social interactions.",
     image: chatMockup,
-    imageScale: 1.18,
-    mobileImageScale: 1.05,
+    imageScale: 1.18,       
+    mobileImageScale: 1.05, 
     items: [
       { name: "Call History", icon: Phone },
       { name: "Make Calls", icon: PhoneCall },
@@ -63,8 +63,8 @@ const featuresData = [
     color: "#60A5FA",
     description: "Access, download, and manage files stored on the device.",
     image: galleryMockup,
-    imageScale: 1.1,
-    mobileImageScale: 1.0,
+    imageScale: 1.1,        
+    mobileImageScale: 1.0,  
     items: [
       { name: "Image Gallery", icon: GalleryHorizontal },
       { name: "Download Files", icon: Download },
@@ -79,8 +79,8 @@ const featuresData = [
     color: "#F43F5E",
     description: "Real-time surveillance of the device's surroundings and activity.",
     image: locationMockup,
-    imageScale: 1.45,
-    mobileImageScale: 1.3,
+    imageScale: 1.45,       
+    mobileImageScale: 1.3,  
     items: [
       { name: "Remote Camera", icon: Camera },
       { name: "One-Way Audio", icon: Mic },
@@ -96,8 +96,8 @@ const featuresData = [
     color: "#FBBF24",
     description: "Essential tracking and system information.",
     image: infoMockup,
-    imageScale: 1.5,
-    mobileImageScale: 1.2,
+    imageScale: 1.5,        
+    mobileImageScale: 1.2,  
     items: [
       { name: "Device Information", icon: Cpu },
       { name: "Device Location", icon: Navigation },
@@ -107,8 +107,8 @@ const featuresData = [
 
 // VisualContent component
 const VisualContent = ({ category, isMobile }) => {
-  const scale = isMobile
-    ? (category.mobileImageScale || 1)
+  const scale = isMobile 
+    ? (category.mobileImageScale || 1) 
     : (category.imageScale || 1);
 
   return (
@@ -128,10 +128,8 @@ const VisualContent = ({ category, isMobile }) => {
         src={category.image}
         alt={category.category}
         className="visual-image"
-        // IMPORTANT: 'eager' ensures that once mounted, it shows instantly
-        // The useEffect below handles the network pre-fetching
-        loading="eager"
-        decoding="async"
+        // Removed loading="eager" and decoding="async"
+        // Our useEffect preloader handles this better.
         style={{
           width: '100%',
           height: '100%',
@@ -156,9 +154,7 @@ const Features = () => {
   const [activeTabId, setActiveTabId] = useState('device');
   const activeCategory = featuresData.find(cat => cat.id === activeTabId);
 
-  // --- NEW: PRELOAD IMAGES ---
-  // This runs once when the component mounts. It fetches all images in the background.
-  // When you click a tab later, the browser already has the image in memory.
+  // Preload images
   useEffect(() => {
     featuresData.forEach((feature) => {
       const img = new Image();
@@ -211,36 +207,39 @@ const Features = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory.id}
-              initial={{ opacity: 0, y: 10, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -10, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
+              // --- ANIMATION CHANGE ---
+              // Changed from a scale/y-translate to a simple, fast fade
+              // This is much less "glitchy" as it doesn't move pixels.
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15, ease: "easeOut" }} // Made transition faster
               className="feature-display-card"
             >
 
               {/* Desktop Visual */}
               <div className="feature-card-visual desktop-visual" style={{ padding: 0 }}>
-                <VisualContent category={activeCategory} isMobile={false} />
+                 <VisualContent category={activeCategory} isMobile={false} />
               </div>
 
               {/* Right Content */}
               <div className="feature-card-content">
-
+                
                 {/* Mobile Wrapper */}
                 <div className="mobile-card-wrapper">
-                  {/* Mobile Visual */}
-                  <div className="feature-card-visual mobile-visual" style={{ padding: 0 }}>
-                    <VisualContent category={activeCategory} isMobile={true} />
-                  </div>
+                    {/* Mobile Visual */}
+                    <div className="feature-card-visual mobile-visual" style={{ padding: 0 }}>
+                         <VisualContent category={activeCategory} isMobile={true} />
+                    </div>
 
-                  <div className="content-header-fixed">
-                    <h3 className="content-title" style={{ color: activeCategory.color }}>
-                      {activeCategory.category}
-                    </h3>
-                    <p className="content-desc">
-                      {activeCategory.description}
-                    </p>
-                  </div>
+                    <div className="content-header-fixed">
+                      <h3 className="content-title" style={{ color: activeCategory.color }}>
+                        {activeCategory.category}
+                      </h3>
+                      <p className="content-desc">
+                        {activeCategory.description}
+                      </p>
+                    </div>
                 </div>
 
                 {/* Grid */}
