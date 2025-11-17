@@ -1,10 +1,13 @@
 // src/components/Footer.jsx
+
 import React from 'react';
+// We no longer need 'Link' from react-router-dom
 import PreFooterCTA from './PreFooterCTA';
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
 import eyesLogo from '../assets/eyes.webp';
 
-const Footer = ({ onPrivacyClick }) => {
+// The 'onPrivacyClick' prop has been removed
+const Footer = () => {
   return (
     <div className="relative w-full">
       {/* The Pre-Footer CTA Section */}
@@ -46,9 +49,19 @@ const Footer = ({ onPrivacyClick }) => {
             <div>
               <h3 className="text-lg font-semibold mb-4">Product</h3>
               <ul className="space-y-3 text-slate-400 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Download App</a></li>
+                <li><a href="/#features" className="hover:text-white transition-colors">Features</a></li>
+                <li><a href="/#pricing" className="hover:text-white transition-colors">Pricing</a></li>
+                
+                {/* This link now points to the page (no target="_blank") */}
+                <li>
+                  <a 
+                    href="/privacypolicy" 
+                    className="hover:text-white transition-colors"
+                  >
+                    Privacy Policy
+                  </a>
+                </li>
+
                 <li><a href="#" className="hover:text-white transition-colors">Co-Parenting</a></li>
               </ul>
             </div>
@@ -81,7 +94,9 @@ const Footer = ({ onPrivacyClick }) => {
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-500 text-sm">© 2025 Watcher Inc. All rights reserved.</p>
             <div className="flex gap-6 text-slate-500 text-sm">
-              <button onClick={onPrivacyClick} className="hover:text-white transition-colors text-left">Privacy Policy</button>
+              
+              {/* This link also points to the page (no target="_blank") */}
+              <a href="/privacypolicy" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
             </div>
