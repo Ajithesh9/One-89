@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Smartphone, Lock, ArrowRight, Download } from 'lucide-react';
-import eyesLogo from '../assets/eyes.png';
+import eyesLogo from '../assets/eyes.webp';
 import '../PreFooterCTA.css';
 
 const PreFooterCTA = () => {

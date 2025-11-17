@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Added useEffect
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   // Device
@@ -13,11 +13,11 @@ import {
   Cpu, Navigation,
 } from 'lucide-react';
 
-import locationMockup from '../assets/location-mockup.png';
-import chatMockup from '../assets/chat-mockup.png';
-import appMockup from '../assets/device-control.png';
-import galleryMockup from '../assets/gallery-images.png';
-import infoMockup from '../assets/utility.png';
+import locationMockup from '../assets/location-mockup.webp';
+import chatMockup from '../assets/chat-mockup.webp';
+import appMockup from '../assets/device-control.webp';
+import galleryMockup from '../assets/gallery-images.webp';
+import infoMockup from '../assets/utility.webp';
 
 import '../Features.css';
 
@@ -28,8 +28,8 @@ const featuresData = [
     color: "#BB86FC",
     description: "Full control over the device's core functions and applications.",
     image: appMockup,
-    imageScale: 1.26,       // Desktop Zoom
-    mobileImageScale: 1.1,  // Mobile Zoom (Adjusted)
+    imageScale: 1.26,
+    mobileImageScale: 1.1,
     items: [
       { name: "Device Apps", icon: AppWindow },
       { name: "Device Wallpaper", icon: ImageIcon },
@@ -44,8 +44,8 @@ const featuresData = [
     color: "#03DAC6",
     description: "Comprehensive logs of all calls, messages, and social interactions.",
     image: chatMockup,
-    imageScale: 1.18,       // Desktop Zoom
-    mobileImageScale: 1.05, // Mobile Zoom (Adjusted)
+    imageScale: 1.18,
+    mobileImageScale: 1.05,
     items: [
       { name: "Call History", icon: Phone },
       { name: "Make Calls", icon: PhoneCall },
@@ -63,8 +63,8 @@ const featuresData = [
     color: "#60A5FA",
     description: "Access, download, and manage files stored on the device.",
     image: galleryMockup,
-    imageScale: 1.1,        // Desktop Zoom
-    mobileImageScale: 1.0,  // Mobile Zoom (Adjusted)
+    imageScale: 1.1,
+    mobileImageScale: 1.0,
     items: [
       { name: "Image Gallery", icon: GalleryHorizontal },
       { name: "Download Files", icon: Download },
@@ -79,8 +79,8 @@ const featuresData = [
     color: "#F43F5E",
     description: "Real-time surveillance of the device's surroundings and activity.",
     image: locationMockup,
-    imageScale: 1.45,       // Desktop Zoom
-    mobileImageScale: 1.3,  // Mobile Zoom (Adjusted)
+    imageScale: 1.45,
+    mobileImageScale: 1.3,
     items: [
       { name: "Remote Camera", icon: Camera },
       { name: "One-Way Audio", icon: Mic },
@@ -96,8 +96,8 @@ const featuresData = [
     color: "#FBBF24",
     description: "Essential tracking and system information.",
     image: infoMockup,
-    imageScale: 1.5,        // Desktop Zoom
-    mobileImageScale: 1.2,  // Mobile Zoom (Adjusted)
+    imageScale: 1.5,
+    mobileImageScale: 1.2,
     items: [
       { name: "Device Information", icon: Cpu },
       { name: "Device Location", icon: Navigation },
@@ -105,9 +105,8 @@ const featuresData = [
   }
 ];
 
-// Moved VisualContent outside to prevent re-creation on every render
+// VisualContent component
 const VisualContent = ({ category, isMobile }) => {
-  // Select the appropriate scale based on the isMobile prop
   const scale = isMobile
     ? (category.mobileImageScale || 1)
     : (category.imageScale || 1);
@@ -129,11 +128,14 @@ const VisualContent = ({ category, isMobile }) => {
         src={category.image}
         alt={category.category}
         className="visual-image"
+        // IMPORTANT: 'eager' ensures that once mounted, it shows instantly
+        // The useEffect below handles the network pre-fetching
+        loading="eager"
+        decoding="async"
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          // Apply the dynamic scale here
           transform: `scale(${scale})`,
           transition: 'transform 0.3s ease'
         }}
@@ -153,6 +155,16 @@ const VisualContent = ({ category, isMobile }) => {
 const Features = () => {
   const [activeTabId, setActiveTabId] = useState('device');
   const activeCategory = featuresData.find(cat => cat.id === activeTabId);
+
+  // --- NEW: PRELOAD IMAGES ---
+  // This runs once when the component mounts. It fetches all images in the background.
+  // When you click a tab later, the browser already has the image in memory.
+  useEffect(() => {
+    featuresData.forEach((feature) => {
+      const img = new Image();
+      img.src = feature.image;
+    });
+  }, []);
 
   return (
     <section id="features" className="features-section">
@@ -176,7 +188,6 @@ const Features = () => {
               return (
                 <button
                   key={cat.id}
-                  // Fix: Prevent state update if clicking the already active tab
                   onClick={() => {
                     if (activeTabId !== cat.id) {
                       setActiveTabId(cat.id);
@@ -207,21 +218,17 @@ const Features = () => {
               className="feature-display-card"
             >
 
-              {/* --- DESKTOP VISUAL (Left Column) --- */}
-              {/* Hidden on Mobile */}
+              {/* Desktop Visual */}
               <div className="feature-card-visual desktop-visual" style={{ padding: 0 }}>
                 <VisualContent category={activeCategory} isMobile={false} />
               </div>
 
-              {/* --- RIGHT CONTENT COLUMN --- */}
+              {/* Right Content */}
               <div className="feature-card-content">
 
-                {/* MOBILE WRAPPER: Image + Header */}
-                {/* This wrapper becomes the "Card" on mobile */}
+                {/* Mobile Wrapper */}
                 <div className="mobile-card-wrapper">
-
-                  {/* --- MOBILE VISUAL (Top of Card) --- */}
-                  {/* Hidden on Desktop */}
+                  {/* Mobile Visual */}
                   <div className="feature-card-visual mobile-visual" style={{ padding: 0 }}>
                     <VisualContent category={activeCategory} isMobile={true} />
                   </div>
@@ -236,8 +243,7 @@ const Features = () => {
                   </div>
                 </div>
 
-                {/* GRID (Sibling to Mobile Card Wrapper) */}
-                {/* Sits outside the "Card" style on mobile */}
+                {/* Grid */}
                 <div className="features-grid-wrapper">
                   <div className="features-grid-list">
                     {activeCategory.items.map((item) => {

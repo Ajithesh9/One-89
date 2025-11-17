@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-scroll';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiMenu, FiX } from 'react-icons/fi';
-import eyesLogo from '../assets/eyes.png';
+import eyesLogo from '../assets/eyes.webp';
 import '../Navbar.css';
 
 const navLinks = [

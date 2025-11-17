@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { FiDownload, FiPlay } from 'react-icons/fi';
-import heroImg from '../assets/Hero.png';
+import heroImg from '../assets/Hero.webp'; // was .png
 import '../Hero.css';
 
 const Hero = ({ onDownloadClick }) => {
@@ -72,7 +72,15 @@ const Hero = ({ onDownloadClick }) => {
             animate="visible"
             className="hero-image-container"
           >
-            <img src={heroImg} alt="Hero Display" className="hero-image" />
+            <img
+              src={heroImg}
+              alt="Hero Display"
+              className="hero-image"
+              // OPTIMIZATION: Prioritize this image above all others
+              fetchPriority="high"
+              loading="eager"
+              decoding="sync"
+            />
           </motion.div>
         </div>
       </div>

@@ -2,7 +2,7 @@
 import React from 'react';
 import PreFooterCTA from './PreFooterCTA';
 import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
-import eyesLogo from '../assets/eyes.png'; // Import the logo
+import eyesLogo from '../assets/eyes.webp';
 
 const Footer = ({ onPrivacyClick }) => {
   return (
