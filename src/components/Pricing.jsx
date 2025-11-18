@@ -1,5 +1,7 @@
+// src/components/Pricing.jsx
+
 import { useState } from 'react';
-import { Check, Zap, Users, Shield, ArrowRight } from 'lucide-react'; // Removed CheckCircle2
+import { Check, Zap, Users, Shield, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../Pricing.css';
 
@@ -74,8 +76,7 @@ const plans = [
 ];
 
 const Pricing = () => {
-  // Default to the "Best Value" plan (Diamond)
-  const [activePlanId, setActivePlanId] = useState('diamond');
+  const [activePlanId, setActivePlanId] = useState('bronze');
   const activePlan = plans.find(p => p.id === activePlanId);
 
   return (
@@ -84,8 +85,11 @@ const Pricing = () => {
         <div className="pricing-grid">
 
           {/* Left Column: Content */}
-          <div className="lg:col-span-7 mb-12 lg:mb-0">
-            {/* Added -mt-8 as requested by user */}
+          {/* CHANGED: Increased margin-bottom from 'mb-12' to 'mb-24'.
+             This creates extra vertical space on mobile so the "Best Value" arrow
+             doesn't overlap the text above it.
+          */}
+          <div className="lg:col-span-7 mb-24 lg:mb-0">
             <div className="max-w-2xl -mt-8">
               <h4 className="pricing-eyebrow">
                 Pricing
@@ -155,7 +159,6 @@ const Pricing = () => {
               {plans.map((plan) => (
                 <button
                   key={plan.id}
-                  // Fix: Prevent state update if clicking the already active plan
                   onClick={() => {
                     if (activePlanId !== plan.id) {
                       setActivePlanId(plan.id);
@@ -175,14 +178,14 @@ const Pricing = () => {
                       <span className="arrow-text">
                         Best Value!
                       </span>
-                      {/* SVG Flipped Horizontally (scale-x-[-1]) to point LEFT at the button */}
+                      {/* SVG classes are handled in Pricing.css */}
                       <svg
                         width="50"
                         height="40"
                         viewBox="0 0 45 35"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="arrow-svg scale-x-[-1] rotate-[15deg] -mt-1"
+                        className="arrow-svg"
                       >
                         <path
                           d="M10 5 C 15 20, 25 25, 35 30"
@@ -246,7 +249,6 @@ const Pricing = () => {
                     <span className="price-period">/{activePlan.period}</span>
                   </div>
 
-                  {/* REVERTED: Plain text for "Cancel anytime" */}
                   <p className="price-subtext">
                     {activePlan.billingNote ? activePlan.billingNote : 'Cancel anytime'}
                   </p>

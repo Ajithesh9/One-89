@@ -2,7 +2,11 @@
 
 /* --- SECTION BASE --- */
 .prefooter-section {
-  @apply w-full bg-dark-background pt-20 pb-32 relative overflow-hidden;
+  /* CHANGED: Reduced pt (top padding) from 20 to 12.
+     - pt-12: Reduces gap from FAQ section.
+     - pb-32: Kept large to accommodate the hill graphic at the bottom.
+  */
+  @apply w-full bg-dark-background pt-12 pb-32 relative overflow-hidden;
 }
 
 .prefooter-container {

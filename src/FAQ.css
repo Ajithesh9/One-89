@@ -2,7 +2,11 @@
 
 /* --- SECTION CONTAINER --- */
 .faq-section {
-  @apply bg-dark-background py-24;
+  /* CHANGED: Reduced pb (bottom padding) to 12 to pull the next section closer.
+     - pt (top): 12 (matches Pricing bottom)
+     - pb (bottom): 12 (matches PreFooter top)
+  */
+  @apply bg-dark-background pt-12 pb-12;
 }
 
 .faq-container {
@@ -37,7 +41,6 @@
 
 /* --- TRIGGER BUTTON --- */
 .faq-trigger {
-  /* Removed 'group' from here */
   @apply w-full flex items-start gap-4 py-6 text-left focus:outline-none cursor-pointer;
 }
 
@@ -88,7 +91,6 @@
 }
 
 .faq-support-link {
-  /* Removed 'group' from here */
   @apply inline-flex items-center gap-2 text-dark-primary font-semibold hover:text-white transition-all duration-300 cursor-pointer;
 }
 

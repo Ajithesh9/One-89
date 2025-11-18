@@ -21,7 +21,11 @@
 /* --- LAYOUT COMPONENTS --- */
 
 .pricing-section {
-  @apply bg-dark-background py-20 sm:py-24 relative overflow-hidden;
+  /* CHANGED: Replaced 'py-20 sm:py-24' with separate top/bottom values.
+     - pt (top): Kept large for spacing from the section above.
+     - pb (bottom): Reduced to 8 (2rem) to pull the FAQ section closer.
+  */
+  @apply bg-dark-background pt-20 pb-8 sm:pt-24 sm:pb-12 relative overflow-hidden;
 }
 
 .pricing-container {
@@ -67,7 +71,6 @@
 /* --- TAB SWITCHER --- */
 
 .tab-group {
-  /* Reduced margin-bottom since annotation is now on the side */
   @apply flex p-1.5 mb-10 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 relative;
 }
 
@@ -147,11 +150,9 @@
 /* --- ANNOTATIONS (ARROW) --- */
 
 .arrow-annotation {
-  /* * Positioned to the RIGHT side of the button.
-   * 'hidden md:flex' ensures it only shows on larger screens to avoid overflow.
-   * 'ml-5' gives it some breathing room from the button.
-   */
-  @apply absolute left-full top-1/4 -translate-y-1/2 ml-5 w-max hidden md:flex flex-col items-start pointer-events-none z-20;
+  @apply absolute flex flex-col items-center pointer-events-none z-20 w-max
+         bottom-full left-1/2 -translate-x-1/2 mb-2;
+  @apply md:left-full md:top-1/4 md:bottom-auto md:-translate-y-1/2 md:ml-5 md:translate-x-0 md:items-start md:mb-0;
 }
 
 .arrow-text {
@@ -160,5 +161,7 @@
 }
 
 .arrow-svg {
-  @apply text-white drop-shadow-md opacity-90;
+  @apply text-white drop-shadow-md opacity-90 transition-transform duration-300;
+  @apply rotate-[50deg] -ml-2;
+  @apply md:scale-x-[-1] md:rotate-[15deg] md:-mt-1 md:ml-0;
 }
