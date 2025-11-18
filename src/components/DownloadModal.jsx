@@ -1,13 +1,24 @@
-import { motion } from 'framer-motion';
-import { FiX, FiDownload, FiSmartphone } from 'react-icons/fi';
-import { FaGooglePlay } from 'react-icons/fa';
-import '../DownloadModal.css';
+import { motion } from "framer-motion";
+import { FiX, FiDownload, FiSmartphone } from "react-icons/fi";
+import { FaGooglePlay } from "react-icons/fa";
+import "../DownloadModal.css";
 
 // Placeholder for the APK file (Uncomment import when file is available)
 // import kidsAppApk from '../assets/watcher-kids-installer.apk';
-const kidsAppApk = '#';
+const kidsAppApk = "#";
 
 const DownloadModal = ({ onClose }) => {
+  const handleKidsDownload = () => {
+    const fileUrl =
+      "https://github.com/abhishekxdeku/kids/releases/download/1.2.9/watcher-kids-installer.apk";
+    window.location.href = fileUrl;
+  };
+
+  const launchAPK = () => {
+    const fileUrl = "one89://www.kids.in/";
+    window.location.href = fileUrl;
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -21,7 +32,7 @@ const DownloadModal = ({ onClose }) => {
         initial={{ scale: 0.9, opacity: 0, y: 20 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         exit={{ scale: 0.9, opacity: 0, y: 20 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
         className="download-modal"
         onClick={(e) => e.stopPropagation()}
       >
@@ -29,7 +40,9 @@ const DownloadModal = ({ onClose }) => {
         <div className="download-modal-header">
           <div className="header-content">
             <h2 className="download-modal-title">Install Watcher</h2>
-            <p className="download-modal-subtitle">Select your device type to get started</p>
+            <p className="download-modal-subtitle">
+              Select your device type to get started
+            </p>
           </div>
           <button onClick={onClose} className="modal-close-button">
             <FiX size={24} />
@@ -38,7 +51,6 @@ const DownloadModal = ({ onClose }) => {
 
         {/* Content */}
         <div className="download-modal-content">
-
           {/* Option 1: Parent App */}
           <a
             href="https://play.google.com/store/apps/details?id=com.deku.watcher"
@@ -65,8 +77,7 @@ const DownloadModal = ({ onClose }) => {
 
           {/* Option 2: Kids App */}
           <a
-            href={kidsAppApk}
-            download="watcher-kids-installer.apk"
+            onClick={handleKidsDownload}
             className="download-option-card kids-card group"
           >
             <div className="card-icon-wrapper kids-icon">
@@ -80,12 +91,16 @@ const DownloadModal = ({ onClose }) => {
               <FiDownload size={20} />
             </div>
           </a>
-
         </div>
 
         {/* Footer Note */}
         <div className="download-modal-footer">
-          <p>Need help installing? <a href="#faq" onClick={onClose}>Read the guide</a></p>
+          <p>
+            Need help installing?{" "}
+            <a href="#faq" onClick={onClose}>
+              Read the guide
+            </a>
+          </p>
         </div>
       </motion.div>
     </motion.div>
