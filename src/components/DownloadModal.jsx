@@ -62,7 +62,7 @@ const DownloadModal = ({ onClose }) => {
               <FaGooglePlay size={28} />
             </div>
             <div className="card-text-content">
-              <span className="card-title">Parent App</span>
+              <span className="card-title">Parental App</span>
               <span className="card-desc">Monitor from your device</span>
             </div>
             <div className="card-action-arrow">
@@ -84,7 +84,7 @@ const DownloadModal = ({ onClose }) => {
               <FiSmartphone size={28} />
             </div>
             <div className="card-text-content">
-              <span className="card-title">Child App</span>
+              <span className="card-title">Kid's App</span>
               <span className="card-desc">Install on target device</span>
             </div>
             <div className="card-action-arrow">

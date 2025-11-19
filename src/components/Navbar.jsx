@@ -1,18 +1,18 @@
 // src/components/Navbar.jsx
 
-import { useState, useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiMenu, FiX } from 'react-icons/fi';
-import eyesLogo from '../assets/eyes.webp';
-import '../Navbar.css';
+import { useState, useEffect } from "react";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiMenu, FiX } from "react-icons/fi";
+import eyesLogo from "../assets/eyes.webp";
+import "../Navbar.css";
 
 const navLinks = [
-  { id: 'features', title: 'Features' },
-  { id: 'howitworks', title: 'How it works' },
-  { id: 'pricing', title: 'Pricing' },
-  { id: 'faq', title: 'FAQ' },
+  { id: "features", title: "Features" },
+  { id: "howitworks", title: "How it works" },
+  { id: "pricing", title: "Pricing" },
+  { id: "faq", title: "FAQ" },
 ];
 
 const Navbar = ({ onDownloadClick }) => {
@@ -20,20 +20,19 @@ const Navbar = ({ onDownloadClick }) => {
   const [isSolid, setIsSolid] = useState(false);
 
   const location = useLocation();
-  const isPrivacyPage = location.pathname === '/privacypolicy';
+  const isPrivacyPage = location.pathname === "/privacy";
 
   useEffect(() => {
     const handleScroll = () => {
       setIsSolid(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav className={`navbar ${isSolid ? 'solid' : 'faded'}`}>
+    <nav className={`navbar ${isSolid ? "solid" : "faded"}`}>
       <div className="navbar-content-wrapper">
-
         {/* Logo (links to homepage) */}
         <RouterLink to="/" className="navbar-logo">
           <img src={eyesLogo} alt="One89 Logo" className="logo-image" />
@@ -73,10 +72,7 @@ const Navbar = ({ onDownloadClick }) => {
         ) : (
           // On Main Page: Show the actions
           <div className="navbar-actions">
-            <button
-              className="cta-button-desktop"
-              onClick={onDownloadClick}
-            >
+            <button className="cta-button-desktop" onClick={onDownloadClick}>
               Download
             </button>
             <button
@@ -84,7 +80,11 @@ const Navbar = ({ onDownloadClick }) => {
               className="mobile-menu-button"
               aria-label="Toggle menu"
             >
-              {menuOpen ? <FiX className="mobile-menu-icon" /> : <FiMenu className="mobile-menu-icon" />}
+              {menuOpen ? (
+                <FiX className="mobile-menu-icon" />
+              ) : (
+                <FiMenu className="mobile-menu-icon" />
+              )}
             </button>
           </div>
         )}

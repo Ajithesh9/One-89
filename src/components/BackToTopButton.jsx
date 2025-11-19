@@ -1,15 +1,15 @@
 // src/components/BackToTopButton.jsx
 
-import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { scrollToTop } from '../App';
-import { FiArrowUp } from 'react-icons/fi';
-import '../BackToTopButton.css';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { scrollToTop } from "../App";
+import { FiArrowUp } from "react-icons/fi";
+import "../BackToTopButton.css";
 
 // Define which pages the button should appear on
 const visiblePages = [
-  '/privacypolicy'
+  "/privacy",
   // To add more pages, just add them here, e.g.,
   // '/terms-of-service'
 ];
@@ -32,21 +32,21 @@ export const BackToTopButton = () => {
     };
 
     // Check visibility when path changes
-    handleScroll(); 
+    handleScroll();
 
     // Add scroll listeners
     if (window.lenis) {
-      window.lenis.on('scroll', handleScroll);
+      window.lenis.on("scroll", handleScroll);
     } else {
-      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener("scroll", handleScroll, { passive: true });
     }
 
     // Cleanup listeners
     return () => {
       if (window.lenis) {
-        window.lenis.off('scroll', handleScroll);
+        window.lenis.off("scroll", handleScroll);
       } else {
-        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener("scroll", handleScroll);
       }
     };
   }, [location.pathname]); // Re-run when page path changes
@@ -62,7 +62,7 @@ export const BackToTopButton = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }} // This fade-out will now run
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
           <FiArrowUp className="w-6 h-6" />
         </motion.button>

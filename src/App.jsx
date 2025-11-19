@@ -1,19 +1,19 @@
 // src/App.jsx
 
-import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-import Lenis from 'lenis';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import HowItWorks from './components/HowItWorks';
-import Pricing from './components/Pricing';
-import FAQ from './components/FAQ';
-import Footer from './components/Footer';
-import PrivacyPolicyPage from './components/PrivacyPolicyPage';
-import DownloadModal from './components/DownloadModal';
-import { BackToTopButton } from './components/BackToTopButton';
+import { useState, useEffect, useRef } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+import Lenis from "lenis";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Features from "./components/Features";
+import HowItWorks from "./components/HowItWorks";
+import Pricing from "./components/Pricing";
+import FAQ from "./components/FAQ";
+import Footer from "./components/Footer";
+import PrivacyPolicyPage from "./components/PrivacyPolicyPage";
+import DownloadModal from "./components/DownloadModal";
+import { BackToTopButton } from "./components/BackToTopButton";
 
 // Create a component for your main page layout
 const MainLayout = ({ onDownloadClick }) => (
@@ -39,8 +39,8 @@ function App() {
     lenisRef.current = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
+      direction: "vertical",
+      gestureDirection: "vertical",
       smooth: true,
       smoothTouch: false,
       touchMultiplier: 2,
@@ -87,10 +87,7 @@ function App() {
             path="/"
             element={<MainLayout onDownloadClick={openDownloadModal} />}
           />
-          <Route
-            path="/privacypolicy"
-            element={<PrivacyPolicyPage />}
-          />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
         </Routes>
       </main>
 
@@ -120,7 +117,7 @@ export const scrollToTop = () => {
   if (window.lenis) {
     window.lenis.scrollTo(0);
   } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 };
 

@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
-import { useRef } from 'react';
-import { FiDownload, FiPlay } from 'react-icons/fi';
-import heroImg from '../assets/Hero.webp'; // was .png
-import '../Hero.css';
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { FiDownload, FiPlay } from "react-icons/fi";
+import heroImg from "../assets/Hero.webp"; // was .png
+import "../Hero.css";
 
 const Hero = ({ onDownloadClick }) => {
   const targetRef = useRef(null);
@@ -14,12 +14,20 @@ const Hero = ({ onDownloadClick }) => {
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
   };
 
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   return (
@@ -44,7 +52,8 @@ const Hero = ({ onDownloadClick }) => {
             </motion.div>
 
             <motion.p variants={itemVariants} className="hero-subtitle">
-              Digital safety, simplified. Control and monitor all family devices in real-time. Keep them safe, wherever they are.
+              Digital safety, simplified. Control and monitor all family devices
+              in real-time. Keep them safe, wherever they are.
             </motion.p>
 
             <motion.div variants={itemVariants} className="hero-buttons">
@@ -54,7 +63,7 @@ const Hero = ({ onDownloadClick }) => {
                 <FiDownload className="hero-button-icon" />
               </button>
               <a
-                href="https://www.youtube.com"
+                href="https://www.youtube.com/watch?v=ZsZk3nzbqjw"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero-button secondary"
