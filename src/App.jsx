@@ -13,7 +13,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import DownloadModal from './components/DownloadModal';
-import { BackToTopButton } from './components/BackToTopButton'; 
+import { BackToTopButton } from './components/BackToTopButton';
 
 // Create a component for your main page layout
 const MainLayout = ({ onDownloadClick }) => (
@@ -25,7 +25,7 @@ const MainLayout = ({ onDownloadClick }) => (
     <FAQ />
   </>
 );
-
+import { SpeedInsights } from "@vercel/speed-insights/react";
 function App() {
   const [isDownloadModalOpen, setDownloadModalOpen] = useState(false);
   const lenisRef = useRef(null);
@@ -83,17 +83,17 @@ function App() {
 
       <main>
         <Routes>
-          <Route 
-            path="/" 
-            element={<MainLayout onDownloadClick={openDownloadModal} />} 
+          <Route
+            path="/"
+            element={<MainLayout onDownloadClick={openDownloadModal} />}
           />
-          <Route 
-            path="/privacypolicy" 
-            element={<PrivacyPolicyPage />} 
+          <Route
+            path="/privacypolicy"
+            element={<PrivacyPolicyPage />}
           />
         </Routes>
       </main>
-      
+
       <Footer />
 
       <AnimatePresence>
@@ -106,6 +106,7 @@ function App() {
         This removes the "flashing" and fixes the exit animation.
       */}
       <BackToTopButton />
+      <SpeedInsights />
     </div>
   );
 }
