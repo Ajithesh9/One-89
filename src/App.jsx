@@ -14,7 +14,7 @@ import Footer from './components/Footer';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import DownloadModal from './components/DownloadModal';
 import { BackToTopButton } from './components/BackToTopButton';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 // Create a component for your main page layout
 const MainLayout = ({ onDownloadClick }) => (
