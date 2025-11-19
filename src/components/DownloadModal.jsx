@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { FiX, FiDownload, FiSmartphone } from "react-icons/fi";
 import { FaGooglePlay } from "react-icons/fa";
+import { MdOutlineRocketLaunch, MdOutlineLaunch } from "react-icons/md";
 import "../DownloadModal.css";
 
 // Placeholder for the APK file (Uncomment import when file is available)
 // import kidsAppApk from '../assets/watcher-kids-installer.apk';
-const kidsAppApk = "#";
 
 const DownloadModal = ({ onClose }) => {
   const handleKidsDownload = () => {
@@ -14,7 +14,7 @@ const DownloadModal = ({ onClose }) => {
     window.location.href = fileUrl;
   };
 
-  const launchAPK = () => {
+  const launchKidsApp = () => {
     const fileUrl = "one89://www.kids.in/";
     window.location.href = fileUrl;
   };
@@ -62,7 +62,7 @@ const DownloadModal = ({ onClose }) => {
               <FaGooglePlay size={28} />
             </div>
             <div className="card-text-content">
-              <span className="card-title">Parental App</span>
+              <span className="card-title">Download Parental App</span>
               <span className="card-desc">Monitor from your device</span>
             </div>
             <div className="card-action-arrow">
@@ -84,11 +84,33 @@ const DownloadModal = ({ onClose }) => {
               <FiSmartphone size={28} />
             </div>
             <div className="card-text-content">
-              <span className="card-title">Kid's App</span>
+              <span className="card-title">Download Kid's App</span>
               <span className="card-desc">Install on target device</span>
             </div>
             <div className="card-action-arrow">
               <FiDownload size={20} />
+            </div>
+          </a>
+
+          {/* Divider with "AND" */}
+          <div className="modal-divider">
+            <span>OR</span>
+          </div>
+
+          {/* Option 2: Kids App */}
+          <a
+            onClick={launchKidsApp}
+            className="download-option-card kids-launch-card group"
+          >
+            <div className="card-icon-wrapper kids-launch-icon">
+              <MdOutlineRocketLaunch size={28} />
+            </div>
+            <div className="card-text-content">
+              <span className="card-title">Launch Kid's App</span>
+              <span className="card-desc">Launch on target device</span>
+            </div>
+            <div className="card-action-arrow">
+              <MdOutlineLaunch size={20} />
             </div>
           </a>
         </div>

@@ -18,7 +18,7 @@
 .download-modal {
   width: 100%;
   max-width: 28rem;
-  background-color: #15171B; /* Matching Feature/Pricing Cards */
+  background-color: #15171b; /* Matching Feature/Pricing Cards */
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -30,14 +30,19 @@
 
 /* Add a subtle top glow */
 .download-modal::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 60%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
 }
 
 /* --- HEADER --- */
@@ -57,19 +62,19 @@
 .download-modal-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #ffffff;
   letter-spacing: -0.02em;
 }
 
 .download-modal-subtitle {
   font-size: 0.9rem;
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 
 .modal-close-button {
   background: rgba(255, 255, 255, 0.05);
   border: none;
-  color: #9CA3AF;
+  color: #9ca3af;
   padding: 0.5rem;
   border-radius: 50%;
   cursor: pointer;
@@ -81,7 +86,7 @@
 
 .modal-close-button:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #FFFFFF;
+  color: #ffffff;
   transform: rotate(90deg);
 }
 
@@ -125,6 +130,24 @@
   box-shadow: 0 8px 20px -5px rgba(3, 218, 198, 0.15);
 }
 
+/* Kids Card Specifics */
+.kids-card:hover {
+  border-color: rgba(3, 218, 198, 0.5); /* Teal Glow */
+  box-shadow: 0 8px 20px -5px rgba(3, 218, 198, 0.15);
+}
+
+/* Kids Card Specifics */
+.kids-launch-card:hover {
+  border-color: rgba(3, 218, 198, 0.5); /* Blue Glow */
+  box-shadow: 0 8px 20px -5px rgba(3, 218, 198, 0.15);
+}
+
+/* Kids Card Specifics */
+.kids-launch-card:hover {
+  border-color: rgb(96, 165, 250, 0.5); /* Blue Glow */
+  box-shadow: 0 8px 20px -5px rgb(96, 165, 250, 0.15);
+}
+
 /* Icons */
 .card-icon-wrapper {
   width: 3.5rem;
@@ -138,12 +161,17 @@
 
 .parent-icon {
   background-color: rgba(187, 134, 252, 0.1);
-  color: #BB86FC;
+  color: #bb86fc;
 }
 
 .kids-icon {
   background-color: rgba(3, 218, 198, 0.1);
-  color: #03DAC6;
+  color: #03dac6;
+}
+
+.kids-launch-icon {
+  background-color: rgb(96, 165, 250, 0.1);
+  color: #60a5fa;
 }
 
 /* Text */
@@ -156,22 +184,22 @@
 .card-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .card-desc {
   font-size: 0.85rem;
-  color: #9CA3AF;
+  color: #9ca3af;
 }
 
 /* Action Arrow */
 .card-action-arrow {
-  color: #4B5563;
+  color: #4b5563;
   transition: all 0.3s ease;
 }
 
 .download-option-card:hover .card-action-arrow {
-  color: #FFFFFF;
+  color: #ffffff;
   transform: translateX(2px);
 }
 
@@ -185,7 +213,7 @@
 }
 
 .modal-divider::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
@@ -196,11 +224,11 @@
 }
 
 .modal-divider span {
-  background-color: #15171B; /* Matches modal bg to hide line behind text */
+  background-color: #15171b; /* Matches modal bg to hide line behind text */
   padding: 0 0.75rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #6B7280;
+  color: #6b7280;
   position: relative;
   z-index: 1;
   text-transform: uppercase;
@@ -217,12 +245,12 @@
 
 .download-modal-footer p {
   font-size: 0.85rem;
-  color: #9CA3AF;
+  color: #9ca3af;
   margin: 0;
 }
 
 .download-modal-footer a {
-  color: #BB86FC;
+  color: #bb86fc;
   font-weight: 500;
   margin-left: 0.25rem;
   text-decoration: none;
@@ -230,6 +258,6 @@
 }
 
 .download-modal-footer a:hover {
-  color: #D8B4FE;
+  color: #d8b4fe;
   text-decoration: underline;
 }
