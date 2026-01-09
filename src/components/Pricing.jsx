@@ -191,7 +191,7 @@ const Pricing = () => {
                   {plan.name}
 
                   {/* Arrow Annotation for Best Value (Diamond Plan) */}
-                  {plan.id === "diamond" && (
+                  {plan.id === "yearly" && (
                     <div className="arrow-annotation">
                       <span className="arrow-text">Best Value!</span>
                       {/* SVG classes are handled in Pricing.css */}
