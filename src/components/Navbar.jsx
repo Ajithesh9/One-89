@@ -1,7 +1,7 @@
 // src/components/Navbar.jsx
 
 import { useState, useEffect } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
@@ -12,6 +12,7 @@ const navLinks = [
   { id: "features", title: "Features" },
   { id: "howitworks", title: "How it works" },
   { id: "pricing", title: "Pricing" },
+  { id: "policy", title: "Policy" },
   { id: "faq", title: "FAQ" },
 ];
 
@@ -21,6 +22,8 @@ const Navbar = ({ onDownloadClick }) => {
 
   const location = useLocation();
   const isPrivacyPage = location.pathname === "/privacy";
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +61,11 @@ const Navbar = ({ onDownloadClick }) => {
                 offset={-100}
                 className="nav-link"
                 activeClass="active"
+                onClick={() => {
+                  if (link.id === "policy") {
+                    navigate("/privacy");
+                  }
+                }}
               >
                 {link.title}
               </ScrollLink>
@@ -111,7 +119,12 @@ const Navbar = ({ onDownloadClick }) => {
                   offset={-80}
                   className="mobile-nav-link"
                   activeClass="active"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={() => {
+                    setMenuOpen(false);
+                    if (link.id === "policy") {
+                      navigate("/privacy");
+                    }
+                  }}
                 >
                   {link.title}
                 </ScrollLink>

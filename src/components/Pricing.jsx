@@ -1,89 +1,113 @@
 // src/components/Pricing.jsx
-
-import { useState } from 'react';
-import { Check, Zap, Users, Shield, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import '../Pricing.css';
+import { useState, useEffect } from "react";
+import { Check, Zap, Users, Shield, ArrowRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import "../Pricing.css";
+import { useNavigate } from "react-router-dom";
+import SubscribeButton from "./SubscribeButton";
 
 // Data reordered: Bronze -> Silver -> Gold -> Diamond
 const plans = [
   {
-    id: 'bronze',
-    name: 'Bronze',
-    price: '79.00',
-    period: 'Weekly',
-    description: 'Flexible weekly monitoring for fewer devices.',
+    id: "weekly",
+    name: "Weekly",
+    price: "79.00",
+    period: "Weekly",
+    description: "Flexible weekly monitoring for fewer devices.",
     features: [
-      'Starting From ₹79.00 | Weekly',
-      'Can Pair Upto 3 Devices',
-      'Essential Monitoring Features',
-      'Basic Device Control',
+      "Starting From ₹79.00 | Weekly",
+      "Can Pair Upto 3 Devices",
+      "Essential Monitoring Features",
+      "Basic Device Control",
     ],
     popular: false,
-    color: '#BB86FC', // Purple
-    buttonText: 'Get Bronze'
+    color: "#BB86FC", // Purple
+    buttonText: "Subscribe",
+    planId: "pl_RyamJKN701bY9F",
   },
   {
-    id: 'silver',
-    name: 'Silver',
-    price: '300.00',
-    period: 'Monthly',
-    description: 'Standard monthly plan for up to 5 devices.',
+    id: "monthly",
+    name: "Monthly",
+    price: "299.00",
+    period: "Monthly",
+    description: "Standard monthly plan for up to 5 devices.",
     features: [
-      'Starting From ₹300.00 | Monthly',
-      'Can Pair Upto 5 Devices',
-      'Standard Monitoring',
-      'Device Restrictions',
+      "Starting From ₹300.00 | Monthly",
+      "Can Pair Upto 5 Devices",
+      "Standard Monitoring",
+      "Device Restrictions",
     ],
     popular: false,
-    color: '#9CA3AF', // Silver/Gray
-    buttonText: 'Get Silver'
+    color: "#9CA3AF", // Silver/Gray
+    buttonText: "Subscribe",
+    planId: "pl_RyanC01GR8jIRI",
   },
   {
-    id: 'gold',
-    name: 'Gold',
-    price: '250.00',
-    period: 'Monthly',
-    billingNote: 'Billed 6 Months',
-    description: 'Balanced plan for medium-sized needs.',
+    id: "quarterly",
+    name: "Quarterly",
+    price: "279.00",
+    period: "Monthly",
+    billingNote: "Billed 3 Months",
+    description: "Balanced plan for medium-sized needs.",
     features: [
-      'Starting From ₹250.0 | Monthly (Billed 6 Months)',
-      'Can Pair Upto 7 Devices',
-      'Advanced Monitoring',
-      'Enhanced Controls',
+      "Starting From ₹279.0 | Monthly (Billed 3 Months)",
+      "Can Pair Upto 7 Devices",
+      "Advanced Monitoring",
+      "Enhanced Controls",
     ],
     popular: false,
-    color: '#FBBF24', // Gold/Yellow
-    buttonText: 'Get Gold'
+    color: "#FBBF24", // Gold/Yellow
+    buttonText: "Subscribe",
+    planId: "pl_RyanvGGfgp14ZS",
   },
   {
-    id: 'diamond',
-    name: 'Diamond',
-    price: '200.00',
-    period: 'Monthly',
-    billingNote: 'Billed Yearly',
-    description: 'Maximum value for larger families.',
+    id: "yearly",
+    name: "Yearly",
+    price: "200.00",
+    period: "Monthly",
+    billingNote: "Billed Yearly",
+    description: "Maximum value for larger families.",
     features: [
-      'Starting From ₹200.0 | Monthly (Billed Yearly)',
-      'Can Pair Upto 10 Devices',
-      'Full Suite of Features',
-      'Priority Support',
+      "Starting From ₹200.0 | Monthly (Billed Yearly)",
+      "Can Pair Upto 10 Devices",
+      "Full Suite of Features",
+      "Priority Support",
     ],
     popular: true, // Best Value (Yearly)
-    color: '#60A5FA', // Blue (from Capabilities)
-    buttonText: 'Get Diamond'
-  }
+    color: "#60A5FA", // Blue (from Capabilities)
+    buttonText: "Subscribe",
+    planId: "pl_Ryaob7yqVSbykD",
+  },
 ];
 
 const Pricing = () => {
-  const [activePlanId, setActivePlanId] = useState('bronze');
-  const activePlan = plans.find(p => p.id === activePlanId);
+  const [activePlanId, setActivePlanId] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("plan") || "weekly";
+  });
+  const activePlan = plans.find((p) => p.id === activePlanId);
+  const [showSubscribeButton, setShowSubscribeButton] = useState(false);
+
+  useEffect(() => {
+    if (showSubscribeButton) {
+      window.location.reload();
+    } else {
+      setShowSubscribeButton(false);
+    }
+  }, [activePlanId]);
+
+  // Update URL when plan changes
+  const handlePlanChange = (planId) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("plan", planId);
+    window.history.pushState({}, "", url);
+    setActivePlanId(planId);
+  };
 
   return (
     <section id="pricing" className="pricing-section">
       <div className="pricing-container">
         <div className="pricing-grid">
-
           {/* Left Column: Content */}
           {/* CHANGED: Increased margin-bottom from 'mb-12' to 'mb-24'.
              This creates extra vertical space on mobile so the "Best Value" arrow
@@ -91,15 +115,12 @@ const Pricing = () => {
           */}
           <div className="lg:col-span-7 mb-24 lg:mb-0">
             <div className="max-w-2xl -mt-8">
-              <h4 className="pricing-eyebrow">
-                Pricing
-              </h4>
+              <h4 className="pricing-eyebrow">Pricing</h4>
 
-              <h2 className="pricing-title">
-                Simple, Transparent Pricing
-              </h2>
+              <h2 className="pricing-title">Simple, Transparent Pricing</h2>
               <p className="pricing-description">
-                Choose the plan that fits your family's needs. No hidden fees, cancel anytime.
+                Choose the plan that fits your family's needs. No hidden fees,
+                cancel anytime.
               </p>
 
               <div className="space-y-8">
@@ -109,11 +130,10 @@ const Pricing = () => {
                     <Users className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="feature-title">
-                      Family First
-                    </h3>
+                    <h3 className="feature-title">Family First</h3>
                     <p className="feature-desc">
-                      Scale from a single device to covering the whole household easily.
+                      Scale from a single device to covering the whole household
+                      easily.
                     </p>
                   </div>
                 </div>
@@ -124,11 +144,10 @@ const Pricing = () => {
                     <Zap className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="feature-title">
-                      Instant Updates
-                    </h3>
+                    <h3 className="feature-title">Instant Updates</h3>
                     <p className="feature-desc">
-                      Real-time data synchronization ensuring you never miss a moment.
+                      Real-time data synchronization ensuring you never miss a
+                      moment.
                     </p>
                   </div>
                 </div>
@@ -139,11 +158,10 @@ const Pricing = () => {
                     <Shield className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="feature-title">
-                      Total Security
-                    </h3>
+                    <h3 className="feature-title">Total Security</h3>
                     <p className="feature-desc">
-                      Enterprise-grade encryption keeps your family's data private and secure.
+                      Enterprise-grade encryption keeps your family's data
+                      private and secure.
                     </p>
                   </div>
                 </div>
@@ -153,7 +171,6 @@ const Pricing = () => {
 
           {/* Right Column: Pricing Card */}
           <div className="lg:col-span-5">
-
             {/* Tab Switcher */}
             <div className="tab-group">
               {plans.map((plan) => (
@@ -161,23 +178,22 @@ const Pricing = () => {
                   key={plan.id}
                   onClick={() => {
                     if (activePlanId !== plan.id) {
-                      setActivePlanId(plan.id);
+                      handlePlanChange(plan.id);
                     }
                   }}
                   className="tab-button"
                   style={{
-                    color: activePlanId === plan.id ? '#0C0E12' : '#9CA3AF',
-                    backgroundColor: activePlanId === plan.id ? plan.color : 'transparent',
+                    color: activePlanId === plan.id ? "#0C0E12" : "#9CA3AF",
+                    backgroundColor:
+                      activePlanId === plan.id ? plan.color : "transparent",
                   }}
                 >
                   {plan.name}
 
                   {/* Arrow Annotation for Best Value (Diamond Plan) */}
-                  {plan.id === 'diamond' && (
+                  {plan.id === "diamond" && (
                     <div className="arrow-annotation">
-                      <span className="arrow-text">
-                        Best Value!
-                      </span>
+                      <span className="arrow-text">Best Value!</span>
                       {/* SVG classes are handled in Pricing.css */}
                       <svg
                         width="50"
@@ -210,7 +226,7 @@ const Pricing = () => {
             </div>
 
             {/* Pricing Card Box */}
-            <AnimatePresence mode='wait'>
+            <AnimatePresence mode="wait">
               <motion.div
                 key={activePlan.id}
                 initial={{ opacity: 0, y: 10, scale: 0.98 }}
@@ -237,26 +253,19 @@ const Pricing = () => {
                     >
                       {activePlan.name} Plan
                     </h3>
-                    <p className="plan-desc">
-                      {activePlan.description}
-                    </p>
+                    <p className="plan-desc">{activePlan.description}</p>
                   </div>
-
                   <div className="price-wrapper">
-                    <span className="price-amount">
-                      ₹{activePlan.price}
-                    </span>
+                    <span className="price-amount">₹{activePlan.price}</span>
                     <span className="price-period">/{activePlan.period}</span>
                   </div>
-
                   <p className="price-subtext">
-                    {activePlan.billingNote ? activePlan.billingNote : 'Cancel anytime'}
+                    {activePlan.billingNote
+                      ? activePlan.billingNote
+                      : "Cancel anytime"}
                   </p>
-
                   <div className="card-features">
-                    <h4 className="card-features-title">
-                      What's Included
-                    </h4>
+                    <h4 className="card-features-title">What's Included</h4>
                     <ul className="space-y-3">
                       {activePlan.features.map((feature, i) => (
                         <li key={i} className="card-feature-item">
@@ -272,12 +281,41 @@ const Pricing = () => {
                     </ul>
                   </div>
 
+                  {/*{showSubscribeButton && (
+                    <SubscribeButton
+                      planId={activePlan.planId}
+                    ></SubscribeButton>
+                  )}*/}
+
                   <div className="action-button-wrapper">
                     <button
                       className="action-button group"
                       style={{
                         backgroundColor: activePlan.color,
-                        boxShadow: `0 4px 20px -5px ${activePlan.color}40`
+                        boxShadow: `0 4px 20px -5px ${activePlan.color}40`,
+                      }}
+                      onClick={async () => {
+                        window.open(
+                          "https://play.google.com/store/apps/details?id=com.deku.watcher"
+                        );
+                        /*setShowSubscribeButton(true);
+
+                        // Wait for next tick to ensure DOM is updated
+                        await new Promise((resolve) =>
+                          setTimeout(resolve, 1000)
+                        );
+
+                        const button = document.getElementById(
+                          `rzp_payment_form_${activePlan.planId}`
+                        );
+
+                        if (button != null && button != undefined) {
+                          const radio = button.querySelector("[name=plan_id]");
+                          if (radio != null && radio != undefined) {
+                            radio.checked = true;
+                          }
+                          button.querySelector("button")?.click();
+                        }*/
                       }}
                     >
                       {activePlan.buttonText}
@@ -288,7 +326,6 @@ const Pricing = () => {
               </motion.div>
             </AnimatePresence>
           </div>
-
         </div>
       </div>
     </section>
